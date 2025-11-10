@@ -4,7 +4,3 @@ services:
     env: static
     buildCommand: echo "No build required for static site"
     staticPublishPath: .
-    routes:
-      - type: rewrite
-        source: /
-        destination: /smax-aviator-presentation.html
