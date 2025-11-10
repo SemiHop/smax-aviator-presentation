@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAX Aviator: Yapay Zeka Destekli Hizmet Yönetimi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #f4f5f7;
+            --primary-text: #2e2e2e;
+            --accent-green: #3db14e;
+            --secondary-gray: #6b6c6e;
+            --highlight-blue: #0074b8;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--accent-green) 0%, #2fa03f 100%);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px 80px;
+            background: var(--white);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.5s ease-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            border-bottom: 4px solid var(--accent-green);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: var(--primary-text);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        h4 {
+            font-size: 20px;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--secondary-gray);
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: var(--primary-bg);
+            border-left: 5px solid var(--accent-green);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .card p,
+        .card li {
+            color: var(--primary-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-green), #2fa03f);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .highlight-box h3,
+        .highlight-box h4 {
+            color: var(--white);
+            margin-top: 0;
+        }
+
+        .highlight-box p,
+        .highlight-box ul,
+        .highlight-box ol,
+        .highlight-box li {
+            color: var(--white);
+        }
+
+        ul {
+            margin-left: 0;
+            list-style: none;
+            line-height: 2;
+        }
+
+        ul li {
+            padding-left: 1.5em;
+            position: relative;
+            font-size: 18px;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        ul li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        ol {
+            margin-left: 30px;
+            line-height: 2;
+        }
+
+        ol li {
+            font-size: 18px;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, #E8EDF2 100%);
+            border: 2px dashed var(--secondary-gray);
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--secondary-gray);
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screenshot-placeholder img {
+            max-width: 85%;
+            max-height: 550px;
+            height: auto;
+            width: auto;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Screenshots in two-column layouts need more width */
+        .two-column .screenshot-placeholder img {
+            max-width: 95%;
+            max-height: 450px;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #2fa03f 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .flow-number {
+            background: var(--white);
+            color: var(--accent-green);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .metric-box {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--highlight-blue) 0%, #005a8f 100%);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .metric-box .number {
+            font-size: 48px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .metric-box .label {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .pillar {
+            background: var(--primary-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-top: 5px solid var(--accent-green);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .pillar h3 {
+            margin-top: 0;
+            color: var(--accent-green);
+        }
+
+        .challenge-list {
+            background: #fff4e6;
+            border-left: 5px solid #ff9800;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .challenge-list h3 {
+            color: #e65100;
+            margin-top: 0;
+        }
+
+        .challenge-list ul li:before {
+            background-color: #ff9800;
+        }
+
+        .blue-callout {
+            background: #e6f2f8;
+            border-left: 5px solid var(--highlight-blue);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .blue-callout h4 {
+            color: var(--highlight-blue);
+            margin-top: 0;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            background: #2fa03f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            color: var(--accent-green);
+            font-size: 18px;
+            font-weight: 600;
+            z-index: 1000;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--secondary-gray);
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 999;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #2fa03f 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            color: white;
+            font-size: 96px;
+            margin-bottom: 20px;
+        }
+
+        .title-slide h2,
+        .title-slide h3 {
+            color: white;
+            border: none;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 48px;
+            margin-bottom: 60px;
+        }
+
+        .title-slide .meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 28px;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .two-column,
+            .three-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation">
+        <!-- Slayt 1: Başlık -->
+        <div class="slide active title-slide">
+            <h1>OpenText SMAX Aviator</h1>
+            <div class="subtitle">Yapay Zeka Destekli Hizmet Yönetimi</div>
+            <div class="meta">
+                <p>Kurumsal BT için Akıllı Sanal Asistan</p>
+                <p style="margin-top: 10px; font-size: 22px;">Sunum Sahibi <strong>Rigosis Bilgi Sistemleri</strong></p>
+            </div>
+        </div>
+
+        <!-- Slayt 2: Zorluk -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Zorluk</h2>
+            </div>
+            <div class="content">
+                <div class="challenge-list">
+                    <h3>BT Hizmet Masalarında Yaygın Sorunlar</h3>
+                    <ul>
+                        <li><strong>Uzun Çözüm Süreleri:</strong> Kullanıcılar basit cevaplar için saatlerce hatta
+                            günlerce bekler</li>
+                        <li><strong>Bilgi Siloları:</strong> Bilgiler farklı sistemler ve kişiler arasında dağılmış
+                            durumdadır</li>
+                        <li><strong>Destek Uzmanı Tükenmişliği:</strong> Tekrarlayan sorular ekip kapasitesini tüketir
+                        </li>
+                        <li><strong>Tutarsız Hizmet Kalitesi:</strong> Hizmet, temsilcinin deneyimi ve uygunluğuna göre
+                            değişir</li>
+                        <li><strong>Ölçeklenme Zorlukları:</strong> Artan destek talepleri kaynaklarla orantılı olarak
+                            büyümez</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: SMAX Aviator ile Tanışın -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>SMAX Aviator ile Tanışın</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Kurumsal Yapay Zekâ Sanal Asistanınız</h3>
+                    <p style="font-size: 18px;">Gizlilik ve güvenlik standartlarını korurken gelişmiş dil modellerini
+                        gerçek zamanlı kurumsal verilerle kesintisiz biçimde entegre eder.</p>
+                </div>
+
+                <div class="screenshot-placeholder" style="margin: 30px 0;">
+                    <img src="screenshots/16-aviator-detailed-architecture.png" alt="SMAX Aviator Ayrıntılı Mimarisi">
+                </div>
+
+                <div class="two-column">
+                    <div class="card">
+                        <h4>🤖 Esnek LLM Seçenekleri</h4>
+                        <p>İhtiyacınıza göre varsayılan Private Llama 3.1 veya Public Gemini 2.5 Flash arasında seçim
+                            yapın</p>
+                    </div>
+                    <div class="card">
+                        <h4>🏢 Kurumsal Kullanıma Hazır</h4>
+                        <p>Kiracı izolasyonu, veri gizliliği, uyumluluk için hazır mimari</p>
+                    </div>
+                    <div class="card">
+                        <h4>👥 Çoklu Persona</h4>
+                        <p>Service Portal, Destek Uzmanı Arayüzü, Mobil, Teams, UCMDB</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Gerçek Zamanlı Bağlam</h4>
+                        <p>Bilgi makaleleri, haberler, katalog öğeleri, kayıtlar, harici kaynaklar</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 35px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">LLM Seçenekleri: İhtiyacınıza Uyanı
+                        Seçin</h3>
+                    <div class="two-column">
+                        <div class="card" style="border-left-color: var(--accent-green);">
+                            <h4>🔒 Private LLM (Varsayılan)</h4>
+                            <p style="margin-bottom: 15px;"><strong>Llama 3.1</strong> - OpenText Public Cloud SaaS
+                                üzerinde barındırılır</p>
+                            <ul style="font-size: 15px;">
+                                <li><strong>ITOM dokümantasyonu ile ince ayarlı:</strong> Yöneticiler ve uygulayıcılar
+                                    için ITOM ürünlerini daha iyi anlar</li>
+                                <li><strong>Artırılmış doğruluk:</strong> Yanıt kalitesini ve karmaşık sorgu işleme
+                                    kabiliyetini geliştirir</li>
+                                <li><strong>Tam veri gizliliği:</strong> Verileriniz OpenText altyapısında kalır</li>
+                                <li><strong>Ek alt işleyici yok:</strong> Veriler OpenText kontrolünden çıkmaz</li>
+                                <li><strong>Varsayılan seçenek:</strong> Ek yapılandırma gerekmez</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="border-left-color: var(--highlight-blue);">
+                            <h4>🌐 Public LLM (İsteğe Bağlı)</h4>
+                            <p style="margin-bottom: 15px;"><strong>Gemini 2.5 Flash</strong> - Google tarafından
+                                barındırılır</p>
+                            <ul style="font-size: 15px;">
+                                <li><strong>Daha büyük model:</strong> Daha güçlü doğal dil anlama</li>
+                                <li><strong>Daha geniş bilgi tabanı:</strong> Daha kapsamlı genel bilgi kapsaması</li>
+                                <li><strong>Geliştirilmiş çok dillilik:</strong> Daha fazla dil desteği</li>
+                                <li><strong>Önemli husus:</strong> Google, verileriniz için ek bir alt işleyici olur
+                                </li>
+                                <li><strong>Veri koruması:</strong> OpenText, Google'ın verileriniz üzerinde eğitim
+                                    yapmasına izin vermez</li>
+                                <li><strong>Maliyet etkisi yok:</strong> Seçim fiyatlandırmayı veya lisanslamayı
+                                    etkilemez</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top: 25px;">
+                        <p style="margin: 0; font-size: 16px;"><strong>Ödünsüz Esneklik:</strong> Her iki seçenek de
+                            güçlü yapay zekâ yetenekleri sunar. En yüksek veri kontrolü ve ITOM uzmanlığı için Private
+                            LLM'i, daha geniş dil desteği için Public LLM'i tercih edin. Seçim size aittir ve
+                            fiyatlandırmayı etkilemez.</p>
+                    </div>
+                </div>
+
+                <div class="blue-callout" style="margin-top: 30px;">
+                    <h4>🔗 Kurumsal Bilgi - Harici Kaynaklar</h4>
+                    <p style="margin-bottom: 15px;">Service Management, harici bilgi entegrasyonu için şu IDOL
+                        bağlayıcılarını destekler:</p>
+                    <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; padding-left: 20px;">
+                        <li><strong>SharePoint Remote Connector</strong></li>
+                        <li><strong>Confluence REST Connector</strong></li>
+                        <li><strong>Web Connector</strong></li>
+                        <li><strong>OpenText Connector</strong> (Extended ECM)</li>
+                        <li><strong>Core Content Connector</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 5: Son Kullanıcılar için Aviator -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Son Kullanıcılar için Aviator</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Sohbet Tabanlı Arayüz</h3>
+                    <p style="font-size: 18px; margin-bottom: 20px;">İş kullanıcıları, her yerden erişilebilen doğal
+                        dilde konuşma yoluyla Aviator ile etkileşime geçer.</p>
+                    <div class="three-column">
+                        <div style="text-align: center;">
+                            <h4 style="color: white; margin: 0;">🌐 Service Portal</h4>
+                            <p style="font-size: 14px; margin: 5px 0 0 0;">Web tabanlı erişim</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: white; margin: 0;">📱 Mobil Uygulama</h4>
+                            <p style="font-size: 14px; margin: 5px 0 0 0;">Her yerden destek</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: white; margin: 0;">💬 MS Teams</h4>
+                            <p style="font-size: 14px; margin: 5px 0 0 0;">İşbirliği entegrasyonu</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 30px;">
+                    <div class="card">
+                        <h4>Aviator Neler Yapabilir</h4>
+                        <ul>
+                            <li><strong>Sorgulara yanıt verir</strong> ve mevcut bilgiden özetler oluşturarak
+                                kullanıcıların kendi kendine çözmesine yardımcı olur</li>
+                            <li><strong>Sonraki Adımları önerir</strong> ve ilgili katalog öğelerini sunar</li>
+                            <li><strong>Birden çok kaynağa erişir:</strong> Bilgi Makaleleri, Haberler, Service Catalog
+                                ve haricen indekslenmiş içerik</li>
+                            <li><strong>Kaynak gösterir</strong> ve şeffaflık için referanslar sağlar</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Güvenlik ve Yönetişim</h4>
+                        <ul>
+                            <li><strong>Yetkilere saygı duyar:</strong> Kullanıcılar yalnızca erişim yetkileri olan
+                                içerikleri görür</li>
+                            <li><strong>Veri alanı kontrolleri:</strong> Service Portal erişim kuralları uygulanır</li>
+                            <li><strong>Geri bildirim etkindir:</strong> Kullanıcılar yanıtları derecelendirerek sürekli
+                                iyileştirmeyi destekler</li>
+                            <li><strong>Denetim izleri:</strong> Tüm etkileşimler uyumluluk için kaydedilir</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blue-callout" style="margin-top: 25px;">
+                    <h4>🎯 Temel Faydalar</h4>
+                    <p style="margin: 0;">7/24 Erişilebilirlik • Anında Yanıtlar • Tutarlı Kalite • Talep Hacminde
+                        Azalma • Kullanıcı Memnuniyetinde Artış • Self-servis Yetkinliği</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 6: Demo - Bilgi Soru-Cevap -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Kaynak Referanslı Bilgi Soru-Cevap</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Kullanıcı “Yılda kaç gün izin hakkımız var?” diye
+                    sorar</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/02-service-portal-chat.png" alt="Service Portal Sohbeti">
+                </div>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Ne Oluyor</h4>
+                        <p>Aviator bilgi tabanını, İK politikalarını ve şirket dokümanlarını tarar, ardından kaynak
+                            referanslarıyla net bir yanıt oluşturur.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Kullanıcı Eylemi</h4>
+                        <p>Kullanıcı referanslara tıklayarak tam politika dokümanlarını görüntüleyebilir, ek sorular
+                            sorabilir veya geri bildirim gönderebilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 7: Demo - Niyet ve Teklif Önerileri -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Niyet ve Teklif Önerileri</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Kullanıcı şifre sıfırlama hakkında soru sorar</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/03-intent-suggestions.png" alt="Niyet Önerileri">
+                </div>
+                <div style="margin-top: 30px;">
+                    <h4>Akıllı Akış:</h4>
+                    <ol>
+                        <li>Aviator, şifre sıfırlama süreci hakkında yardımcı bir yanıt sağlar</li>
+                        <li>Kullanıcının gerçek bir sıfırlama talebi oluşturmak isteyebileceğini fark eder</li>
+                        <li>İlgili katalog tekliflerini ve niyetleri önerir</li>
+                        <li>Kullanıcı teklife tıklayarak talebi oluşturur – form önceden doldurulmuş gelir</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 8: SMAX Destek Uzmanları için Aviator -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>SMAX Destek Uzmanları için Aviator</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Gömülü Aviator Widget</h3>
+                    <p style="font-size: 18px; margin-bottom: 20px;">SMAX Destek Uzmanları, SMAX arayüzünde doğrudan
+                        erişilebilen gömülü Aviator Widget üzerinden Aviator ile etkileşim kurar.</p>
+                    <div style="text-align: center; padding: 15px 0;">
+                        <h4 style="color: white; margin: 0;">🖥️ Destek Uzmanı Arayüzü Entegrasyonu</h4>
+                        <p style="font-size: 14px; margin: 5px 0 0 0;">Anında yapay zekâ desteği için her zaman kayıt
+                            ekranının yanında bulunur</p>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 30px;">
+                    <div class="card">
+                        <h4>Widget Özellikleri</h4>
+                        <ul>
+                            <li><strong>Sohbet tabanlı etkileşim:</strong> Service Portal ile aynı işlevsellik</li>
+                            <li><strong>Tam bilgi erişimi:</strong> Tüm bilgi makaleleri, haberler, Service Catalog ve
+                                harici içerikler</li>
+                            <li><strong>Eylem düğmeleri:</strong> Talep ve Olay kayıtlarını özetler, çözüm önerileri
+                                sunar</li>
+                            <li><strong>Sohbet geçmişi:</strong> Önceki tüm Aviator etkileşimlerini görüntüler ve
+                                yönetir</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Güvenlik ve Kontroller</h4>
+                        <ul>
+                            <li><strong>Veri alanı politikaları:</strong> Güvenlik kontrolleri ve veri alanlarına
+                                tabidir</li>
+                            <li><strong>Rol tabanlı erişim:</strong> Destek uzmanları yalnızca yetkili oldukları
+                                verilere erişir</li>
+                            <li><strong>Bağlama duyarlı:</strong> Üzerinde çalışılan talep veya kayıt bağlamını anlar
+                            </li>
+                            <li><strong>Denetim uyumluluğu:</strong> Tüm yapay zekâ etkileşimleri kaydedilir ve
+                                izlenebilir</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blue-callout" style="margin-top: 25px;">
+                    <h4>🎯 Destek Uzmanı Faydaları</h4>
+                    <p style="margin: 0;">Daha Hızlı Talep Çözümü • Artırılmış Doğruluk • Otomatik Bilgi Üretimi •
+                        Akıllı Risk Değerlendirmesi • Geliştirilmiş Müşteri İletişimi • Her Zaman Etkin Yapay Zekâ
+                        Asistanı</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 9: Demo - Akıllı Talep Özetleme -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Akıllı Talep Özetleme</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Birden fazla güncelleme içeren karmaşık talep</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/05-agent-ticket-summary.png" alt="Destek Uzmanı Talep Özeti">
+                </div>
+                <div style="margin-top: 30px;">
+                    <h4>Özetleme Süreci</h4>
+                    <div class="flow-step">
+                        <div class="flow-number">1</div>
+                        <div>Destek uzmanı uzun açıklama ve 15 güncelleme içeren talebi açar</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-number">2</div>
+                        <div>Aviator panelinde “Bu talebi özetle” seçeneğine tıklar</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-number">3</div>
+                        <div>Aviator başlık, açıklama, güncellemeler ve yorumları analiz eder</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-number">4</div>
+                        <div>Önemli noktaları vurgulayan özlü bir özet oluşturur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 10: Demo - Yapay Zekâ Destekli Çözüm Önerileri -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Yapay Zekâ Destekli Çözüm Önerileri</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Tekrarlayan olay türü</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/06-solution-suggestion.png" alt="Çözüm Önerisi">
+                </div>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Nasıl Çalışır</h4>
+                        <p>Aviator, olay ayrıntılarını analiz eder, bilgi tabanında benzer çözümlenmiş vakaları arar ve
+                            kalıplara dayalı bir çözüm önerisi üretir.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Destek Uzmanına Faydası</h4>
+                        <p>Çözüm için başlangıç noktası sağlar, geçmiş çözümlerden öğrenir, araştırma süresini kısaltır,
+                            tutarlılığı artırır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 11: Demo - Otomatik Bilgi Makalesi Oluşturma -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Otomatik Bilgi Makalesi Oluşturma</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Bilgi adayı olarak işaretlenen bir olay</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/07-knowledge-generation.png" alt="Bilgi Makalesi Oluşturma">
+                </div>
+                <div class="highlight-box">
+                    <h4>Bilgi Yakalama Zorluğu</h4>
+                    <p>Destek uzmanları sorunları çözer ancak dokümantasyon geride kalır. Bilgiler kişilerin zihninde
+                        kalır. Aviator bu süreci otomatikleştirir:</p>
+                    <ol style="margin-top: 20px;">
+                        <li>Destek uzmanı olayı “Bilgi adayı” olarak işaretler</li>
+                        <li>Aviator makale başlığını ve içeriğini oluşturur</li>
+                        <li>Taslak, olayla ilişkilendirilmiş yeni bir makale kaydına kaydedilir</li>
+                        <li>Destek uzmanı gözden geçirir, düzenler ve yayımlar</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 12: Demo - Akıllı Değişiklik Risk Değerlendirmesi -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Akıllı Değişiklik Risk Değerlendirmesi</h2>
+            </div>
+            <div class="content">
+                <p style="font-size: 18px;"><strong>Senaryo:</strong> Değişiklik talebinin değerlendirilmesi</p>
+                <div class="screenshot-placeholder">
+                    <img src="screenshots/08-change-risk-assessment.png" alt="Değişiklik Risk Değerlendirmesi">
+                </div>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Risk Puanlaması:</h4>
+                        <ul>
+                            <li><strong>0:</strong> Risk yok</li>
+                            <li><strong>1:</strong> Düşük risk</li>
+                            <li><strong>2:</strong> Orta risk</li>
+                            <li><strong>3:</strong> Yüksek risk</li>
+                            <li><strong>4:</strong> Çok yüksek risk</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Değerlendirme Şunları İçerir:</h4>
+                        <ul>
+                            <li>Etkilenen sistemlerin ve süreçlerin analizi</li>
+                            <li>Olası etkiler</li>
+                            <li>Potansiyel sorunlar</li>
+                            <li>Azaltma önerileri</li>
+                            <li>Açıklayıcı gerekçelendirme</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 13: Demo - Duygu Analizi -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Demo: Duygu Analizi</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Yapay Zeka Destekli İş Akışı: Otomatik Duygu Tespiti</h3>
+                    <p style="font-size: 18px;">Aviator iş akışı kuralları, oluşturulan her yeni vaka için otomatik
+                        olarak duygu tespiti yapar ve müşteri memnuniyetini korumaya yönelik proaktif aksiyonları
+                        tetikler.</p>
+                </div>
+
+                <div class="screenshot-placeholder" style="margin: 25px 0;">
+                    <img src="screenshots/12-sentiment-analysis-list.png" alt="Duygu Analizi">
+                </div>
+
+                <div style="margin-top: 25px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">Duygu Analizi Nasıl Çalışır</h3>
+
+                    <div class="two-column" style="margin-bottom: 25px;">
+                        <div class="card">
+                            <h4>🎯 Otomatik Tespit</h4>
+                            <ul style="font-size: 15px;">
+                                <li>Vaka oluşturulduğunda duygu otomatik olarak tespit edilir</li>
+                                <li>Kullanıcı yeni yorum gönderdiğinde yeniden analiz yapılır</li>
+                                <li>Değişiklikler gerçek zamanlı olarak işaretlenir</li>
+                                <li>Sınıflandırma: Olumlu, Nötr veya Olumsuz</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>⚙️ İş Akışı Tetikleyicileri</h4>
+                            <ul style="font-size: 15px;">
+                                <li><strong>Önceliklendirme:</strong> Olumsuz duygulu vakalar daha yüksek önceliğe
+                                    taşınır</li>
+                                <li><strong>Raporlama:</strong> Zaman içindeki duygu eğilimleri izlenir</li>
+                                <li><strong>Atama:</strong> Özel ekiplere yönlendirme yapılır</li>
+                                <li><strong>Eskale Etme:</strong> Yöneticilere bildirim gönderilir</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Örnek Senaryo -->
+                    <div class="blue-callout">
+                        <h4>📋 Örnek Senaryo</h4>
+                        <div class="flow-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <strong>İlk Vaka Oluşturuldu</strong>
+                                <p>Duygu: Nötr - “Yazıcım çalışmıyor.”</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <strong>Kullanıcı Yeni Yorum Ekler</strong>
+                                <p>Duygu Olumsuz’a döner - “Hâlâ bozuk, iki gündür kimse ilgilenmedi!”</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <strong>Otomatik Aksiyonlar Tetiklenir</strong>
+                                <p>✓ Vaka kıdemli uzmana eskale edilir<br>✓ Öncelik “Yüksek” olarak güncellenir<br>✓
+                                    Yönetici bilgilendirilir<br>✓ Kullanıcıya proaktif bilgilendirme e-postası
+                                    gönderilir</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- İş Değeri -->
+                    <div class="highlight-box" style="margin-top: 25px;">
+                        <p style="margin: 0; font-size: 16px;"><strong>İş Değeri:</strong> Olumsuz duygulara proaktif
+                            yanıt verilerek müşteri kaybı önlenir. Erken tespit ve zamanında eskalasyon, memnuniyetsiz
+                            müşterilere hızlı müdahale edilmesini sağlar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 15: Destek Uzmanı Değer Özeti -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Destek Uzmanı Değer Özeti</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div class="metric-box">
+                        <span class="number">3-5 dk</span>
+                        <span class="label">Talep Başına Kazanılan Süre</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">↑ 35%</span>
+                        <span class="label">İlk Çağrıda Çözüm Oranı</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">↓ 50%</span>
+                        <span class="label">Eğitim Süresi</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">3x</span>
+                        <span class="label">Bilgi Üretimi</span>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h3>Destek Uzmanı Verimliliğinde Dönüşüm</h3>
+                    <p style="font-size: 18px;">Destek uzmanları tekrarlayan araştırmalar yerine karmaşık problemlere
+                        odaklanır. Daha hızlı talep çözümü, daha yüksek kalite ve artan iş memnuniyeti sağlar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 16: Arka Planda Akıllı Otomasyon -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Arka Planda Akıllı Otomasyon</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Aviator Modelleri + İş Kuralları = Otomatik İş Akışları</h3>
+                    <p style="font-size: 18px;">Herhangi bir kayıt türü için yapay zekâ destekli otomasyon yapılandırın.
+                        Tetikleyicileri tanımlayın, istemleri özelleştirin ve Aviator’ın tekrarlayan analiz görevlerini
+                        otomatik olarak yürütmesine izin verin.</p>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 25px;">Temel Otomasyon Senaryoları</h3>
+
+                    <!-- Satır 1: Duygu Analizi ve Modeller -->
+                    <div class="two-column" style="margin-bottom: 30px;">
+                        <div class="card">
+                            <h4>🎭 Duygu Analizi</h4>
+                            <p style="margin-bottom: 15px;">Talep duygusunu otomatik olarak tespit eder ve eskalasyon iş
+                                akışlarını tetikler</p>
+                            <div class="screenshot-placeholder" style="margin: 15px 0;">
+                                <img src="screenshots/13-sentiment-workflow-config.png" alt="Duygu Analizi">
+                            </div>
+                            <ul style="font-size: 14px;">
+                                <li>Talep içeriğini olumlu/nötr/olumsuz olarak analiz eder</li>
+                                <li>Olumsuz duygu içeren talepleri otomatik olarak kıdemli uzmanlara eskale eder</li>
+                                <li>Hızlı yanıt sayesinde müşteri kaybını önler</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>🧠 Aviator Modelleri</h4>
+                            <p style="margin-bottom: 15px;">Özel iş akışları için yapay zekâ parametrelerini
+                                yapılandırın</p>
+                            <div class="screenshot-placeholder" style="margin: 15px 0;">
+                                <img src="screenshots/11-aviator-model-config.png" alt="Aviator Modelleri">
+                            </div>
+                            <ul style="font-size: 14px;">
+                                <li><strong>İstem şablonları:</strong> Yapay zekânın veriyi nasıl işleyeceğini tanımlar
+                                </li>
+                                <li><strong>Bağlam kaynakları:</strong> Vektör veritabanı veya uygulamalar</li>
+                                <li><strong>Özel parametreler:</strong> Token sayısı, eşikler, referanslar</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Satır 2: Bilgi Oluşturma ve Değişiklik Riski -->
+                    <div class="two-column" style="margin-bottom: 30px;">
+                        <div class="card">
+                            <h4>📚 Bilgi Makalesi Oluşturma</h4>
+                            <p style="margin-bottom: 15px;">Çözümlenmiş olaylardan otomatik olarak bilgi makaleleri
+                                üretir</p>
+                            <div class="screenshot-placeholder" style="margin: 15px 0;">
+                                <img src="screenshots/14-knowledge-article-generation.png"
+                                    alt="Bilgi Makalesi Oluşturma">
+                            </div>
+                            <ul style="font-size: 14px;">
+                                <li>Bilgi adayı olayları otomatik olarak algılar</li>
+                                <li>Başlık ve makale içeriğini otomatik oluşturur</li>
+                                <li>Bilgi makalesi oluşturma süresini 60 dakikadan 5 dakikaya düşürür</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>⚠️ Değişiklik Risk Değerlendirmesi</h4>
+                            <p style="margin-bottom: 15px;">0–4 arası puanlama ile yapay zekâ destekli risk analizi</p>
+                            <div class="screenshot-placeholder" style="margin: 15px 0;">
+                                <img src="screenshots/15-change-risk-analysis.png" alt="Değişiklik Risk Analizi">
+                            </div>
+                            <ul style="font-size: 14px;">
+                                <li>Değişiklik detaylarını, hizmet etkisini ve kesinti riskini değerlendirir</li>
+                                <li>Ayrıntılı risk değerlendirme raporu oluşturur</li>
+                                <li>Yüksek riskli değişiklikler için ek onay adımlarını tetikler</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- İş Kuralı Akışı -->
+                    <div class="blue-callout" style="margin-top: 25px;">
+                        <h4>⚙️ Nasıl Çalışır</h4>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px;">
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">1. Tetikleme</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Kayıt oluşturulur/güncellenir</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">2. Analiz</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Aviator içeriği işler</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">3. Aksiyon</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Alanlar güncellenir, iş akışları
+                                    tetiklenir</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">4. Denetim</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">“Aviator tarafından güncellendi” olarak
+                                    kaydedilir</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ek Senaryolar Özeti -->
+                    <div style="margin-top: 30px;">
+                        <h4 style="color: var(--accent-green);">Ek Otomasyon Senaryoları</h4>
+                        <div class="two-column" style="margin-top: 15px;">
+                            <div class="card" style="background: var(--primary-bg);">
+                                <ul style="font-size: 14px; margin: 0;">
+                                    <li><strong>🔒 Gizlilik Tespiti:</strong> Kişisel verileri algılar, güvenli ekiplere
+                                        yönlendirir</li>
+                                    <li><strong>📧 Akıllı E-posta Oluşturma:</strong> Müşterilere otomatik çözüm
+                                        e-postaları gönderir</li>
+                                </ul>
+                            </div>
+                            <div class="card" style="background: var(--primary-bg);">
+                                <ul style="font-size: 14px; margin: 0;">
+                                    <li><strong>🎯 Niyet Sınıflandırma:</strong> Talepleri otomatik olarak kategorize
+                                        eder</li>
+                                    <li><strong>📊 Özet Oluşturma:</strong> 5 kelimelik kısa özetler üretir</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="margin: 0; font-size: 16px;"><strong>Sınırsız Potansiyel:</strong> Bunu “Studio Apps” gibi
+                        düşünün – Aviator Modelleri ile İş Kurallarını birleştirerek her kullanım senaryosu için özel
+                        yapay zekâ iş akışları oluşturabilirsiniz. Hayal gücünüz tek sınırdır.</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Slayt 17: Tam Yapay Zekâ Yetkinlikleri Kataloğu -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Tam Yapay Zekâ Yetkinlikleri Kataloğu</h2>
+            </div>
+            <div class="content">
+                <div class="three-column">
+                    <div class="pillar">
+                        <h4>Aviator Son Kullanıcı Asistanı</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Evrensel Kurumsal Bilgi</li>
+                            <li>Genel Bilgi Keşfi</li>
+                            <li>Gerçek zamanlı bilgi</li>
+                            <li>Otomatik Yardım</li>
+                        </ul>
+                        <h4 style="margin-top: 20px;">Aviator Destek Uzmanı Asistanı</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Küresel yardım</li>
+                            <li>Vaka özetleme</li>
+                            <li>Arıza giderme desteği</li>
+                            <li>Çözüm önerileri</li>
+                            <li>Duygu Analizi (24.3)</li>
+                            <li>Otomatik Eskalasyon (24.3)</li>
+                            <li>Bilgi oluşturma (24.3)</li>
+                            <li>Değişiklik risk analizi (24.3)</li>
+                        </ul>
+                    </div>
+                    <div class="pillar">
+                        <h4>Akıllı İletişim</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Aviator e-posta oluşturma (24.3)</li>
+                            <li>Otomatik çözüm e-postaları</li>
+                            <li>Canlı çeviri</li>
+                        </ul>
+                        <h4 style="margin-top: 20px;">Akıllı Talep Yönetimi</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Akıllı görsel işleme ve OCR</li>
+                            <li>Otomatik sınıflandırma ve atama</li>
+                            <li>Akıllı CI tespiti</li>
+                            <li>Proaktif çözüm eşleştirme</li>
+                            <li>Akıllı atama önerileri</li>
+                        </ul>
+                        <h4 style="margin-top: 20px;">Uzman Eşleştirme</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Uzman önerisi</li>
+                            <li>Uzman ataması</li>
+                        </ul>
+                    </div>
+                    <div class="pillar">
+                        <h4>Akıllı Veri Analitiği</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Popüler Konu Kümeleme</li>
+                            <li>Değer Odaklı Bilgi Yönetimi</li>
+                            <li>Katalog ve Otomasyon Yönetimi</li>
+                            <li>Proaktif Problem Yönetimi</li>
+                            <li>Son Kullanıcı Anket Analitiği</li>
+                            <li>Değişiklik Analitiği</li>
+                            <li>Değişiklik Riski ve Başarı Analizi</li>
+                        </ul>
+                        <h4 style="margin-top: 20px;">AI Studio Özelleştirme</h4>
+                        <ul style="font-size: 14px;">
+                            <li>Aviator Modelleri</li>
+                            <li>Aviator İş Akışı Kuralları (24.3)</li>
+                            <li>Aviator Özel Aksiyonları (24.3)</li>
+                            <li>Yapay Zekâ Destekli Entegrasyon Akışları</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <h4>Referans Slaytı</h4>
+                    <p style="margin: 0; font-size: 16px;">Bu kapsamlı kataloğu Q&A oturumlarında veya teknik
+                        tartışmalarda kullanarak SMAX Aviator’ın hizmet yönetimi yaşam döngüsündeki tüm yapay zekâ
+                        yeteneklerini gösterebilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 18: Uçtan Uca Akıllı İş Akışı -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Uçtan Uca Demo: Akıllı İş Akışı</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Tam Müşteri Deneyimi: Talep Oluşturmadan Proaktif Yanıta</h3>
+                    <p style="font-size: 17px;">Aviator’ın olumsuz duyguyu nasıl algıladığını ve analiz, ekip ataması,
+                        bildirimler ve IVR aramasıyla proaktif müşteri yanıtını içeren akıllı bir iş akışını otomatik
+                        olarak nasıl başlattığını izleyin.</p>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <!-- Adım 1: Talep Oluşturma -->
+                    <div class="card" style="margin-bottom: 25px; border-left: 4px solid var(--accent-green);">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div class="flow-number" style="margin-right: 15px;">1</div>
+                            <h3 style="margin: 0; color: var(--accent-green);">Müşteri Talep Oluşturur</h3>
+                        </div>
+                        <p style="margin-bottom: 15px; font-size: 15px;">Son kullanıcı, Service Portal üzerinden olumsuz
+                            veya öfkeli bir ton içeren bir talep gönderir.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                            <video controls style="width: 100%; display: block;" preload="metadata">
+                                <source src="screenshots/Create_ticket.mp4" type="video/mp4">
+                                Tarayıcınız video etiketini desteklemiyor.
+                            </video>
+                        </div>
+                        <ul style="font-size: 14px; margin-top: 15px;">
+                            <li><strong>Ne olur:</strong> Olumsuz içerikli talep gönderilir</li>
+                            <li><strong>Tetikleyici:</strong> Yeni vaka oluşturma olayı iş kurallarını tetikler</li>
+                        </ul>
+                    </div>
+
+                    <!-- Adım 2: Analiz ve Atama -->
+                    <div class="card" style="margin-bottom: 25px; border-left: 4px solid var(--highlight-blue);">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div class="flow-number" style="margin-right: 15px;">2</div>
+                            <h3 style="margin: 0; color: var(--highlight-blue);">Aviator Analizi ve Otomatik Aksiyonlar
+                            </h3>
+                        </div>
+                        <p style="margin-bottom: 15px; font-size: 15px;">Aviator anında duyguyu analiz eder, uygun ekibe
+                            atama yapar ve Microsoft Teams üzerinden bildirim gönderir.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                            <video controls style="width: 100%; display: block;" preload="metadata">
+                                <source src="screenshots/Analysi_Assign_Teams_Notification.mp4" type="video/mp4">
+                                Tarayıcınız video etiketini desteklemiyor.
+                            </video>
+                        </div>
+                        <ul style="font-size: 14px; margin-top: 15px;">
+                            <li><strong>Duygu Tespiti:</strong> Yapay zekâ olumsuz duyguyu otomatik olarak algılar</li>
+                            <li><strong>Öncelik Artırımı:</strong> Duyguya göre talep önceliği yükseltilir</li>
+                            <li><strong>Akıllı Atama:</strong> Kıdemli destek ekibine yönlendirilir</li>
+                            <li><strong>Teams Entegrasyonu:</strong> Atanan uzmana anında bildirim gönderilir</li>
+                            <li><strong>5 Kelimelik Özet:</strong> Hızlı değerlendirme için otomatik özet (ör. “Gecikmiş
+                                yanıt nedeniyle müşteri kızgın”)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Adım 3: IVR Araması -->
+                    <div class="card" style="margin-bottom: 25px; border-left: 4px solid #E67E22;">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div class="flow-number" style="margin-right: 15px;">3</div>
+                            <h3 style="margin: 0; color: #E67E22;">Proaktif IVR Araması</h3>
+                        </div>
+                        <p style="margin-bottom: 15px; font-size: 15px;">Özel IVR iş akışı, müşteriye otomatik bir arama
+                            başlatarak endişesine anında yanıt verildiğini gösterir.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                            <video controls style="width: 100%; display: block;" preload="metadata">
+                                <source src="screenshots/IVR_Call.mp4" type="video/mp4">
+                                Tarayıcınız video etiketini desteklemiyor.
+                            </video>
+                        </div>
+                        <ul style="font-size: 14px; margin-top: 15px;">
+                            <li><strong>IVR Tetikleyici:</strong> Olumsuz duygu özel iş akışını başlatır</li>
+                            <li><strong>Proaktif Arama:</strong> Müşteriye otomatik arama yapılır</li>
+                            <li><strong>Müşteri Deneyimi:</strong> Endişenin anında kabul edildiğini hisseder</li>
+                            <li><strong>Yönetici Bildirimi:</strong> Denetim için yönetici bilgilendirilir</li>
+                        </ul>
+                    </div>
+
+                    <!-- İş Etkisi -->
+                    <div class="blue-callout" style="margin-top: 25px;">
+                        <h4>💡 Uçtan Uca İş Değeri</h4>
+                        <p style="margin: 0; font-size: 15px;"><strong>Tespitten aksiyona kadar tam otomasyon:</strong>
+                            Hiçbir manuel müdahale gerekmez. Duygu tespit edildi → Ekip atandı → Yönetici
+                            bilgilendirildi → Müşteriyle proaktif iletişim kuruldu. İlk yanıt süresi: <strong>2
+                                dakikanın altında</strong> (gelenekselde <strong>2-4 saat</strong>). Anında etkileşimle
+                            müşteri kaybı önlenir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 19: Etki ve Sonuçlar -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Etki ve Sonuçlar</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div class="metric-box">
+                        <span class="number">Dakikalar</span>
+                        <span class="label">Yanıt Süresi (Saatler Yerine)</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">-40%</span>
+                        <span class="label">Eskalasyon Oranı</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">+25%</span>
+                        <span class="label">Müşteri Memnuniyeti</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">100%</span>
+                        <span class="label">Uzman Odaklı Çözüm</span>
+                    </div>
+                </div>
+                <div class="two-column" style="margin-top: 40px;">
+                    <div class="pillar">
+                        <h3>🎯 İş Faydaları</h3>
+                        <ul>
+                            <li>Müşteri kaybını önler</li>
+                            <li>Marka itibarını korur</li>
+                            <li>Eskalasyon maliyetlerini azaltır</li>
+                            <li>Hizmet metriklerini iyileştirir</li>
+                        </ul>
+                    </div>
+                    <div class="pillar">
+                        <h3>⚙️ Esneklik</h3>
+                        <ul>
+                            <li>Özelleştirilebilir önem seviyeleri</li>
+                            <li>Kural bazlı yapılandırılabilir iş akışları</li>
+                            <li>Mevcut IVR sistemleriyle entegre olur</li>
+                            <li>Kurumsal ihtiyaçlara uyum sağlar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 20: SMAX 25.4 Yenilikleri -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>SMAX 25.4’te Neler Yeni</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div class="pillar">
+                        <h3>🤖 Aviator Agents</h3>
+                        <ul>
+                            <li><strong>Görev Planları:</strong> Seri veya paralel yürütme</li>
+                            <li><strong>Çalıştırma:</strong> Manuel/otomatik görevler, Aviator çağrıları, Orchestration
+                                akışları, Integration Studio</li>
+                            <li><strong>Başlatma:</strong> İş kuralı süreciyle tetiklenir</li>
+                            <li><strong>Oturum Kayıtları:</strong> Tüm eylemlerin denetim geçmişi</li>
+                            <li><strong>Kullanım Alanları:</strong> Karmaşık iş akışları, çok adımlı otomasyon, süreç
+                                orkestrasyonu</li>
+                        </ul>
+                    </div>
+                    <div class="pillar">
+                        <h3>🌐 Google Gemini</h3>
+                        <ul>
+                            <li><strong>Alternatif LLM:</strong> SaaS için arka uç seçeneği</li>
+                            <li><strong>Geliştirilmiş:</strong> Çoklu dil desteği</li>
+                            <li><strong>Daha Geniş:</strong> Genel bilgi tabanı</li>
+                            <li><strong>Gelişmiş:</strong> Dil anlama yeteneği</li>
+                            <li><strong>Seçim:</strong> Veri işleme tercihine göre Private Llama 3 veya Google Gemini
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="margin: 0; font-size: 18px;">Aviator Agents, tam denetimle çok adımlı gelişmiş iş
+                        akışlarını etkinleştirir. Gemini, Google’ın yapay zekâ işlemeye izin veren kurumlar için
+                        esneklik sağlar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slayt 21: Temel Çıkarımlar -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Temel Çıkarımlar</h2>
+            </div>
+            <div class="content">
+                <div class="pillar">
+                    <h3>🔒 Güvenli ve Özel</h3>
+                    <ul>
+                        <li>OpenText Public Cloud üzerinde AWS altyapısı</li>
+                        <li>Milvus vektör veritabanı ile kiracı verisi izolasyonu</li>
+                        <li>Veri gizliliği garanti edilir – veriniz yalnızca size aittir</li>
+                        <li>Uyumluluk için hazır mimari</li>
+                        <li>Private Llama 3 veya Google Gemini seçeneği</li>
+                    </ul>
+                </div>
+                <div class="pillar">
+                    <h3>👥 Çoklu Persona Değeri</h3>
+                    <ul>
+                        <li><strong>Son Kullanıcılar:</strong> Self-servis yetkinliği, 7/24 yanıt, anında çözüm</li>
+                        <li><strong>Destek Uzmanları:</strong> Verimlilik artışı, otomatik içerik üretimi, akıllı
+                            asistan desteği</li>
+                        <li><strong>BT Yöneticileri:</strong> İş akışı otomasyonu, maliyet azaltma, iyileştirilmiş
+                            metrikler</li>
+                    </ul>
+                </div>
+                <div class="pillar">
+                    <h3>🏢 Kurumsal Kullanıma Hazır</h3>
+                    <ul>
+                        <li>Birden fazla kiracıda ölçeklenebilir kanıtlanmış mimari</li>
+                        <li>Özel iş akışları için genişletilebilir kurallar</li>
+                        <li>Tüm hizmet masası operasyonlarında ölçeklenebilir</li>
+                        <li>Teams, Mobil ve UCMDB entegrasyonu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slayt 22: Sonraki Adımlar -->
+        <div class="slide title-slide">
+            <h2 style="color: white; border: none; font-size: 48px;">Sonraki Adımlar</h2>
+            <div style="background: white; padding: 50px; border-radius: 12px; margin: 40px auto; max-width: 850px;">
+                <h3 style="color: var(--accent-green); margin-top: 0; border: none;">Hizmet Masanızı Dönüştürmeye Hazır
+                    mısınız?</h3>
+                <div style="text-align: left; margin-top: 35px;">
+                    <h4 style="color: var(--primary-text);">📅 Canlı bir Demo Planlayın</h4>
+                    <p style="color: var(--secondary-gray);">Aviator’ı kendi kullanım senaryolarınızla çalışırken görün
+                    </p>
+
+                    <h4 style="color: var(--primary-text); margin-top: 30px;">🚀 Pilot Program Seçenekleri</h4>
+                    <p style="color: var(--secondary-gray);">Küçük başlayın, sonuçlara göre ölçekleyin</p>
+
+                    <h4 style="color: var(--primary-text); margin-top: 30px;">⚙️ Kiracı Aktivasyon Süreci</h4>
+                    <p style="color: var(--secondary-gray);">ITOM Aviator lisansını satın alın → PCS talebi oluşturun →
+                        SaaS Operasyon ekibi etkinleştirir → Yapılandırın ve devreye alın</p>
+                </div>
+            </div>
+            <div style="color: white; margin-top: 35px;">
+                <h4 style="color: white; border: none;">📚 Kaynaklar</h4>
+                <p style="font-size: 16px;">docs.microfocus.com - Aviator dokümantasyonunun tamamı</p>
+                <p style="margin-top: 30px; font-size: 24px; font-weight: 600;">Sorular?</p>
+            </div>
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+                <p style="font-size: 18px; opacity: 0.95;"><span style="color: rgba(255,255,255,0.8);">OpenText
+                        SMAX</span> | by <strong>Rigosis Bilgi Sistemleri</strong></p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="slide-number"></div>
+    <div class="brand-footer">
+        <span style="color: var(--highlight-blue); font-weight: 600;">OpenText SMAX</span>
+        <span style="color: var(--secondary-gray);">|</span>
+        <span>by <strong style="color: var(--accent-green);">Rigosis Bilgi Sistemleri</strong></span>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+
+            document.querySelector('.slide-number').textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,7 @@
                 opacity: 0;
                 transform: translateX(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -121,10 +123,11 @@
             border-left: 5px solid var(--accent-green);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
 
-        .card p, .card li {
+        .card p,
+        .card li {
             color: var(--primary-text);
             line-height: 1.6;
             font-size: 16px;
@@ -138,12 +141,16 @@
             margin: 25px 0;
         }
 
-        .highlight-box h3, .highlight-box h4 {
+        .highlight-box h3,
+        .highlight-box h4 {
             color: var(--white);
             margin-top: 0;
         }
 
-        .highlight-box p, .highlight-box ul, .highlight-box ol, .highlight-box li {
+        .highlight-box p,
+        .highlight-box ul,
+        .highlight-box ol,
+        .highlight-box li {
             color: var(--white);
         }
 
@@ -203,7 +210,7 @@
             width: auto;
             border-radius: 8px;
             object-fit: contain;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         /* Screenshots in two-column layouts need more width */
@@ -318,13 +325,13 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .nav-button:hover {
             background: #2fa03f;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .nav-button:disabled {
@@ -344,7 +351,7 @@
             background: var(--white);
             padding: 10px 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .brand-footer {
@@ -362,7 +369,7 @@
             gap: 15px;
             padding: 8px 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .title-slide {
@@ -379,23 +386,25 @@
             margin-bottom: 20px;
         }
 
-        .title-slide h2, .title-slide h3 {
+        .title-slide h2,
+        .title-slide h3 {
             color: white;
             border: none;
         }
 
         .title-slide .subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 48px;
             margin-bottom: 60px;
         }
 
         .title-slide .meta {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 28px;
         }
 
         @media screen and (max-width: 768px) {
+
             .two-column,
             .three-column {
                 grid-template-columns: 1fr;
@@ -403,6 +412,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="presentation">
         <!-- Slide 1: Title -->
@@ -427,8 +437,10 @@
                         <li><strong>Long Resolution Times:</strong> Users wait hours or days for simple answers</li>
                         <li><strong>Knowledge Silos:</strong> Information buried across systems and people</li>
                         <li><strong>Agent Burnout:</strong> Repetitive questions drain team capacity</li>
-                        <li><strong>Inconsistent Quality:</strong> Service varies by agent availability and expertise</li>
-                        <li><strong>Scaling Challenges:</strong> Growing support demands without proportional resources</li>
+                        <li><strong>Inconsistent Quality:</strong> Service varies by agent availability and expertise
+                        </li>
+                        <li><strong>Scaling Challenges:</strong> Growing support demands without proportional resources
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -442,11 +454,13 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>Your Enterprise AI Virtual Assistant</h3>
-                    <p style="font-size: 18px;">Seamlessly integrates advanced language models with real-time enterprise data while maintaining stringent privacy and security standards.</p>
+                    <p style="font-size: 18px;">Seamlessly integrates advanced language models with real-time enterprise
+                        data while maintaining stringent privacy and security standards.</p>
                 </div>
 
                 <div class="screenshot-placeholder" style="margin: 30px 0;">
-                    <img src="screenshots/16-aviator-detailed-architecture.png" alt="Detailed SMAX Aviator Architecture">
+                    <img src="screenshots/16-aviator-detailed-architecture.png"
+                        alt="Detailed SMAX Aviator Architecture">
                 </div>
 
                 <div class="two-column">
@@ -469,16 +483,22 @@
                 </div>
 
                 <div style="margin-top: 35px;">
-                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">LLM Options: Choose What Fits Your Needs</h3>
+                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">LLM Options: Choose What Fits Your
+                        Needs</h3>
                     <div class="two-column">
                         <div class="card" style="border-left-color: var(--accent-green);">
                             <h4>🔒 Private LLM (Default)</h4>
-                            <p style="margin-bottom: 15px;"><strong>Llama 3.1</strong> - Hosted in OpenText Public Cloud SaaS</p>
+                            <p style="margin-bottom: 15px;"><strong>Llama 3.1</strong> - Hosted in OpenText Public Cloud
+                                SaaS</p>
                             <ul style="font-size: 15px;">
-                                <li><strong>Fine-tuned with ITOM documentation:</strong> Better understanding of ITOM products for administrators and implementers</li>
-                                <li><strong>Improved accuracy:</strong> Enhanced response quality and complex query handling</li>
-                                <li><strong>Complete data privacy:</strong> Your data stays in OpenText infrastructure</li>
-                                <li><strong>No additional sub-processors:</strong> Data never leaves OpenText control</li>
+                                <li><strong>Fine-tuned with ITOM documentation:</strong> Better understanding of ITOM
+                                    products for administrators and implementers</li>
+                                <li><strong>Improved accuracy:</strong> Enhanced response quality and complex query
+                                    handling</li>
+                                <li><strong>Complete data privacy:</strong> Your data stays in OpenText infrastructure
+                                </li>
+                                <li><strong>No additional sub-processors:</strong> Data never leaves OpenText control
+                                </li>
                                 <li><strong>Default option:</strong> No configuration needed</li>
                             </ul>
                         </div>
@@ -489,20 +509,26 @@
                                 <li><strong>Larger model:</strong> Stronger natural language understanding</li>
                                 <li><strong>Broader knowledge base:</strong> More general knowledge coverage</li>
                                 <li><strong>Enhanced multi-lingual:</strong> Support for more languages</li>
-                                <li><strong>Important consideration:</strong> Google becomes additional sub-processor of your data</li>
-                                <li><strong>Data protection:</strong> OpenText does not allow Google to train on your data</li>
+                                <li><strong>Important consideration:</strong> Google becomes additional sub-processor of
+                                    your data</li>
+                                <li><strong>Data protection:</strong> OpenText does not allow Google to train on your
+                                    data</li>
                                 <li><strong>No cost impact:</strong> Choice doesn't affect pricing or licensing</li>
                             </ul>
                         </div>
                     </div>
                     <div class="highlight-box" style="margin-top: 25px;">
-                        <p style="margin: 0; font-size: 16px;"><strong>Flexibility Without Compromise:</strong> Both options deliver powerful AI capabilities. Choose Private LLM for maximum data control and ITOM expertise, or Public LLM for broader language support. The choice is yours, with no pricing impact.</p>
+                        <p style="margin: 0; font-size: 16px;"><strong>Flexibility Without Compromise:</strong> Both
+                            options deliver powerful AI capabilities. Choose Private LLM for maximum data control and
+                            ITOM expertise, or Public LLM for broader language support. The choice is yours, with no
+                            pricing impact.</p>
                     </div>
                 </div>
 
                 <div class="blue-callout" style="margin-top: 30px;">
                     <h4>🔗 Enterprise Knowledge - External Sources</h4>
-                    <p style="margin-bottom: 15px;">Service Management supports these IDOL connectors for external knowledge integration:</p>
+                    <p style="margin-bottom: 15px;">Service Management supports these IDOL connectors for external
+                        knowledge integration:</p>
                     <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; padding-left: 20px;">
                         <li><strong>SharePoint Remote Connector</strong></li>
                         <li><strong>Confluence REST Connector</strong></li>
@@ -522,7 +548,8 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>Chat Conversation Interface</h3>
-                    <p style="font-size: 18px; margin-bottom: 20px;">Business users interact with Aviator through natural language conversation, accessible from anywhere</p>
+                    <p style="font-size: 18px; margin-bottom: 20px;">Business users interact with Aviator through
+                        natural language conversation, accessible from anywhere</p>
                     <div class="three-column">
                         <div style="text-align: center;">
                             <h4 style="color: white; margin: 0;">🌐 Service Portal</h4>
@@ -543,9 +570,11 @@
                     <div class="card">
                         <h4>What Aviator Can Do</h4>
                         <ul>
-                            <li><strong>Respond to queries</strong> with summaries based on existing knowledge to help users self-solve</li>
+                            <li><strong>Respond to queries</strong> with summaries based on existing knowledge to help
+                                users self-solve</li>
                             <li><strong>Suggest Next Steps</strong> with relevant catalog offerings</li>
-                            <li><strong>Access multiple sources:</strong> Knowledge Articles, News, Service Catalog & Externally indexed content</li>
+                            <li><strong>Access multiple sources:</strong> Knowledge Articles, News, Service Catalog &
+                                Externally indexed content</li>
                             <li><strong>Provide citations</strong> with reference sources for transparency</li>
                         </ul>
                     </div>
@@ -554,7 +583,8 @@
                         <ul>
                             <li><strong>Respects entitlements:</strong> Users only see what they have access to</li>
                             <li><strong>Data domain controls:</strong> Service Portal access rules enforced</li>
-                            <li><strong>Feedback enabled:</strong> Users can rate responses for continuous improvement</li>
+                            <li><strong>Feedback enabled:</strong> Users can rate responses for continuous improvement
+                            </li>
                             <li><strong>Audit trails:</strong> All interactions logged for compliance</li>
                         </ul>
                     </div>
@@ -562,7 +592,8 @@
 
                 <div class="blue-callout" style="margin-top: 25px;">
                     <h4>🎯 Key Benefits</h4>
-                    <p style="margin: 0;">24/7 Availability • Instant Responses • Consistent Quality • Reduced Ticket Volume • Improved User Satisfaction • Self-Service Empowerment</p>
+                    <p style="margin: 0;">24/7 Availability • Instant Responses • Consistent Quality • Reduced Ticket
+                        Volume • Improved User Satisfaction • Self-Service Empowerment</p>
                 </div>
             </div>
         </div>
@@ -573,18 +604,21 @@
                 <h2>Demo: Knowledge Q&A with References</h2>
             </div>
             <div class="content">
-                <p style="font-size: 18px;"><strong>Scenario:</strong> User asks "How many vacation days do we get per year?"</p>
+                <p style="font-size: 18px;"><strong>Scenario:</strong> User asks "How many vacation days do we get per
+                    year?"</p>
                 <div class="screenshot-placeholder">
                     <img src="screenshots/02-service-portal-chat.png" alt="Service Portal Chat">
                 </div>
                 <div class="two-column">
                     <div class="card">
                         <h4>What's Happening</h4>
-                        <p>Aviator searches knowledge base, HR policies, and company documents, then generates a clear response with source references</p>
+                        <p>Aviator searches knowledge base, HR policies, and company documents, then generates a clear
+                            response with source references</p>
                     </div>
                     <div class="card">
                         <h4>User Action</h4>
-                        <p>Can click references to view full policy documents, ask follow-up questions, or submit feedback</p>
+                        <p>Can click references to view full policy documents, ask follow-up questions, or submit
+                            feedback</p>
                     </div>
                 </div>
             </div>
@@ -620,10 +654,12 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>Embedded Aviator Widget</h3>
-                    <p style="font-size: 18px; margin-bottom: 20px;">SMAX Agents interact with Aviator through the embedded Aviator Widget, accessible directly in the SMAX Agent interface</p>
+                    <p style="font-size: 18px; margin-bottom: 20px;">SMAX Agents interact with Aviator through the
+                        embedded Aviator Widget, accessible directly in the SMAX Agent interface</p>
                     <div style="text-align: center; padding: 15px 0;">
                         <h4 style="color: white; margin: 0;">🖥️ Agent Interface Integration</h4>
-                        <p style="font-size: 14px; margin: 5px 0 0 0;">Always available alongside ticket records for instant AI assistance</p>
+                        <p style="font-size: 14px; margin: 5px 0 0 0;">Always available alongside ticket records for
+                            instant AI assistance</p>
                     </div>
                 </div>
 
@@ -632,15 +668,19 @@
                         <h4>Widget Capabilities</h4>
                         <ul>
                             <li><strong>Chat conversation:</strong> Same functionality as Service Portal cases</li>
-                            <li><strong>Full knowledge access:</strong> All knowledge articles, news, Service Catalog & external content</li>
-                            <li><strong>Action buttons:</strong> Summarize and suggest solutions for Requests & Incident records</li>
-                            <li><strong>Conversation history:</strong> View and manage all previous Aviator interactions</li>
+                            <li><strong>Full knowledge access:</strong> All knowledge articles, news, Service Catalog &
+                                external content</li>
+                            <li><strong>Action buttons:</strong> Summarize and suggest solutions for Requests & Incident
+                                records</li>
+                            <li><strong>Conversation history:</strong> View and manage all previous Aviator interactions
+                            </li>
                         </ul>
                     </div>
                     <div class="card">
                         <h4>Security & Controls</h4>
                         <ul>
-                            <li><strong>Data domain enforcement:</strong> Subject to security controls and data domains</li>
+                            <li><strong>Data domain enforcement:</strong> Subject to security controls and data domains
+                            </li>
                             <li><strong>Role-based access:</strong> Agents see only what they're entitled to access</li>
                             <li><strong>Context-aware:</strong> Understands current ticket/record being worked on</li>
                             <li><strong>Audit compliant:</strong> All AI interactions logged and traceable</li>
@@ -650,7 +690,8 @@
 
                 <div class="blue-callout" style="margin-top: 25px;">
                     <h4>🎯 Agent Benefits</h4>
-                    <p style="margin: 0;">Faster Ticket Resolution • Improved Accuracy • Automated Knowledge Creation • Intelligent Risk Assessment • Enhanced Customer Communication • Always-On AI Copilot</p>
+                    <p style="margin: 0;">Faster Ticket Resolution • Improved Accuracy • Automated Knowledge Creation •
+                        Intelligent Risk Assessment • Enhanced Customer Communication • Always-On AI Copilot</p>
                 </div>
             </div>
         </div>
@@ -700,11 +741,13 @@
                 <div class="two-column">
                     <div class="card">
                         <h4>How It Works</h4>
-                        <p>Aviator analyzes incident details, searches knowledge base for similar resolved cases, generates solution based on patterns</p>
+                        <p>Aviator analyzes incident details, searches knowledge base for similar resolved cases,
+                            generates solution based on patterns</p>
                     </div>
                     <div class="card">
                         <h4>Agent Benefit</h4>
-                        <p>Starting point for resolution, learns from past solutions, reduces research time, improves consistency</p>
+                        <p>Starting point for resolution, learns from past solutions, reduces research time, improves
+                            consistency</p>
                     </div>
                 </div>
             </div>
@@ -722,7 +765,8 @@
                 </div>
                 <div class="highlight-box">
                     <h4>The Knowledge Capture Challenge</h4>
-                    <p>Agents resolve issues but documentation lags. Knowledge remains in individual's heads. Aviator automates this:</p>
+                    <p>Agents resolve issues but documentation lags. Knowledge remains in individual's heads. Aviator
+                        automates this:</p>
                     <ol style="margin-top: 20px;">
                         <li>Agent marks incident as "Knowledge candidate"</li>
                         <li>Aviator generates article title and content</li>
@@ -776,7 +820,8 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>AI-Enriched Workflow: Automatic Sentiment Detection</h3>
-                    <p style="font-size: 18px;">Aviator workflow business rules automatically detect sentiment for any new case, enabling proactive response to customer concerns.</p>
+                    <p style="font-size: 18px;">Aviator workflow business rules automatically detect sentiment for any
+                        new case, enabling proactive response to customer concerns.</p>
                 </div>
 
                 <div class="screenshot-placeholder" style="margin: 25px 0;">
@@ -828,125 +873,17 @@
                             <div class="step-number">3</div>
                             <div class="step-content">
                                 <strong>Automatic Actions Triggered</strong>
-                                <p>✓ Case escalated to senior agent<br>✓ Priority increased to High<br>✓ Manager notified<br>✓ Proactive email sent to user</p>
+                                <p>✓ Case escalated to senior agent<br>✓ Priority increased to High<br>✓ Manager
+                                    notified<br>✓ Proactive email sent to user</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Value Proposition -->
                     <div class="highlight-box" style="margin-top: 25px;">
-                        <p style="margin: 0; font-size: 16px;"><strong>Business Value:</strong> Prevent customer churn by proactively responding to negative sentiment. Early detection and escalation ensures frustrated customers receive immediate attention before issues escalate further.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 14: Aviator Models - Configuration Deep Dive -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>Aviator Models: Configuration Deep Dive</h2>
-            </div>
-            <div class="content">
-                <div class="highlight-box">
-                    <h3>Configure AI Behavior for Custom Workflows</h3>
-                    <p style="font-size: 17px;">Aviator Models define how the AI processes information and generates responses. Configure prompts, tokens, context sources, and search parameters to optimize for your specific use cases.</p>
-                </div>
-
-                <div style="margin-top: 25px;">
-                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">Key Configuration Parameters</h3>
-
-                    <!-- Row 1: Prompt Template & Tokens -->
-                    <div class="two-column" style="margin-bottom: 25px;">
-                        <div class="card">
-                            <h4>📝 Prompt Template</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Organizes information sent to the LLM, allowing you to expand on an input.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>{input}:</strong> User prompt or question</li>
-                                <li><strong>{context}:</strong> Knowledge retrieved from vector DB or applications</li>
-                                <li><strong>Language:</strong> Template only supports English</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4>🔢 Max New Tokens</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Specifies maximum output length from the LLM.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>Range:</strong> 10 to 384 tokens</li>
-                                <li><strong>Default:</strong> 256 tokens</li>
-                                <li><strong>Note:</strong> Exceeding triggers "continue generation" message</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Row 2: Context Source & Max References -->
-                    <div class="two-column" style="margin-bottom: 25px;">
-                        <div class="card">
-                            <h4>🗂️ Context Source</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Defines where Aviator retrieves supporting information.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>Vector Database:</strong> Searches indexed knowledge base</li>
-                                <li><strong>Applications:</strong> Retrieves data via APIs (no vector DB search)</li>
-                                <li><strong>Business Rules:</strong> Currently only use Applications</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4>📚 Max References</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Controls how many sources are searched and returned.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>Range:</strong> 1 to 10 references</li>
-                                <li><strong>Availability:</strong> Only when context source is Vector Database</li>
-                                <li><strong>Impact:</strong> More references = broader context, but slower response</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Row 3: Open Topics & Similarity Threshold -->
-                    <div class="two-column" style="margin-bottom: 25px;">
-                        <div class="card">
-                            <h4>🧠 Open Topics</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Allows LLM to use its inherent training knowledge.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>Benefit:</strong> Enables analytical and creative responses</li>
-                                <li><strong>Trade-off:</strong> Can result in more hallucinations</li>
-                                <li><strong>Use case:</strong> Analysis, summarization, creative tasks</li>
-                                <li><strong>Llama 3.1:</strong> Vastly superior inherent knowledge vs Llama 2</li>
-                            </ul>
-                        </div>
-                        <div class="card">
-                            <h4>🎯 Similarity Threshold</h4>
-                            <p style="margin-bottom: 12px; font-size: 15px;">Controls how closely vector DB results must match query.</p>
-                            <ul style="font-size: 14px;">
-                                <li><strong>Range:</strong> 0 to 1 (higher = stricter matching)</li>
-                                <li><strong>Recommended:</strong> Set to at least 0.82</li>
-                                <li><strong>Availability:</strong> Only when context source is Vector Database</li>
-                                <li><strong>Impact:</strong> Higher threshold = fewer but more relevant results</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Screenshot -->
-                    <div class="screenshot-placeholder" style="margin: 25px 0;">
-                        <img src="screenshots/11-aviator-model-config.png" alt="Aviator Model Configuration">
-                    </div>
-
-                    <!-- Best Practices -->
-                    <div class="blue-callout" style="margin-top: 25px;">
-                        <h4>⚙️ Configuration Best Practices</h4>
-                        <div class="two-column" style="margin-top: 15px;">
-                            <div>
-                                <ul style="font-size: 14px; margin: 0;">
-                                    <li><strong>Start conservative:</strong> Use Vector DB with similarity 0.82+</li>
-                                    <li><strong>Test thoroughly:</strong> Validate responses before production</li>
-                                    <li><strong>Monitor token usage:</strong> Adjust max tokens based on actual needs</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <ul style="font-size: 14px; margin: 0;">
-                                    <li><strong>Use Open Topics sparingly:</strong> Only when analysis is needed</li>
-                                    <li><strong>Business Rules:</strong> Always use Applications as context source</li>
-                                    <li><strong>Iterate:</strong> Refine prompts based on real-world usage</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <p style="margin: 0; font-size: 16px;"><strong>Business Value:</strong> Prevent customer churn
+                            by proactively responding to negative sentiment. Early detection and escalation ensures
+                            frustrated customers receive immediate attention before issues escalate further.</p>
                     </div>
                 </div>
             </div>
@@ -978,7 +915,8 @@
                 </div>
                 <div class="highlight-box" style="margin-top: 40px;">
                     <h3>Agent Productivity Transformation</h3>
-                    <p style="font-size: 18px;">Agents focus on complex problem-solving instead of repetitive research. Faster ticket resolution, improved quality, better job satisfaction.</p>
+                    <p style="font-size: 18px;">Agents focus on complex problem-solving instead of repetitive research.
+                        Faster ticket resolution, improved quality, better job satisfaction.</p>
                 </div>
             </div>
         </div>
@@ -991,7 +929,8 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>Aviator Models + Business Rules = Automated Workflows</h3>
-                    <p style="font-size: 18px;">Configure AI-powered automation for any record type. Define triggers, customize prompts, and let Aviator handle repetitive analysis tasks automatically.</p>
+                    <p style="font-size: 18px;">Configure AI-powered automation for any record type. Define triggers,
+                        customize prompts, and let Aviator handle repetitive analysis tasks automatically.</p>
                 </div>
 
                 <div style="margin-top: 30px;">
@@ -1001,7 +940,8 @@
                     <div class="two-column" style="margin-bottom: 30px;">
                         <div class="card">
                             <h4>🎭 Sentiment Analysis</h4>
-                            <p style="margin-bottom: 15px;">Automatically detect ticket sentiment and trigger escalation workflows</p>
+                            <p style="margin-bottom: 15px;">Automatically detect ticket sentiment and trigger escalation
+                                workflows</p>
                             <div class="screenshot-placeholder" style="margin: 15px 0;">
                                 <img src="screenshots/13-sentiment-workflow-config.png" alt="Sentiment Analysis">
                             </div>
@@ -1082,8 +1022,10 @@
                         <div class="two-column" style="margin-top: 15px;">
                             <div class="card" style="background: var(--primary-bg);">
                                 <ul style="font-size: 14px; margin: 0;">
-                                    <li><strong>🔒 Privacy Detection:</strong> Identifies PII, auto-routes to secure teams</li>
-                                    <li><strong>📧 Smart Email Generation:</strong> Automated solution emails to customers</li>
+                                    <li><strong>🔒 Privacy Detection:</strong> Identifies PII, auto-routes to secure
+                                        teams</li>
+                                    <li><strong>📧 Smart Email Generation:</strong> Automated solution emails to
+                                        customers</li>
                                 </ul>
                             </div>
                             <div class="card" style="background: var(--primary-bg);">
@@ -1097,7 +1039,9 @@
                 </div>
 
                 <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="margin: 0; font-size: 16px;"><strong>Unlimited Potential:</strong> Think of this like "Studio Apps" - combine Aviator Models with Business Rules to create custom AI workflows for any use case. Your imagination is the limit.</p>
+                    <p style="margin: 0; font-size: 16px;"><strong>Unlimited Potential:</strong> Think of this like
+                        "Studio Apps" - combine Aviator Models with Business Rules to create custom AI workflows for any
+                        use case. Your imagination is the limit.</p>
                 </div>
             </div>
         </div>
@@ -1173,7 +1117,9 @@
                 </div>
                 <div class="highlight-box" style="margin-top: 25px;">
                     <h4>Reference Slide</h4>
-                    <p style="margin: 0; font-size: 16px;">Use this comprehensive catalog during Q&A sessions or technical discussions to demonstrate the full breadth of SMAX Aviator's AI capabilities across the entire service management lifecycle.</p>
+                    <p style="margin: 0; font-size: 16px;">Use this comprehensive catalog during Q&A sessions or
+                        technical discussions to demonstrate the full breadth of SMAX Aviator's AI capabilities across
+                        the entire service management lifecycle.</p>
                 </div>
             </div>
         </div>
@@ -1186,7 +1132,9 @@
             <div class="content">
                 <div class="highlight-box">
                     <h3>Complete Customer Experience: From Ticket Creation to Proactive Response</h3>
-                    <p style="font-size: 17px;">Watch how Aviator detects negative sentiment and automatically triggers an intelligent workflow that includes analysis, team assignment, notifications, and proactive customer outreach via IVR call.</p>
+                    <p style="font-size: 17px;">Watch how Aviator detects negative sentiment and automatically triggers
+                        an intelligent workflow that includes analysis, team assignment, notifications, and proactive
+                        customer outreach via IVR call.</p>
                 </div>
 
                 <div style="margin-top: 30px;">
@@ -1196,8 +1144,10 @@
                             <div class="flow-number" style="margin-right: 15px;">1</div>
                             <h3 style="margin: 0; color: var(--accent-green);">Customer Creates Ticket</h3>
                         </div>
-                        <p style="margin-bottom: 15px; font-size: 15px;">End user submits a request with frustrated or negative tone content through the Service Portal.</p>
-                        <div style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                        <p style="margin-bottom: 15px; font-size: 15px;">End user submits a request with frustrated or
+                            negative tone content through the Service Portal.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
                             <video controls style="width: 100%; display: block;" preload="metadata">
                                 <source src="screenshots/Create_ticket.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
@@ -1213,21 +1163,26 @@
                     <div class="card" style="margin-bottom: 25px; border-left: 4px solid var(--highlight-blue);">
                         <div style="display: flex; align-items: center; margin-bottom: 15px;">
                             <div class="flow-number" style="margin-right: 15px;">2</div>
-                            <h3 style="margin: 0; color: var(--highlight-blue);">Aviator Analysis & Automated Actions</h3>
+                            <h3 style="margin: 0; color: var(--highlight-blue);">Aviator Analysis & Automated Actions
+                            </h3>
                         </div>
-                        <p style="margin-bottom: 15px; font-size: 15px;">Aviator instantly analyzes sentiment, assigns the ticket to the appropriate team, and sends notifications via Microsoft Teams.</p>
-                        <div style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                        <p style="margin-bottom: 15px; font-size: 15px;">Aviator instantly analyzes sentiment, assigns
+                            the ticket to the appropriate team, and sends notifications via Microsoft Teams.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
                             <video controls style="width: 100%; display: block;" preload="metadata">
                                 <source src="screenshots/Analysi_Assign_Teams_Notification.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
                         <ul style="font-size: 14px; margin-top: 15px;">
-                            <li><strong>Sentiment Detection:</strong> AI identifies negative sentiment automatically</li>
+                            <li><strong>Sentiment Detection:</strong> AI identifies negative sentiment automatically
+                            </li>
                             <li><strong>Priority Escalation:</strong> Ticket priority increased based on sentiment</li>
                             <li><strong>Smart Assignment:</strong> Routed to senior support team</li>
                             <li><strong>Teams Integration:</strong> Instant notification sent to assigned agent</li>
-                            <li><strong>5-Word Summary:</strong> Generated for quick triage (e.g., "Customer frustrated with delayed response")</li>
+                            <li><strong>5-Word Summary:</strong> Generated for quick triage (e.g., "Customer frustrated
+                                with delayed response")</li>
                         </ul>
                     </div>
 
@@ -1237,8 +1192,10 @@
                             <div class="flow-number" style="margin-right: 15px;">3</div>
                             <h3 style="margin: 0; color: #E67E22;">Proactive IVR Outreach</h3>
                         </div>
-                        <p style="margin-bottom: 15px; font-size: 15px;">Custom IVR workflow automatically initiates a proactive phone call to the customer, demonstrating immediate response to their concern.</p>
-                        <div style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
+                        <p style="margin-bottom: 15px; font-size: 15px;">Custom IVR workflow automatically initiates a
+                            proactive phone call to the customer, demonstrating immediate response to their concern.</p>
+                        <div
+                            style="background: #000; border-radius: 8px; overflow: hidden; max-width: 100%; margin: 15px 0;">
                             <video controls style="width: 100%; display: block;" preload="metadata">
                                 <source src="screenshots/IVR_Call.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
@@ -1255,7 +1212,11 @@
                     <!-- Business Impact -->
                     <div class="blue-callout" style="margin-top: 25px;">
                         <h4>💡 End-to-End Business Value</h4>
-                        <p style="margin: 0; font-size: 15px;"><strong>Complete automation from detection to action:</strong> Zero manual intervention required. Sentiment detected → Team assigned → Manager notified → Customer contacted proactively. Time to first response: <strong>Under 2 minutes</strong> vs traditional <strong>2-4 hours</strong>. Customer churn prevention through immediate engagement.</p>
+                        <p style="margin: 0; font-size: 15px;"><strong>Complete automation from detection to
+                                action:</strong> Zero manual intervention required. Sentiment detected → Team assigned →
+                            Manager notified → Customer contacted proactively. Time to first response: <strong>Under 2
+                                minutes</strong> vs traditional <strong>2-4 hours</strong>. Customer churn prevention
+                            through immediate engagement.</p>
                     </div>
                 </div>
             </div>
@@ -1319,10 +1280,12 @@
                         <h3>🤖 Aviator Agents</h3>
                         <ul>
                             <li><strong>Task Plans:</strong> Serial or parallel execution</li>
-                            <li><strong>Execute:</strong> Manual/automatic tasks, Aviator calls, Orchestration flows, Integration Studio</li>
+                            <li><strong>Execute:</strong> Manual/automatic tasks, Aviator calls, Orchestration flows,
+                                Integration Studio</li>
                             <li><strong>Initiated:</strong> Via Business rule process</li>
                             <li><strong>Session Records:</strong> Full audit history of all actions</li>
-                            <li><strong>Use Cases:</strong> Complex workflows, multi-step automation, process orchestration</li>
+                            <li><strong>Use Cases:</strong> Complex workflows, multi-step automation, process
+                                orchestration</li>
                         </ul>
                     </div>
                     <div class="pillar">
@@ -1332,12 +1295,15 @@
                             <li><strong>Enhanced:</strong> Multilingual support</li>
                             <li><strong>Larger:</strong> General knowledge corpus</li>
                             <li><strong>Advanced:</strong> Language understanding</li>
-                            <li><strong>Choice:</strong> Private Llama 3 vs Google Gemini based on data processing preferences</li>
+                            <li><strong>Choice:</strong> Private Llama 3 vs Google Gemini based on data processing
+                                preferences</li>
                         </ul>
                     </div>
                 </div>
                 <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="margin: 0; font-size: 18px;">Aviator Agents enable sophisticated multi-step workflows with full governance. Gemini provides flexibility for organizations comfortable with Google's AI processing.</p>
+                    <p style="margin: 0; font-size: 18px;">Aviator Agents enable sophisticated multi-step workflows with
+                        full governance. Gemini provides flexibility for organizations comfortable with Google's AI
+                        processing.</p>
                 </div>
             </div>
         </div>
@@ -1362,7 +1328,8 @@
                     <h3>👥 Multi-Persona Value</h3>
                     <ul>
                         <li><strong>End-users:</strong> Self-service empowerment, 24/7 answers, instant resolution</li>
-                        <li><strong>Agents:</strong> Productivity boost, automated content generation, intelligent assistance</li>
+                        <li><strong>Agents:</strong> Productivity boost, automated content generation, intelligent
+                            assistance</li>
                         <li><strong>IT Managers:</strong> Workflow automation, reduced costs, improved metrics</li>
                     </ul>
                 </div>
@@ -1382,7 +1349,8 @@
         <div class="slide title-slide">
             <h2 style="color: white; border: none; font-size: 48px;">Next Steps</h2>
             <div style="background: white; padding: 50px; border-radius: 12px; margin: 40px auto; max-width: 850px;">
-                <h3 style="color: var(--accent-green); margin-top: 0; border: none;">Ready to Transform Your Service Desk?</h3>
+                <h3 style="color: var(--accent-green); margin-top: 0; border: none;">Ready to Transform Your Service
+                    Desk?</h3>
                 <div style="text-align: left; margin-top: 35px;">
                     <h4 style="color: var(--primary-text);">📅 Schedule a Live Demo</h4>
                     <p style="color: var(--secondary-gray);">See Aviator in action with your use cases</p>
@@ -1391,7 +1359,8 @@
                     <p style="color: var(--secondary-gray);">Start small, scale based on results</p>
 
                     <h4 style="color: var(--primary-text); margin-top: 30px;">⚙️ Tenant Activation Process</h4>
-                    <p style="color: var(--secondary-gray);">Purchase ITOM Aviator license → Submit PCS ticket → SaaS Operations team activates → Configure & deploy</p>
+                    <p style="color: var(--secondary-gray);">Purchase ITOM Aviator license → Submit PCS ticket → SaaS
+                        Operations team activates → Configure & deploy</p>
                 </div>
             </div>
             <div style="color: white; margin-top: 35px;">
@@ -1400,7 +1369,8 @@
                 <p style="margin-top: 30px; font-size: 24px; font-weight: 600;">Questions?</p>
             </div>
             <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
-                <p style="font-size: 18px; opacity: 0.95;"><span style="color: rgba(255,255,255,0.8);">OpenText SMAX</span> | by <strong>Rigosis Bilgi Sistemleri</strong></p>
+                <p style="font-size: 18px; opacity: 0.95;"><span style="color: rgba(255,255,255,0.8);">OpenText
+                        SMAX</span> | by <strong>Rigosis Bilgi Sistemleri</strong></p>
             </div>
         </div>
 
@@ -1451,4 +1421,5 @@
         showSlide(0);
     </script>
 </body>
+
 </html>
