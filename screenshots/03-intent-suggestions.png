@@ -1,0 +1,8 @@
+<svg width="1000" height="500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f4f5f7"/>
+  <rect x="10" y="10" width="980" height="480" fill="none" stroke="#3db14e" stroke-width="3" stroke-dasharray="10,5"/>
+  <text x="50%" y="40%" font-family="Segoe UI, Arial, sans-serif" font-size="28" fill="#2e2e2e" text-anchor="middle" font-weight="600">🎯 INTENT SUGGESTION SCREENSHOT</text>
+  <text x="50%" y="55%" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#6b6c6e" text-anchor="middle">Should show: User question • Aviator answer • "Suggested next steps" section</text>
+  <text x="50%" y="62%" font-family="Segoe UI, Arial, sans-serif" font-size="16" fill="#6b6c6e" text-anchor="middle">Relevant offerings displayed • One-click request creation</text>
+  <text x="50%" y="75%" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#0074b8" text-anchor="middle" font-style="italic">Replace with intent/offering suggestion screenshot</text>
+</svg>

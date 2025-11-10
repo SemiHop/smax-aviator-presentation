@@ -1,0 +1,73 @@
+═══════════════════════════════════════════════════════════════════
+  SMAX AVIATOR PRESENTATION - SCREENSHOT REPLACEMENT GUIDE
+═══════════════════════════════════════════════════════════════════
+
+QUICK START
+-----------
+1. Go to the "screenshots" folder
+2. Replace each .png file with your actual screenshot
+3. Keep the EXACT same filename
+4. Refresh the presentation in your browser
+
+SCREENSHOT FILES LOCATION
+-------------------------
+/mnt/c/Presentation/smax-aviator/screenshots/
+
+LIST OF PLACEHOLDER FILES
+-------------------------
+✓ 01-architecture-diagram.png       → Slide 4
+✓ 02-service-portal-chat.png        → Slide 6
+✓ 03-intent-suggestions.png         → Slide 7
+✓ 05-agent-ticket-summary.png       → Slide 10
+✓ 06-solution-suggestion.png        → Slide 11
+✓ 07-knowledge-generation.png       → Slide 12
+✓ 08-change-risk-assessment.png     → Slide 13
+✓ 09-ucmdb-ci-summary.png           → Slide 14
+✓ 10-workflow-diagram.png           → Slide 20
+✓ 11-aviator-model-config.png       → Slide 20a (NEW - Technical Deep-Dive)
+✓ 12-sentiment-analysis-list.png    → Slide 20b (NEW - Technical Deep-Dive)
+✓ 13-sentiment-workflow-config.png  → Slide 20b (NEW - Technical Deep-Dive)
+✓ 14-knowledge-article-generation.png → Slide 20c (NEW - Technical Deep-Dive)
+✓ 15-change-risk-analysis.png       → Slide 20d (NEW - Technical Deep-Dive)
+✓ 16-aviator-detailed-architecture.png → Slide 3 ⭐ ACTUAL SCREENSHOT - READY!
+
+HOW TO REPLACE
+--------------
+OPTION 1: Overwrite the file
+  - Save your screenshot with the same filename
+  - Copy it to the screenshots folder
+  - It will replace the placeholder automatically
+
+OPTION 2: Rename your file
+  - Rename your screenshot to match the placeholder name
+  - Copy it to the screenshots folder
+
+EXAMPLE
+-------
+If you have a screenshot called "my-architecture.png":
+  1. Rename it to "01-architecture-diagram.png"
+  2. Copy to: /mnt/c/Presentation/smax-aviator/screenshots/
+  3. Replace the existing file
+  4. Done!
+
+FILE REQUIREMENTS
+-----------------
+• Format: PNG (recommended) or JPG
+• Resolution: 1920x1080 or higher recommended
+• File size: Under 2MB per image (for best performance)
+• Clear, high-contrast images work best
+
+TESTING
+-------
+After replacing screenshots:
+  1. Open: smax-aviator-presentation.html
+  2. Navigate through slides
+  3. Verify all images display correctly
+  4. Check for clarity and readability
+
+NEED MORE INFO?
+---------------
+See: /mnt/c/Presentation/smax-aviator/screenshots/README.md
+For detailed descriptions of what each screenshot should show.
+
+═══════════════════════════════════════════════════════════════════

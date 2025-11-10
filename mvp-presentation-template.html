@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Copilot + SMAX Integration MVP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px 80px;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #4a5568;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #718096;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p, .card li {
+            color: #4a5568;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .highlight-box {
+            background: #edf2f7;
+            border: 2px solid #667eea;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            line-height: 2;
+        }
+
+        li {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .architecture-diagram {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            color: #2d3748;
+            overflow-x: auto;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .flow-step .step-number {
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .metric-box {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .metric-box .number {
+            font-size: 48px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .metric-box .label {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .nav-button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            color: #667eea;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .check-icon {
+            color: #48bb78;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .scenario-box {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .scenario-box .speaker {
+            font-weight: bold;
+            color: #2f855a;
+            margin-bottom: 8px;
+        }
+
+        .scenario-box .message {
+            color: #2d3748;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-left: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .security-layer {
+            background: linear-gradient(to right, #f7fafc, #edf2f7);
+            border-left: 6px solid #e53e3e;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .security-layer h4 {
+            color: #e53e3e;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -29px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #667eea;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 18px;
+            width: 2px;
+            height: 100%;
+            background: #cbd5e0;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .title-slide {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            color: white;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 32px;
+            margin-bottom: 60px;
+        }
+
+        .title-slide .meta {
+            color: rgba(255,255,255,0.8);
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>Microsoft Copilot + SMAX Integration</h1>
+            <div class="subtitle">MVP Design & Implementation Plan</div>
+            <div class="meta">
+                <p>Secure, Role-Based AI Assistant for IT Service Management</p>
+                <p style="margin-top: 20px;">October 2025</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Executive Summary -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Executive Summary</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Vision</h3>
+                    <p style="font-size: 20px; line-height: 1.8;">
+                        <strong>BYOD (Bring Your Own Data) Copilot Connector:</strong> Enable end users and IT agents to interact with SMAX through natural language conversations in Microsoft 365 Copilot, while enforcing comprehensive role-based access control across all operations.
+                    </p>
+                    <p style="font-size: 18px; line-height: 1.8; margin-top: 15px; color: #4a5568;">
+                        This architecture frees you from vendor lock-in. If another product replaces SMAX in the future, the same vision continues — simply remove the SMAX endpoints, connect the new product, and maintain uninterrupted AI service. Your data is yours, the platform is independent.
+                    </p>
+                </div>
+
+                <div class="three-column">
+                    <div class="metric-box">
+                        <span class="number">6-8</span>
+                        <span class="label">Weeks to MVP</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">4</span>
+                        <span class="label">Access Control Dimensions</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">2</span>
+                        <span class="label">Copilot Agents</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Key Benefits</h3>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>For End Users</h4>
+                        <ul>
+                            <li>Natural language service requests</li>
+                            <li>Self-service KB search</li>
+                            <li>Easy ticket creation & tracking</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>For IT Agents</h4>
+                        <ul>
+                            <li>Faster ticket resolution</li>
+                            <li>Similar ticket suggestions</li>
+                            <li>KB-based recommendations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Problem -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>The Challenge</h2>
+            </div>
+            <div class="content">
+                <h3>Current State Issues</h3>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>End User Pain Points</h4>
+                        <ul>
+                            <li>Complex SMAX interface</li>
+                            <li>Difficult to find right service</li>
+                            <li>KB search returns too many results</li>
+                            <li>Don't know where to start</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>IT Agent Challenges</h4>
+                        <ul>
+                            <li>Time spent searching for solutions</li>
+                            <li>Manually finding similar tickets</li>
+                            <li>Knowledge scattered across systems</li>
+                            <li>Repetitive resolution work</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h3>Critical Requirement: Security</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        SMAX enforces comprehensive access control through <strong>data domains, roles, locations, and groups</strong>.
+                        Any integration MUST respect these security boundaries to prevent unauthorized data access.
+                    </p>
+                </div>
+
+                <div class="three-column" style="margin-top: 30px;">
+                    <div class="card">
+                        <h4>Data Domains</h4>
+                        <p>Organizational units (e.g., CustomeDomain1_c, UserAccess4_c)</p>
+                    </div>
+                    <div class="card">
+                        <h4>Entitlement Rules</h4>
+                        <p>Role, Location, Group filters on offerings</p>
+                    </div>
+                    <div class="card">
+                        <h4>RBAC</h4>
+                        <p>Role-based permissions control access</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Solution -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>The Solution</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>AI-Powered Conversational Interface with Security-First Design</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        Integrate Microsoft 365 Copilot with SMAX through a secure on-premises integration layer that enforces
+                        four-dimensional access control at query time using vector database metadata filtering.
+                    </p>
+                </div>
+
+                <h3>Core Capabilities</h3>
+                <div class="two-column">
+                    <div>
+                        <div class="flow-step">
+                            <span class="step-number">1</span>
+                            <strong>Offerings Search:</strong> "Find password reset service"
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">2</span>
+                            <strong>KB Search:</strong> "How do I unlock my account?"
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">3</span>
+                            <strong>Ticket Creation:</strong> "Report email sync issue"
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flow-step">
+                            <span class="step-number">4</span>
+                            <strong>Ticket Status:</strong> "Check my ticket INC123456"
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">5</span>
+                            <strong>Similar Tickets:</strong> "Find similar resolved issues"
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">6</span>
+                            <strong>Resolutions:</strong> "Suggest resolution for this ticket"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <div class="tech-badge">Microsoft 365 Copilot</div>
+                    <div class="tech-badge">FastAPI</div>
+                    <div class="tech-badge">Qdrant Vector DB</div>
+                    <div class="tech-badge">Redis Cache</div>
+                    <div class="tech-badge">Docker Compose</div>
+                    <div class="tech-badge">NGINX</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: High-Level Architecture -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>High-Level Architecture</h2>
+            </div>
+            <div class="content">
+                <div class="architecture-diagram">
+<pre>┌─────────────────────────────────────────────────────────────┐
+│                    MICROSOFT CLOUD                          │
+│  • Microsoft 365 Copilot (Teams, Outlook, Web)             │
+│  • Copilot Studio (2 Agents: End User + IT Agent)          │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ HTTPS / OAuth 2.0
+                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    DMZ / EDGE (On-Premises)                 │
+│  • NGINX Reverse Proxy                                      │
+│  • SSL Termination                                          │
+│  • OAuth Token Validation                                   │
+│  • Rate Limiting                                            │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ Internal Network
+                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│            ON-PREMISES INTEGRATION LAYER                    │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │ FastAPI Application                                  │   │
+│  │  • Authentication Middleware                         │   │
+│  │  • RBAC Enforcement (4 dimensions)                   │   │
+│  │  • Offerings / KB / Tickets Services                 │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                             │
+│  ┌─────────────────┐  ┌────────────┐  ┌────────────────┐  │
+│  │ Qdrant Vector DB│  │ Redis Cache│  │ Sync Service   │  │
+│  │ • Offerings     │  │ • User CTX │  │ • Hourly Sync  │  │
+│  │ • KB Articles   │  │ • API Cache│  │ • Metadata     │  │
+│  │ • Tickets       │  └────────────┘  └────────────────┘  │
+│  └─────────────────┘                                       │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ Direct Internal Connection
+                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│                SMAX ON-PREMISES (Existing)                  │
+│  • OData API (OOB - runs on passive database)             │
+│  • REST API (offerings, KB, tickets, roles)                │
+│  • Data Domains & Entitlement Rules                        │
+└─────────────────────────────────────────────────────────────┘</pre>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px; background: #f0fff4; border-color: #48bb78;">
+                    <h4 style="color: #2f855a;">Performance Optimization: OData API on Passive Database</h4>
+                    <p style="font-size: 16px; line-height: 1.6;">
+                        The integration uses SMAX <strong>Out-of-Box (OOB) OData API</strong> which runs on the <strong>passive database</strong>.
+                        This architectural choice ensures <strong>zero impact on production SMAX performance</strong> - all read operations
+                        for data synchronization occur against the standby database, leaving the active database free to handle user transactions.
+                    </p>
+                </div>
+
+                <h3>Key Architectural Principles</h3>
+                <ul>
+                    <li><strong>On-Premises Data Sovereignty:</strong> All SMAX data stays internal</li>
+                    <li><strong>Query-Time Security:</strong> RBAC enforced at vector search time</li>
+                    <li><strong>Session-Based Caching:</strong> User context cached for performance</li>
+                    <li><strong>Modular Design:</strong> Clean service separation for extensibility</li>
+                    <li><strong>Zero Production Impact:</strong> OData API on passive DB - minimal performance overhead</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Four-Layer Security Model -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Four-Layer Security Model</h2>
+            </div>
+            <div class="content">
+                <div class="security-layer">
+                    <h4>Layer 1: Edge Security (DMZ)</h4>
+                    <ul>
+                        <li>OAuth 2.0 token validation from Azure AD</li>
+                        <li>Rate limiting (100 req/min per user)</li>
+                        <li>SSL/TLS termination</li>
+                        <li>DDoS protection</li>
+                    </ul>
+                </div>
+
+                <div class="security-layer">
+                    <h4>Layer 2: Application Security</h4>
+                    <ul>
+                        <li>User context extraction from Azure AD token (email/UPN)</li>
+                        <li>RBAC middleware enforces permissions on every request</li>
+                        <li>Session-based access control caching (1-hour TTL)</li>
+                        <li>API request validation and sanitization</li>
+                    </ul>
+                </div>
+
+                <div class="security-layer">
+                    <h4>Layer 3: Data Security</h4>
+                    <ul>
+                        <li><strong>Data Domains:</strong> User must have access to at least one domain</li>
+                        <li><strong>Roles:</strong> Entity role is "Any" OR matches user's role</li>
+                        <li><strong>Locations:</strong> Entity location is "Any" OR matches user's location</li>
+                        <li><strong>Groups:</strong> Entity groups is "Any" OR user in allowed groups</li>
+                        <li>Vector DB query-time metadata filtering</li>
+                        <li>No data leakage through error messages</li>
+                    </ul>
+                </div>
+
+                <div class="security-layer">
+                    <h4>Layer 4: SMAX Security</h4>
+                    <ul>
+                        <li>Service account with read-only permissions</li>
+                        <li>All data domain rules respected</li>
+                        <li>All entitlement rules enforced</li>
+                        <li>Comprehensive audit logging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: User Context & Access Control Flow -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>User Context & Access Control Flow</h2>
+            </div>
+            <div class="content">
+                <h3>How User Identity Flows Through the System</h3>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 1: User Authentication</h4>
+                            <p>User logs into Teams/Outlook via Azure AD. Copilot receives authenticated user token.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 2: Token Passed to On-Prem API</h4>
+                            <p>Azure AD token sent in Authorization header to FastAPI integration layer.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 3: Extract User Identity</h4>
+                            <p>FastAPI validates token with Azure AD and extracts user email/UPN.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 4: Check Cache</h4>
+                            <p>Look up user's access context in Redis cache (role, domains, location, groups).</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 5: Fetch from SMAX (if cache miss)</h4>
+                            <p>Query SMAX APIs to get user's role, groups, location. Parse data domains from role permissions.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 6: Build Access Filter</h4>
+                            <p>Construct Qdrant metadata filter based on user's 4-dimensional access context.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Step 7: Execute Filtered Search</h4>
+                            <p>Vector search returns ONLY authorized results matching user's permissions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Vector Database Design -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Vector Database Design with RBAC Metadata</h2>
+            </div>
+            <div class="content">
+                <h3>Qdrant Collections with Access Control</h3>
+
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Offerings Collection</h4>
+                        <pre style="font-size: 13px; overflow-x: auto;">{
+  "vector": [0.123, 0.456, ...],
+  "payload": {
+    "offering_id": "133589",
+    "title": "Password Reset Service",
+    "description": "...",
+
+    "data_domains": ["CustomeDomain1_c", "UserAccess4_c"],
+    "allowed_roles": ["IT Support", "End User"],
+    "allowed_locations": ["Any"],
+    "allowed_groups": ["Any"],
+    "entitlement_rule_ids": ["129305"]
+  }
+}</pre>
+                    </div>
+
+                    <div class="card">
+                        <h4>KB Articles Collection</h4>
+                        <pre style="font-size: 13px; overflow-x: auto;">{
+  "vector": [0.789, 0.012, ...],
+  "payload": {
+    "article_id": "KB001234",
+    "title": "How to Reset Password",
+    "content": "...",
+
+    "data_domains": ["CustomeDomain1_c"],
+    "allowed_roles": ["Any"],
+    "allowed_locations": ["Any"],
+    "allowed_groups": ["Any"]
+  }
+}</pre>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Query-Time Filtering Example</h3>
+                <div class="highlight-box">
+                    <p><strong>User Context:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>Data Domains: ["CustomeDomain1_c", "UserAccess4_c"]</li>
+                        <li>Role: "End User"</li>
+                        <li>Location: "New York"</li>
+                        <li>Groups: ["Finance", "Level 1"]</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong>Qdrant Filter:</strong> User MUST have at least one matching data domain AND (role is "Any" OR "End User") AND (location is "Any" OR "New York") AND (groups is "Any" OR in ["Finance", "Level 1"])</p>
+                    <p style="margin-top: 15px; color: #48bb78;"><strong>✓ Result:</strong> Only offerings/KB articles matching ALL criteria are returned</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8.1: Similar Ticket Identification & Tagging -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Similar Ticket Identification & Tagging System</h2>
+            </div>
+            <div class="content">
+                <h3>How Similar Tickets Are Found</h3>
+                <div class="highlight-box">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        The system uses a <strong>hybrid approach</strong> combining vector similarity search with intelligent tagging to find relevant tickets and provide accurate recommendations.
+                    </p>
+                </div>
+
+                <div class="two-column">
+                    <div class="card">
+                        <h4>1. Vector Similarity (Primary)</h4>
+                        <ul>
+                            <li><strong>Semantic Understanding:</strong> Embeddings capture meaning beyond keywords</li>
+                            <li><strong>Cosine Similarity:</strong> Measures how close ticket descriptions are</li>
+                            <li><strong>Example:</strong> "Email not syncing" matches "Outlook sync stopped"</li>
+                            <li><strong>Threshold:</strong> Similarity score > 0.75 (configurable)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>2. Tag-Based Filtering (Secondary)</h4>
+                        <ul>
+                            <li><strong>Category Tags:</strong> email, network, hardware, software</li>
+                            <li><strong>Component Tags:</strong> outlook, exchange, vpn, printer</li>
+                            <li><strong>Resolution Tags:</strong> cache-clear, reboot, config-change</li>
+                            <li><strong>Priority Tags:</strong> urgent, high, medium, low</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Tagging System Architecture</h3>
+
+                <div class="architecture-diagram">
+<pre>Ticket Created/Updated in SMAX
+    ↓
+┌──────────────────────────────────────────┐
+│  Auto-Tagging Engine (ML-based)         │
+├──────────────────────────────────────────┤
+│  1. Extract keywords from title/desc     │
+│  2. Classify category (email, network)   │
+│  3. Identify components (Outlook, VPN)   │
+│  4. Predict resolution type (historical) │
+│  5. Generate tags automatically          │
+└──────────────┬───────────────────────────┘
+               ↓
+┌──────────────────────────────────────────┐
+│  Tags Added to Ticket Metadata          │
+├──────────────────────────────────────────┤
+│  {                                       │
+│    "ticket_id": "INC123456",            │
+│    "auto_tags": [                       │
+│      "category:email",                  │
+│      "component:outlook",               │
+│      "resolution:cache-clear"           │
+│    ],                                   │
+│    "manual_tags": [                     │
+│      "recurring-issue",                 │
+│      "vendor:microsoft"                 │
+│    ]                                    │
+│  }                                      │
+└──────────────┬───────────────────────────┘
+               ↓
+   Synced to Qdrant Vector DB
+   (stored in payload metadata)</pre>
+                </div>
+
+                <h3 style="margin-top: 30px;">Hybrid Search Algorithm</h3>
+
+                <div class="flow-step">
+                    <span class="step-number">1</span>
+                    <strong>Vector Search:</strong> Find top 20 semantically similar tickets (cosine similarity)
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">2</span>
+                    <strong>Tag Boosting:</strong> Re-rank results by matching tags (boost score +0.1 per tag)
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">3</span>
+                    <strong>RBAC Filtering:</strong> Remove tickets from inaccessible data domains
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">4</span>
+                    <strong>Resolution Filtering:</strong> Prioritize resolved tickets with documented solutions
+                </div>
+                <div class="flow-step">
+                    <span class="step-number">5</span>
+                    <strong>Return Top 5:</strong> Present most relevant tickets with resolution summaries
+                </div>
+
+                <h3 style="margin-top: 30px;">Example: Finding Similar Tickets</h3>
+                <div class="highlight-box" style="background: #f0fff4; border-color: #48bb78;">
+                    <p><strong>Query Ticket INC987654:</strong> "Outlook email sync issues since morning"</p>
+                    <p style="margin-top: 10px;"><strong>Auto-generated Tags:</strong> [category:email, component:outlook, symptom:sync-failure]</p>
+                    <p style="margin-top: 15px;"><strong>Similar Tickets Found:</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>INC945123</strong> - Vector: 0.89, Tags: 3/3 match, Resolution: cache-clear ✓</li>
+                        <li><strong>INC932456</strong> - Vector: 0.82, Tags: 2/3 match, Resolution: cached-mode-toggle ✓</li>
+                        <li><strong>INC898234</strong> - Vector: 0.78, Tags: 2/3 match, Resolution: exchange-settings ✓</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8.2: Orchestration Layer -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Orchestration Layer for API Compatibility</h2>
+            </div>
+            <div class="content">
+                <h3>The Challenge: Technology Changes</h3>
+                <div class="highlight-box">
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        <strong>Problem:</strong> SMAX API versions change frequently, with different request/response structures.
+                        Direct integration would require code changes for every SMAX update.
+                    </p>
+                </div>
+
+                <h3>Solution: API Orchestration Layer</h3>
+
+                <div class="architecture-diagram">
+<pre>┌──────────────────────────────────────────────────────────┐
+│            ORCHESTRATION LAYER                           │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌────────────────────────────────────────────────┐    │
+│  │  API Gateway (Standardized Interface)          │    │
+│  │  • Version-agnostic endpoints                  │    │
+│  │  • Schema validation                           │    │
+│  │  • Request/response transformation             │    │
+│  └────────────────┬───────────────────────────────┘    │
+│                   │                                     │
+│  ┌────────────────┴───────────────────────────────┐    │
+│  │  Adapter Layer (Version-Specific)              │    │
+│  ├─────────────────────────────────────────────────┤    │
+│  │  SMAX v2022.11 Adapter                         │    │
+│  │  SMAX v2023.05 Adapter                         │    │
+│  │  SMAX v2024.02 Adapter (Current)               │    │
+│  └────────────────┬───────────────────────────────┘    │
+│                   │                                     │
+│  Configuration: Automatically detects SMAX version     │
+│  and routes to appropriate adapter                     │
+│                                                          │
+└──────────────────┬───────────────────────────────────────┘
+                   ↓
+        SMAX On-Premises (Any Version)</pre>
+                </div>
+
+                <h3 style="margin-top: 30px;">Key Components</h3>
+
+                <div class="two-column">
+                    <div class="card">
+                        <h4>API Gateway</h4>
+                        <ul>
+                            <li><strong>Standardized Endpoints:</strong> Internal services use consistent API</li>
+                            <li><strong>Schema Validation:</strong> Validate requests against OpenAPI spec</li>
+                            <li><strong>Version Detection:</strong> Auto-detect SMAX version from API response</li>
+                            <li><strong>Error Normalization:</strong> Standardize error responses</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>Adapter Pattern</h4>
+                        <ul>
+                            <li><strong>Version-Specific Logic:</strong> Each adapter handles one SMAX version</li>
+                            <li><strong>Request Transformation:</strong> Convert standard → SMAX format</li>
+                            <li><strong>Response Transformation:</strong> Convert SMAX → standard format</li>
+                            <li><strong>Backward Compatibility:</strong> Support multiple versions simultaneously</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Example: Ticket Creation Across Versions</h3>
+
+                <div class="highlight-box">
+                    <p><strong>Internal Standard Format (Version-Agnostic):</strong></p>
+                    <pre style="font-size: 12px; background: white; padding: 15px; border-radius: 8px; overflow-x: auto;">{
+  "title": "Email sync issue",
+  "description": "Outlook not syncing",
+  "priority": "high",
+  "category": "email",
+  "user": "user@company.com"
+}</pre>
+
+                    <p style="margin-top: 20px;"><strong>Adapter Transforms to SMAX v2024.02 Format:</strong></p>
+                    <pre style="font-size: 12px; background: white; padding: 15px; border-radius: 8px; overflow-x: auto;">{
+  "entity": {
+    "properties": {
+      "DisplayLabel": "Email sync issue",
+      "Description": "Outlook not syncing",
+      "Urgency": "TotalLossOfService",
+      "RegisteredForActualService": "10123",
+      "RequestedByPerson": "10456"
+    },
+    "entity_type": "Incident"
+  }
+}</pre>
+                </div>
+
+                <h3 style="margin-top: 30px;">Benefits</h3>
+                <div class="three-column">
+                    <div class="metric-box">
+                        <span class="number">Zero</span>
+                        <span class="label">Code Changes for Version Updates</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">3+</span>
+                        <span class="label">SMAX Versions Supported</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">100%</span>
+                        <span class="label">Backward Compatible</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8.3: Backup & Disaster Recovery -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Backup & Disaster Recovery Plan</h2>
+            </div>
+            <div class="content">
+                <h3>Comprehensive Backup Strategy</h3>
+
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Qdrant Vector Database</h4>
+                        <ul>
+                            <li><strong>Daily Snapshots:</strong> Full collection backup at 2 AM</li>
+                            <li><strong>Incremental Backups:</strong> Every 6 hours (changes only)</li>
+                            <li><strong>Retention:</strong> 30 days of daily backups</li>
+                            <li><strong>Storage:</strong> Separate NAS or S3-compatible storage</li>
+                            <li><strong>Compression:</strong> Gzip compression (70% size reduction)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>Redis Cache</h4>
+                        <ul>
+                            <li><strong>RDB Snapshots:</strong> Every 6 hours (save 900 1, save 300 10)</li>
+                            <li><strong>AOF (Append-Only File):</strong> Enabled for transaction replay</li>
+                            <li><strong>Retention:</strong> 7 days of snapshots</li>
+                            <li><strong>Note:</strong> Cache is reconstructable from SMAX</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 20px;">
+                    <div class="card">
+                        <h4>Application Configuration</h4>
+                        <ul>
+                            <li><strong>Git Repository:</strong> All config files version controlled</li>
+                            <li><strong>Environment Variables:</strong> Backed up to secure vault</li>
+                            <li><strong>Docker Compose Files:</strong> Stored in Git with tags</li>
+                            <li><strong>NGINX Config:</strong> Version controlled + backup</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>Logs & Audit Trails</h4>
+                        <ul>
+                            <li><strong>Application Logs:</strong> Shipped to ELK/Splunk daily</li>
+                            <li><strong>Retention:</strong> 90 days in log aggregator</li>
+                            <li><strong>Security Logs:</strong> 1 year retention for compliance</li>
+                            <li><strong>Archive:</strong> Compressed and moved to cold storage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Disaster Recovery Procedures</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Detection</th>
+                            <th>Recovery Steps</th>
+                            <th>RTO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Qdrant Failure</strong></td>
+                            <td>Health check fails, no search results</td>
+                            <td>1. Stop Qdrant container<br>2. Restore latest snapshot<br>3. Restart container<br>4. Verify collections</td>
+                            <td>30 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Redis Failure</strong></td>
+                            <td>Cache miss rate >90%, connection errors</td>
+                            <td>1. Stop Redis<br>2. Restore RDB/AOF<br>3. Restart Redis<br>4. Warm up cache</td>
+                            <td>15 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FastAPI Crash</strong></td>
+                            <td>Health endpoint down, 502 errors</td>
+                            <td>1. Check logs for root cause<br>2. Restart container<br>3. If persists, rollback to previous version</td>
+                            <td>5 min</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Full VM Failure</strong></td>
+                            <td>VM unresponsive, no services available</td>
+                            <td>1. Spin up backup VM<br>2. Restore all components<br>3. Update DNS/load balancer<br>4. Verify all services</td>
+                            <td>4 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Corruption</strong></td>
+                            <td>Invalid search results, data inconsistency</td>
+                            <td>1. Identify corrupted collection<br>2. Restore from previous day<br>3. Run integrity check<br>4. Trigger manual sync</td>
+                            <td>2 hours</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 30px;">Recovery Targets</h3>
+                <div class="three-column">
+                    <div class="metric-box">
+                        <span class="number">4 hrs</span>
+                        <span class="label">RTO (Recovery Time Objective)</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">1 hr</span>
+                        <span class="label">RPO (Recovery Point Objective)</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">Quarterly</span>
+                        <span class="label">DR Test Frequency</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>Automated Backup Monitoring</h4>
+                    <ul>
+                        <li><strong>Backup Success Alerts:</strong> Email notification on successful backup</li>
+                        <li><strong>Backup Failure Alerts:</strong> PagerDuty alert on failed backup (critical)</li>
+                        <li><strong>Storage Space Monitoring:</strong> Alert when backup storage >80% full</li>
+                        <li><strong>Backup Integrity Checks:</strong> Weekly restore test to separate environment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: End User Scenario -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>End User Scenario: Password Reset</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Persona: Sarah - Finance Manager</h3>
+                    <p><strong>Context:</strong> Sarah forgot her password and can't access her workstation. She needs to reset it quickly to attend an important meeting.</p>
+                </div>
+
+                <h3>Conversational Flow in Microsoft Teams</h3>
+
+                <div class="scenario-box">
+                    <div class="speaker">👤 Sarah:</div>
+                    <div class="message">"I forgot my password and need to reset it"</div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">🤖 End User Assistant:</div>
+                    <div class="message">
+                        "I can help you with that! I found these services available to you:<br><br>
+                        <strong>1. Password Reset Service (Self-Service)</strong><br>
+                        &nbsp;&nbsp;&nbsp;• Reset your AD password immediately<br>
+                        &nbsp;&nbsp;&nbsp;• Available 24/7, no IT approval needed<br>
+                        &nbsp;&nbsp;&nbsp;• Takes about 2 minutes<br><br>
+                        <strong>2. Account Unlock Service</strong><br>
+                        &nbsp;&nbsp;&nbsp;• Unlock your account after failed logins<br><br>
+                        Would you like to request the Password Reset Service? Or would you like to see help articles about resetting your password yourself?"
+                    </div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">👤 Sarah:</div>
+                    <div class="message">"Yes, request the password reset service"</div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">🤖 End User Assistant:</div>
+                    <div class="message">
+                        "Great! I've created ticket <strong>INC123456</strong> for your password reset request.<br><br>
+                        <strong>Status:</strong> In Progress<br>
+                        <strong>Priority:</strong> High<br>
+                        <strong>Estimated Time:</strong> 10-15 minutes<br><br>
+                        You'll receive an email with reset instructions shortly. Would you like me to show you KB articles about setting a strong password?"
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px; background: #e6fffa; border-color: #48bb78;">
+                    <h4 style="color: #2f855a;">Behind the Scenes: Security in Action</h4>
+                    <ul>
+                        <li>Sarah's Azure AD identity validated ✓</li>
+                        <li>Her data domains fetched from SMAX (CustomeDomain1_c, Finance_c) ✓</li>
+                        <li>Offerings filtered to only show services she's entitled to ✓</li>
+                        <li>Ticket created in her data domain automatically ✓</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: IT Agent Scenario -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>IT Agent Scenario: Email Sync Issue</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Persona: Mike - IT Support Agent (Level 2)</h3>
+                    <p><strong>Context:</strong> Mike is working on a ticket about email synchronization issues. He wants to find similar resolved tickets and get resolution suggestions.</p>
+                </div>
+
+                <h3>Conversational Flow in Microsoft Teams</h3>
+
+                <div class="scenario-box">
+                    <div class="speaker">👤 Mike:</div>
+                    <div class="message">"I'm working on ticket INC987654 about email sync issues in Outlook. Find similar tickets"</div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">🤖 IT Agent Assistant:</div>
+                    <div class="message">
+                        "I found <strong>3 similar resolved tickets</strong> from your accessible domains:<br><br>
+                        <strong>1. INC945123</strong> - Outlook not syncing with Exchange<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution:</em> Cleared local OST cache, recreated profile<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolved by:</em> John (Level 2) - 2 days ago<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution Time:</em> 30 minutes<br><br>
+                        <strong>2. INC932456</strong> - Email sync stuck on "Updating"<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution:</em> Disabled cached mode temporarily, re-enabled<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolved by:</em> Maria (Level 2) - 1 week ago<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution Time:</em> 45 minutes<br><br>
+                        <strong>3. INC898234</strong> - Contacts not syncing<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution:</em> Verified Exchange connection settings<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolved by:</em> Tom (Level 1) - 2 weeks ago<br>
+                        &nbsp;&nbsp;&nbsp;• <em>Resolution Time:</em> 20 minutes
+                    </div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">👤 Mike:</div>
+                    <div class="message">"Show me KB articles about Outlook cache issues"</div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">🤖 IT Agent Assistant:</div>
+                    <div class="message">
+                        "Here are relevant KB articles:<br><br>
+                        <strong>KB00567</strong> - Troubleshooting Outlook Cached Mode<br>
+                        &nbsp;&nbsp;&nbsp;• Step-by-step guide for OST file issues<br>
+                        &nbsp;&nbsp;&nbsp;• Includes registry fixes and rebuild procedures<br><br>
+                        <strong>KB00892</strong> - Exchange Sync Troubleshooting Checklist<br>
+                        &nbsp;&nbsp;&nbsp;• Common causes and quick fixes<br>
+                        &nbsp;&nbsp;&nbsp;• Network connectivity tests<br><br>
+                        Would you like me to draft a resolution based on these similar tickets?"
+                    </div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">👤 Mike:</div>
+                    <div class="message">"Yes, draft the resolution"</div>
+                </div>
+
+                <div class="scenario-box">
+                    <div class="speaker">🤖 IT Agent Assistant:</div>
+                    <div class="message">
+                        "<strong>Suggested Resolution for INC987654:</strong><br><br>
+                        Based on similar tickets, try these steps in order:<br>
+                        1. Clear Outlook cache (see KB00567, Section 2.1)<br>
+                        2. Verify Exchange connection settings<br>
+                        3. Temporarily disable cached mode and re-enable<br>
+                        4. If issue persists, recreate Outlook profile (KB00567, Section 3)<br><br>
+                        Estimated resolution time: 30-45 minutes<br><br>
+                        Would you like me to add this to the ticket notes?"
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px; background: #e6fffa; border-color: #48bb78;">
+                    <h4 style="color: #2f855a;">Behind the Scenes: IT Agent Benefits</h4>
+                    <ul>
+                        <li>Mike has broader access across multiple data domains (IT support role) ✓</li>
+                        <li>Similar tickets found using vector similarity search ✓</li>
+                        <li>Only tickets from domains he has access to are shown (security maintained) ✓</li>
+                        <li>Resolution drafted from historical successful fixes ✓</li>
+                        <li><strong>Time saved: 15-20 minutes per ticket</strong> ✓</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Success Metrics -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Success Metrics</h2>
+            </div>
+            <div class="content">
+                <h3>Functional Requirements</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Requirement</th>
+                            <th>Success Metric</th>
+                            <th>Target</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Offerings Search</td>
+                            <td>Users find entitled services</td>
+                            <td>95%+ success rate</td>
+                        </tr>
+                        <tr>
+                            <td>KB Search</td>
+                            <td>Relevant articles returned</td>
+                            <td>90%+ relevance score</td>
+                        </tr>
+                        <tr>
+                            <td>Ticket Creation</td>
+                            <td>Success rate & speed</td>
+                            <td>100% success, &lt;2s</td>
+                        </tr>
+                        <tr>
+                            <td>RBAC Enforcement</td>
+                            <td>No unauthorized access</td>
+                            <td>100% secure</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 30px;">Business Impact (First 3 Months)</h3>
+                <div class="three-column">
+                    <div class="metric-box">
+                        <span class="number">60%</span>
+                        <span class="label">User Adoption Rate</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">30%</span>
+                        <span class="label">Self-Service Resolution Rate</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">20%</span>
+                        <span class="label">Ticket Deflection</span>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 30px;">
+                    <div class="card">
+                        <h4>Performance Targets</h4>
+                        <ul>
+                            <li><strong>&lt;2s</strong> API response for searches</li>
+                            <li><strong>&lt;1s</strong> ticket status checks</li>
+                            <li><strong>99.5%+</strong> uptime during business hours</li>
+                            <li><strong>100+</strong> concurrent users supported</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>IT Agent Productivity</h4>
+                        <ul>
+                            <li><strong>15%</strong> faster avg resolution time</li>
+                            <li><strong>20 min</strong> saved per ticket</li>
+                            <li><strong>4.0+/5.0</strong> user satisfaction rating</li>
+                            <li><strong>Zero</strong> RBAC bypass incidents</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Technology Stack -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Technology Stack</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div class="card">
+                        <h4>Cloud Components</h4>
+                        <ul>
+                            <li><strong>Microsoft 365 Copilot:</strong> User interface (Teams, Outlook, Web)</li>
+                            <li><strong>Copilot Studio:</strong> Agent orchestration & NLP</li>
+                            <li><strong>Azure AD:</strong> User authentication & identity</li>
+                            <li><strong>Azure OpenAI:</strong> Embedding generation (optional)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>On-Premises Components</h4>
+                        <ul>
+                            <li><strong>FastAPI (Python 3.11+):</strong> REST API framework</li>
+                            <li><strong>Qdrant 1.7+:</strong> Vector database with metadata filtering</li>
+                            <li><strong>Redis 7:</strong> Session & API response caching</li>
+                            <li><strong>NGINX:</strong> Reverse proxy & SSL termination</li>
+                            <li><strong>Docker Compose:</strong> Container orchestration</li>
+                            <li><strong>Prometheus + Grafana:</strong> Monitoring & dashboards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Infrastructure Requirements</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Specification</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Servers</td>
+                            <td>2 VMs (active-active HA)</td>
+                            <td>Load balanced by NGINX</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>4 cores min (8 recommended)</td>
+                            <td>Per VM</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td>16GB min (32GB recommended)</td>
+                            <td>8GB app, 4GB Qdrant, 2GB Redis</td>
+                        </tr>
+                        <tr>
+                            <td>Disk</td>
+                            <td>100GB SSD min (500GB prod)</td>
+                            <td>Vector storage + logs</td>
+                        </tr>
+                        <tr>
+                            <td>Network</td>
+                            <td>1Gbps internal, 100Mbps external</td>
+                            <td>DMZ + Internal subnets</td>
+                        </tr>
+                        <tr>
+                            <td>OS</td>
+                            <td>Ubuntu 22.04 LTS or RHEL 8+</td>
+                            <td>Docker compatible</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>Why These Technologies?</h4>
+                    <ul style="columns: 2;">
+                        <li><strong>FastAPI:</strong> Modern, async, excellent performance</li>
+                        <li><strong>Qdrant:</strong> Rich metadata filtering for RBAC</li>
+                        <li><strong>Redis:</strong> Fast session caching</li>
+                        <li><strong>Docker Compose:</strong> Simple deployment, easy scaling</li>
+                        <li><strong>Python 3.11:</strong> Great AI/ML ecosystem</li>
+                        <li><strong>NGINX:</strong> Battle-tested, highly secure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Risk Management -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Risk Management</h2>
+            </div>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SMAX API changes</td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Versioned API client with backward compatibility</td>
+                        </tr>
+                        <tr>
+                            <td>Azure AD integration issues</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td>Thorough staging tests; fallback auth mechanism</td>
+                        </tr>
+                        <tr>
+                            <td>Performance issues under load</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Early load testing; aggressive caching strategy</td>
+                        </tr>
+                        <tr>
+                            <td>Data sync failures</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Robust error handling; alerting on failures</td>
+                        </tr>
+                        <tr>
+                            <td>User resistance to adoption</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Comprehensive training; early feedback collection</td>
+                        </tr>
+                        <tr>
+                            <td>Security vulnerabilities</td>
+                            <td>High</td>
+                            <td>Low</td>
+                            <td>Security review at each phase; pen testing</td>
+                        </tr>
+                        <tr>
+                            <td>RBAC misconfiguration</td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Automated tests for access control; audit logs</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin-top: 40px;">Contingency Plans</h3>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>If SMAX API is Down</h4>
+                        <ul>
+                            <li>Serve cached data from Redis (stale but available)</li>
+                            <li>Display user message about degraded service</li>
+                            <li>Queue sync jobs for retry when API recovers</li>
+                            <li>Alert operations team immediately</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>If Performance is Poor</h4>
+                        <ul>
+                            <li>Increase cache TTL to reduce SMAX API calls</li>
+                            <li>Scale FastAPI replicas horizontally</li>
+                            <li>Optimize Qdrant index configuration</li>
+                            <li>Implement result pagination for large sets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h4>If RBAC is Bypassed (Security Incident)</h4>
+                    <ul>
+                        <li>Immediately disable affected API endpoints</li>
+                        <li>Audit logs to identify unauthorized access</li>
+                        <li>Patch vulnerability and deploy hotfix</li>
+                        <li>Notify security team and affected users</li>
+                        <li>Conduct post-incident review</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Next Steps & Call to Action -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Next Steps</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box" style="text-align: center; padding: 40px;">
+                    <h3 style="font-size: 36px; color: #667eea;">Ready to Transform IT Service Delivery?</h3>
+                    <p style="font-size: 20px; margin-top: 20px; line-height: 1.8;">
+                        Bring AI-powered conversational support to your organization while maintaining enterprise-grade security and compliance.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 40px;">Immediate Actions</h3>
+                <div class="two-column">
+                    <div class="flow-step">
+                        <span class="step-number">1</span>
+                        <strong>Approve MVP Design</strong><br>
+                        Review architecture and security model
+                    </div>
+                    <div class="flow-step">
+                        <span class="step-number">2</span>
+                        <strong>Allocate Resources</strong><br>
+                        Detailed resource planning and estimated man-day calculation will be prepared later
+                    </div>
+                    <div class="flow-step">
+                        <span class="step-number">3</span>
+                        <strong>Infrastructure Provisioning</strong><br>
+                        2 VMs, network configuration, SMAX service account
+                    </div>
+                    <div class="flow-step">
+                        <span class="step-number">4</span>
+                        <strong>Kick-off Meeting</strong><br>
+                        Align team on goals, timeline, and deliverables
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Key Deliverables</h3>
+                <div class="three-column">
+                    <div class="card">
+                        <h4>Technical</h4>
+                        <ul>
+                            <li>Secure on-prem integration platform</li>
+                            <li>2 Copilot agents (End User + IT Agent)</li>
+                            <li>Comprehensive monitoring</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Documentation</h4>
+                        <ul>
+                            <li>User guides</li>
+                            <li>Admin runbooks</li>
+                            <li>Security audit report</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Training</h4>
+                        <ul>
+                            <li>End user workshops</li>
+                            <li>IT agent training</li>
+                            <li>Admin training</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 30px;">
+                    <h3 style="color: white; font-size: 28px;">Expected ROI</h3>
+                    <div class="three-column" style="margin-top: 20px;">
+                        <div>
+                            <div style="font-size: 40px; font-weight: bold;">20%</div>
+                            <div style="margin-top: 10px;">Ticket Reduction</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 40px; font-weight: bold;">15%</div>
+                            <div style="margin-top: 10px;">Faster Resolution</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 40px; font-weight: bold;">30%</div>
+                            <div style="margin-top: 10px;">Self-Service Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Phase 2 Vision - Multi-Source RAG Platform -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Phase 2 Vision: Multi-Source RAG Platform</h2>
+            </div>
+            <div class="content">
+                <div class="highlight-box">
+                    <h3>Expanding the BYOD Vision</h3>
+                    <p style="font-size: 18px; line-height: 1.8;">
+                        The MVP (Phase 1) is limited to SMAX. <strong>Phase 2</strong> transforms the platform into a true <strong>Bring Your Own Data (BYOD)</strong> solution — integrating PDFs, SharePoint, Confluence, Excel, and more into a unified AI knowledge base.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 30px;">Target Architecture: Multi-Source Data Support</h3>
+                <div class="architecture-diagram">
+<pre>┌────────────────────────────────────────────────────────┐
+│          RAG Orchestration Layer (NEW)                 │
+├────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐  │
+│  │ SMAX Adapter │  │  LlamaIndex  │  │   Custom    │  │
+│  │  (Existing)  │  │   Adapter    │  │  Adapters   │  │
+│  ├──────────────┤  ├──────────────┤  ├─────────────┤  │
+│  │• Tickets     │  │• PDF Files   │  │• Jira       │  │
+│  │• KB Articles │  │• SharePoint  │  │• ServiceNow │  │
+│  │• Offerings   │  │• Confluence  │  │• Databases  │  │
+│  │• Native RBAC │  │• Excel/Word  │  │             │  │
+│  └──────────────┘  └──────────────┘  └─────────────┘  │
+└──────────────────────┬─────────────────────────────────┘
+                       ↓
+         Qdrant Vector Database (Existing Infrastructure)
+   ┌──────────────┬──────────────┬──────────────┐
+   │ smax_*       │ public_docs  │ restricted_* │
+   │ (Full RBAC)  │ (Unrestrict.)│ (Tagged RBAC)│
+   └──────────────┴──────────────┴──────────────┘</pre>
+                </div>
+
+                <h3 style="margin-top: 30px;">What's Possible with LlamaIndex?</h3>
+                <div class="two-column">
+                    <div class="card">
+                        <h4>100+ Built-in Data Connectors</h4>
+                        <ul>
+                            <li><strong>Documents:</strong> PDF, Word, Excel, PowerPoint</li>
+                            <li><strong>Content Platforms:</strong> SharePoint, Confluence, Notion</li>
+                            <li><strong>Databases:</strong> PostgreSQL, MySQL, MongoDB</li>
+                            <li><strong>Cloud Storage:</strong> Google Drive, Dropbox, S3</li>
+                            <li><strong>APIs:</strong> REST, GraphQL custom integrations</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Tiered Security Model</h4>
+                        <ul>
+                            <li><strong>Tier 1 - Public:</strong> Company policies, public KB (No RBAC)</li>
+                            <li><strong>Tier 2 - Tagged:</strong> Department procedures (Manual tagging)</li>
+                            <li><strong>Tier 3 - Native:</strong> External systems (Permission mapping)</li>
+                            <li><strong>Metadata validation:</strong> Untagged documents are rejected</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Phased Implementation Plan</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Phase 2.1: Public Documents (4-6 Weeks)</h4>
+                            <ul>
+                                <li>Company policies (PDFs)</li>
+                                <li>IT procedures (Word/Excel)</li>
+                                <li>Public knowledge base articles</li>
+                                <li><strong>Success:</strong> 50+ docs, &lt;2s latency, zero RBAC violations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Phase 2.2: SharePoint/Confluence (8-10 Weeks)</h4>
+                            <ul>
+                                <li>Department folders (Finance, HR, IT)</li>
+                                <li>Project documentation (Confluence)</li>
+                                <li>Metadata tagging UI</li>
+                                <li><strong>Success:</strong> 500+ docs, 100% tagged, approval workflow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="card">
+                            <h4>Phase 2.3: Advanced Integrations (6+ Months)</h4>
+                            <ul>
+                                <li>Jira ticket history</li>
+                                <li>Database knowledge sources</li>
+                                <li>ServiceNow (as SMAX alternative)</li>
+                                <li><strong>Success:</strong> Real-time sync, cross-source search</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Key Benefits</h3>
+                <div class="three-column">
+                    <div class="metric-box">
+                        <span class="number">70%</span>
+                        <span class="label">Reduction in Custom Parsing Code</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">100+</span>
+                        <span class="label">Ready-to-Use Data Connectors</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">30%</span>
+                        <span class="label">Improvement in Knowledge Discoverability</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h4 style="color: white; margin-bottom: 15px;">Platform Independence Achieved</h4>
+                    <p style="font-size: 16px; line-height: 1.6;">
+                        <strong>While SMAX serves you today</strong>, Phase 2 architecture locks you into no vendor. Migrating to ServiceNow, Jira, or another platform? Simply swap adapters, user experience remains the same. <strong>Your data, your platform, your freedom.</strong>
+                    </p>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 20px; background: #fffbeb; border-color: #f59e0b;">
+                    <h4 style="color: #92400e;">⚠️ Important: Security-First Approach</h4>
+                    <ul style="color: #78350f;">
+                        <li><strong>Default Deny:</strong> Documents without metadata are automatically rejected</li>
+                        <li><strong>Approval Workflow:</strong> Access-controlled documents require approval</li>
+                        <li><strong>Quarterly Audits:</strong> Automatic detection of RBAC violations</li>
+                        <li><strong>Phased Rollout:</strong> Phase 1 SMAX RBAC model is preserved and isolated</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Q&A -->
+        <div class="slide title-slide">
+            <h1>Questions?</h1>
+            <div class="subtitle">Let's discuss how to bring AI-powered IT support to your organization</div>
+            <div class="meta" style="margin-top: 60px;">
+                <h3 style="color: white; margin-bottom: 30px;">Contact Information</h3>
+                <p>📧 Email: support@rigosis.com</p>
+                <p style="margin-top: 15px;">📄 Full Documentation: docs/plans/</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-number"></div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+
+            document.querySelector('.slide-number').textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>

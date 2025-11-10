@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:brainstorming)",
+      "Bash(mkdir:*)",
+      "Bash(for file in *.svg)",
+      "Bash(do mv \"$file\" \"$file%.svg.png\")",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

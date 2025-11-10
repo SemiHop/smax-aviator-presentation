@@ -1,0 +1,20 @@
+Design a clean, modern presentation template inspired by Rigosis Information Systems.
+Use the following color palette and guidelines:
+
+Primary Background: #F4F5F7
+
+Primary Text: #2E2E2E
+Accent Green: #3DB14E
+Secondary Gray: #6B6C6E
+Highlight Blue (optional): #0074B8
+White: #FFFFFF
+
+Style Guidance:
+Minimalist, professional layout with ample white space
+Green for accents, highlights, and dividers
+Gray for text and secondary elements
+Light background for readability
+Optional blue tones for data visuals and callouts
+
+Goal:
+Create a balanced, enterprise-style presentation theme that reflects the Rigosis brand identity while ensuring clarity and visual harmony.
