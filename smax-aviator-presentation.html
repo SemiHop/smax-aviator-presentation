@@ -1276,35 +1276,101 @@
                 <h2>What's New in SMAX 25.4</h2>
             </div>
             <div class="content">
-                <div class="two-column">
-                    <div class="pillar">
-                        <h3>🤖 Aviator Agents</h3>
-                        <ul>
-                            <li><strong>Task Plans:</strong> Serial or parallel execution</li>
-                            <li><strong>Execute:</strong> Manual/automatic tasks, Aviator calls, Orchestration flows,
-                                Integration Studio</li>
-                            <li><strong>Initiated:</strong> Via Business rule process</li>
-                            <li><strong>Session Records:</strong> Full audit history of all actions</li>
-                            <li><strong>Use Cases:</strong> Complex workflows, multi-step automation, process
-                                orchestration</li>
-                        </ul>
-                    </div>
-                    <div class="pillar">
-                        <h3>🌐 Google Gemini</h3>
-                        <ul>
-                            <li><strong>Alternative LLM:</strong> Backend option (SaaS only)</li>
-                            <li><strong>Enhanced:</strong> Multilingual support</li>
-                            <li><strong>Larger:</strong> General knowledge corpus</li>
-                            <li><strong>Advanced:</strong> Language understanding</li>
-                            <li><strong>Choice:</strong> Private Llama 3 vs Google Gemini based on data processing
-                                preferences</li>
-                        </ul>
-                    </div>
+                <div class="highlight-box">
+                    <h3>🚀 Top 3 Features</h3>
+                    <p style="font-size: 18px;">New Aviator Agents + Public LLM Option (private option remains default)</p>
                 </div>
-                <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="margin: 0; font-size: 18px;">Aviator Agents enable sophisticated multi-step workflows with
-                        full governance. Gemini provides flexibility for organizations comfortable with Google's AI
-                        processing.</p>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 20px;">🤖 Aviator Agents: Autonomous Task Managers</h3>
+
+                    <div class="two-column" style="margin-bottom: 25px;">
+                        <div>
+                            <div class="card">
+                                <h4>What are Aviator Agents?</h4>
+                                <p style="font-size: 15px; margin-bottom: 15px;">AI-powered bots that can complete tasks autonomously. Think of them as specialized workers who take over a task when they are called.</p>
+                                <ul style="font-size: 14px;">
+                                    <li><strong>Generative AI actions</strong> execution</li>
+                                    <li><strong>Process automation</strong> and integrations</li>
+                                    <li><strong>Human-in-the-loop</strong> steps supported</li>
+                                    <li><strong>Operates independently</strong> once triggered</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="screenshot-placeholder" style="margin: 0;">
+                                <img src="screenshots/Aviatoragents.png" alt="Aviator Agents">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Difference -->
+                    <div class="blue-callout" style="margin-bottom: 25px;">
+                        <h4>🔍 Aviator Agents vs. AI-Enriched Workflows</h4>
+                        <p style="margin: 0; font-size: 15px;"><strong>AI-Enriched Workflows:</strong> AI is embedded directly into a workflow - enhancing a process with AI intelligence.<br><strong>Aviator Agents:</strong> Tasks are handed off to an independent AI agent that operates autonomously - like delegating to a specialized worker.</p>
+                    </div>
+
+                    <!-- Example Scenario -->
+                    <div class="blue-callout" style="margin-bottom: 25px;">
+                        <h4>📋 Example: Automated Knowledge Article Creation</h4>
+                        <p style="margin-bottom: 15px; font-size: 15px;">Configure an Aviator Agent that specializes in creating knowledge articles from incidents:</p>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px;">
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">1. Trigger</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Initiated from incident record</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">2. Generate</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Creates title and draft content</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">3. Tag</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Defines meta tags and categories</p>
+                            </div>
+                            <div style="text-align: center;">
+                                <p style="margin: 0; font-weight: bold;">4. Approve</p>
+                                <p style="font-size: 14px; margin: 5px 0 0 0;">Moves to review phase for human</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="two-column" style="margin-bottom: 25px;">
+                        <div class="card">
+                            <h4>⚙️ Agent Capabilities</h4>
+                            <ul style="font-size: 14px;">
+                                <li><strong>Task Plans:</strong> Serial or parallel task execution</li>
+                                <li><strong>Multiple Actions:</strong> Manual/automatic tasks, Aviator calls, integration flows</li>
+                                <li><strong>Triggering:</strong> Initiated via business rule processes</li>
+                                <li><strong>Audit:</strong> Full session history of all actions</li>
+                                <li><strong>Control:</strong> Enable or disable at any time</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>🌐 Google Gemini 2.5 Flash Option</h4>
+                            <ul style="font-size: 14px;">
+                                <li><strong>Why choose Gemini?</strong> Larger model with stronger natural language understanding</li>
+                                <li><strong>Broader knowledge base:</strong> More general knowledge coverage</li>
+                                <li><strong>Enhanced multilingual:</strong> Support for more languages</li>
+                                <li><strong>⚠️ Important:</strong> Google becomes additional sub-processor of your data</li>
+                                <li><strong>Data protection:</strong> OpenText does not allow Google to train on your data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- LLM Choice -->
+                    <div class="highlight-box">
+                        <h4>🔒 Private LLM Remains Default</h4>
+                        <p style="margin-bottom: 15px; font-size: 15px;">We continue to offer our <strong>private LLM based on Llama 3.1</strong>, hosted in the OpenText Public Cloud SaaS, which remains the <strong>default LLM option</strong>.</p>
+                        <div class="two-column" style="margin-top: 15px;">
+                            <div>
+                                <p style="margin: 0; font-size: 14px;"><strong>✓ Flexibility:</strong> Choose the LLM that best fits your needs</p>
+                            </div>
+                            <div>
+                                <p style="margin: 0; font-size: 14px;"><strong>✓ No Cost Impact:</strong> Choice does not affect pricing or licensing</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
