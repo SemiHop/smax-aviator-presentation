@@ -1435,6 +1435,13 @@
                 <p style="font-size: 16px;">docs.microfocus.com - Complete Aviator documentation</p>
                 <p style="margin-top: 30px; font-size: 24px; font-weight: 600;">Questions?</p>
             </div>
+            <div style="margin-top: 35px;">
+                <div style="background: white; padding: 20px; border-radius: 12px; display: inline-block;">
+                    <h4 style="color: var(--accent-green); margin: 0 0 15px 0;">📱 Access This Presentation</h4>
+                    <img id="qrcode-final" src="" alt="QR Code" style="width: 180px; height: 180px; display: block; margin: 0 auto;">
+                    <p id="url-final" style="color: var(--secondary-gray); font-size: 12px; margin-top: 10px; word-break: break-all;">Loading...</p>
+                </div>
+            </div>
             <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
                 <p style="font-size: 18px; opacity: 0.95;"><span style="color: rgba(255,255,255,0.8);">OpenText
                         SMAX</span> | by <strong>Rigosis Bilgi Sistemleri</strong></p>
@@ -1486,6 +1493,14 @@
 
         // Initialize
         showSlide(0);
+
+        // Generate QR code for final slide
+        const currentUrl = window.location.href.replace(/\/$/, '');
+        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(currentUrl)}`;
+        const qrImg = document.getElementById('qrcode-final');
+        const urlText = document.getElementById('url-final');
+        if (qrImg) qrImg.src = qrApiUrl;
+        if (urlText) urlText.textContent = currentUrl;
     </script>
 </body>
 
