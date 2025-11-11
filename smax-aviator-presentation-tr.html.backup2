@@ -501,63 +501,6 @@
             </div>
         </div>
 
-        <!-- Slide 4: IT Operations Management Ekosistemi -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>IT Operations Management Ekosistemi</h2>
-            </div>
-            <div class="content">
-                <div class="highlight-box">
-                    <h3>Uçtan Uca ITOM Çözümleri</h3>
-                    <p style="font-size: 18px;">SMAX Aviator, OpenText'in kapsamlı IT Operations Management portföyünün merkezinde yer alarak tüm ITOM süreçlerine yapay zekâ destekli otomasyon getirir.</p>
-                </div>
-
-                <div class="screenshot-placeholder" style="margin: 30px 0;">
-                    <img src="screenshots/IT_Operations_Managment_Ecosystem.png" alt="IT Operations Management Ekosistemi">
-                </div>
-
-                <div class="two-column">
-                    <div class="card">
-                        <h4>🎯 SMAX (Service Management Automation X)</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Olay, Problem ve Değişiklik Yönetimi</li>
-                            <li>Hizmet Kataloğu ve Talep Yönetimi</li>
-                            <li>Yapılandırma ve Varlık Yönetimi (CMDB)</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>📊 Operations Bridge</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Olay İzleme ve Yönetimi</li>
-                            <li>Çoklu kaynak olay korelasyonu</li>
-                            <li>Proaktif uyarı ve bildirimler</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🔧 OPTIC Tenant Management</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Merkezi platform yönetimi</li>
-                            <li>Kiracı yapılandırması ve izolasyonu</li>
-                            <li>Güvenlik ve uyumluluk kontrolü</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🤖 Aviator - AI Hub</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Tüm ITOM ürünleri için yapay zekâ motoru</li>
-                            <li>Doğal dil etkileşimi</li>
-                            <li>Akıllı otomasyon ve öneriler</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="blue-callout" style="margin-top: 30px;">
-                    <h4>🔗 Entegre Ekosistem</h4>
-                    <p>SMAX Aviator, tüm OpenText ITOM ürünleriyle sorunsuz entegrasyon sağlayarak merkezi bir yapay zekâ katmanı oluşturur. Bu sayede kullanıcılar tek bir arayüzden tüm ITOM süreçlerine erişebilir ve yapay zekâ destekli otomasyondan faydalanabilir.</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Slide 5: SMAX Aviator ile Tanışın -->
         <div class="slide">
             <div class="slide-header">
@@ -653,7 +596,7 @@
             </div>
         </div>
 
-        <!-- Slayt 7: Son Kullanıcılar için Aviator -->
+        <!-- Slayt 5: Son Kullanıcılar için Aviator -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Son Kullanıcılar için Aviator</h2>
@@ -713,7 +656,7 @@
         </div>
 
 
-        <!-- Slayt 8: Demo - Bilgi Soru-Cevap -->
+        <!-- Slayt 6: Demo - Bilgi Soru-Cevap -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Kaynak Referanslı Bilgi Soru-Cevap</h2>
@@ -739,7 +682,7 @@
             </div>
         </div>
 
-        <!-- Slayt 9: Demo - Niyet ve Teklif Önerileri -->
+        <!-- Slayt 7: Demo - Niyet ve Teklif Önerileri -->
         <!--
 		<div class="slide">
             <div class="slide-header">
@@ -763,7 +706,7 @@
         </div>
 -->
 
-        <!-- Slayt 10: SMAX Destek Uzmanları için Aviator -->
+        <!-- Slayt 8: SMAX Destek Uzmanları için Aviator -->
         <div class="slide">
             <div class="slide-header">
                 <h2>SMAX Destek Uzmanları için Aviator</h2>
@@ -817,7 +760,7 @@
             </div>
         </div>
 
-        <!-- Slayt 11: Demo - Akıllı Talep Özetleme -->
+        <!-- Slayt 9: Demo - Akıllı Talep Özetleme -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Akıllı Talep Özetleme</h2>
@@ -849,7 +792,7 @@
             </div>
         </div>
 
-        <!-- Slayt 12: Demo - Yapay Zekâ Destekli Çözüm Önerileri -->
+        <!-- Slayt 10: Demo - Yapay Zekâ Destekli Çözüm Önerileri -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Yapay Zekâ Destekli Çözüm Önerileri</h2>
@@ -875,7 +818,7 @@
         </div>
 
 
-        <!-- Slayt 13: Demo - Otomatik Bilgi Makalesi Oluşturma -->
+        <!-- Slayt 11: Demo - Otomatik Bilgi Makalesi Oluşturma -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Otomatik Bilgi Makalesi Oluşturma</h2>
@@ -899,7 +842,7 @@
             </div>
         </div>
 
-        <!-- Slayt 14: Demo - Akıllı Değişiklik Risk Değerlendirmesi -->
+        <!-- Slayt 12: Demo - Akıllı Değişiklik Risk Değerlendirmesi -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Akıllı Değişiklik Risk Değerlendirmesi</h2>
@@ -934,7 +877,7 @@
             </div>
         </div>
 
-        <!-- Slayt 15: Demo - Duygu Analizi -->
+        <!-- Slayt 13: Demo - Duygu Analizi -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Duygu Analizi</h2>
@@ -1015,7 +958,7 @@
         </div>
 
 
-        <!-- Slayt 17: Destek Uzmanı Katma Değer Özeti -->
+        <!-- Slayt 15: Destek Uzmanı Katma Değer Özeti -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Destek Uzmanı Katma Değer Özeti</h2>
@@ -1057,7 +1000,7 @@
         </div>
 
 
-        <!-- Slayt 18: Arka Planda Akıllı Otomasyon -->
+        <!-- Slayt 16: Arka Planda Akıllı Otomasyon -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Arka Planda Akıllı Otomasyon</h2>
@@ -1192,7 +1135,7 @@
 
 
 
-        <!-- Slayt 19: Tam Yapay Zekâ Yetkinlikleri Kataloğu -->
+        <!-- Slayt 17: Tam Yapay Zekâ Yetkinlikleri Kataloğu -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Tam Yapay Zekâ Yetkinlikleri Kataloğu</h2>
@@ -1263,7 +1206,7 @@
             </div>
         </div>
 
-        <!-- Slayt 20: Uçtan Uca Akıllı İş Akışı -->
+        <!-- Slayt 18: Uçtan Uca Akıllı İş Akışı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Uçtan Uca Demo: Akıllı İş Akışı</h2>
@@ -1360,7 +1303,7 @@
             </div>
         </div>
 
-        <!-- Slayt 21: Etki ve Sonuçlar 
+        <!-- Slayt 19: Etki ve Sonuçlar 
         <div class="slide">
             <div class="slide-header">
                 <h2>Etki ve Sonuçlar</h2>
@@ -1408,7 +1351,7 @@
         </div>
 		-->
 
-        <!-- Slayt 22: SMAX 25.4 ile Gelen Yenilikler -->
+        <!-- Slayt 20: SMAX 25.4 ile Gelen Yenilikler -->
         <div class="slide">
             <div class="slide-header">
                 <h2>SMAX 25.4 ile Gelen Yenilikler</h2>
@@ -1544,7 +1487,7 @@
         </div>
 
 
-        <!-- Slayt 23: Temel Çıkarımlar -->
+        <!-- Slayt 21: Temel Çıkarımlar -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Temel Çıkarımlar</h2>
@@ -1582,7 +1525,7 @@
             </div>
         </div>
 
-        <!-- Slayt 24: Sonraki Adımlar -->
+        <!-- Slayt 22: Sonraki Adımlar -->
         <div class="slide title-slide">
             <h2 style="color: white; border: none; font-size: 48px;">Sonraki Adımlar</h2>
             <div style="background: white; padding: 50px; border-radius: 12px; margin: 40px auto; max-width: 850px;">
