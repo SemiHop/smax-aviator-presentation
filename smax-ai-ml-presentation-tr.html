@@ -632,6 +632,7 @@
                 <h2>Hot Topic Analytics (Gündem Analitiği)</h2>
             </div>
             <div class="content">
+
                 <div class="highlight-box">
                     <h3>Portalınızda Ne Konuşulduğunu Görün</h3>
                     <p>
@@ -639,6 +640,7 @@
                         analiz ederek en çok konuşulan konuları ortaya çıkarır.
                     </p>
                 </div>
+
                 <div class="two-column">
                     <div class="card">
                         <h4>LDA Tabanlı Konu Modelleme</h4>
@@ -649,26 +651,70 @@
                             <li>Alt konu (sub-topic) yapısı ile detaylı görünüm</li>
                         </ul>
                     </div>
+
                     <div class="card">
                         <h4>BT İçin Kullanım Senaryoları</h4>
                         <ul>
                             <li>Sık gelen taleplerden yeni katalog hizmetleri üretmek</li>
                             <li>Yinelenen olaylardan problem kayıtları ve kök neden analizleri çıkarmak</li>
                             <li>Bilgi makalesi eksik alanlarını görmek</li>
-                            <li>Anket yorumlarından memnuniyet/memnuniyetsizlik trendlerini izlemek</li>
+                            <li>Anket yorumlarından memnuniyet trendlerini izlemek</li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- GERÇEK MÜŞTERİ VERİSİ -->
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h3>Gerçek Müşteri Arama Verileri (User Search)</h3>
+                    <ul>
+                        <li><strong>mail:</strong> 98 kullanıcı · 121 hit</li>
+                        <li><strong>uygulama:</strong> 26 kullanıcı · 84 hit</li>
+                        <li><strong>mouse:</strong> 16 kullanıcı · 9 hit</li>
+                        <li><strong>program kurma:</strong> 16 kullanıcı · 14 hit</li>
+                        <li><strong>opera:</strong> 12 kullanıcı · 21 hit</li>
+                        <li><strong>e posta arızaları:</strong> 9 kullanıcı · 7 hit</li>
+                        <li><strong>sharepoint:</strong> 5 kullanıcı · 15 hit</li>
+                        <li><strong>ortak alan yetki:</strong> 1 kullanıcı · 1 hit</li>
+                        <li><strong>yükleme:</strong> 1 kullanıcı · 0 hit</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 25px;">
+                    <h4>Hizmet Yöneticisi Analizi</h4>
+                    <ul>
+                        <li><strong>Mail</strong> en baskın konu. E-posta süreçlerinde tekrarlayan sorunlar veya eksik
+                            KB içerikleri var.</li>
+                        <li><strong>“Uygulama”</strong> araması çok genel: katalog yapısı ve KB yönlendirmeleri
+                            belirsiz.</li>
+                        <li><strong>“E posta arızaları”</strong> düşük hit → içerik eksik veya arama sonuçları yanlış
+                            eşleşiyor.</li>
+                        <li><strong>Mouse</strong> aramaları donanım arızalarının sık yaşandığını gösteriyor; ilgili
+                            makaleler eksik.</li>
+                        <li><strong>Program kurma</strong> yüksek hit → katalog ve KB bu konuda iyi çalışıyor.</li>
+                        <li>Düşük hacimle gelen aramalar (“sharepoint”, “ortak alan yetki”, “yükleme”) için net katalog
+                            hizmetleri gerekebilir.</li>
+                    </ul>
+                </div>
+
+                <div class="screenshot-container">
+                    <img src="screenshots/ml/hot_topics_real_data.png" alt="Hot Topic Real Data" class="screenshot">
+                    <div class="screenshot-caption">Gerçek Kullanıcı Arama Verisi (User Search Output)</div>
+                </div>
+
                 <div class="screenshot-container">
                     <img src="screenshots/ml/hot_topics_1.png" alt="Hot Topic Analytics Dashboard" class="screenshot">
                     <div class="screenshot-caption">Hot Topic Analytics: Konu analizi ve görselleştirme</div>
                 </div>
+
+
                 <div class="screenshot-container">
                     <img src="screenshots/ml/LDA.png" alt="LDA Topic Modeling" class="screenshot">
                     <div class="screenshot-caption">LDA (Latent Dirichlet Allocation) konu modelleme algoritması</div>
                 </div>
+
             </div>
         </div>
+
 
         <!-- Slayt 9: Hot Topic – Ön İşleme -->
         <div class="slide">
@@ -676,6 +722,7 @@
                 <h2>Hot Topic Analytics – Veri Hazırlama</h2>
             </div>
             <div class="content">
+
                 <div class="two-column">
                     <div class="card">
                         <h4>Ön İşleme Adımları</h4>
@@ -687,6 +734,7 @@
                             <li>Sık görülen iki kelimelik kalıpların birleştirilmesi (operating-system)</li>
                         </ul>
                     </div>
+
                     <div class="card">
                         <h4>Sonuç</h4>
                         <ul>
@@ -697,12 +745,29 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <h3>Gerçek Verinin Ön İşleme ile İlişkisi</h3>
+                    <ul>
+                        <li><strong>"mail" ve "uygulama"</strong> gibi yüksek hacimli kelimeler stop-word listesinde
+                            olmamalı.</li>
+                        <li><strong>"e posta arızaları"</strong> düşük hit → stemming/temizlik eksikliklerini
+                            gösteriyor.</li>
+                        <li><strong>"mouse"</strong> gibi donanım terimleri bigram/phrase olarak işlenirse sonuç
+                            kalitesi artar.</li>
+                        <li><strong>"yükleme"</strong> 0 hit → indeks kapsamı veya KB içeriği eksik.</li>
+                        <li>Ön işleme kalitesi artırıldıkça Hot Topic kümeleri daha doğru oturur.</li>
+                    </ul>
+                </div>
+
                 <div class="screenshot-container">
                     <img src="screenshots/ml/hot_topics_2.png" alt="Hot Topic Data Processing" class="screenshot">
                     <div class="screenshot-caption">Hot Topic Analytics: Veri ön işleme ve filtreleme sonuçları</div>
                 </div>
+
             </div>
         </div>
+
 
         <!-- Slayt 10: Hızlı CI Tespiti -->
         <div class="slide">
