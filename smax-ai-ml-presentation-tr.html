@@ -315,6 +315,97 @@
                 padding: 30px 20px;
             }
         }
+
+        /* Image Modal/Lightbox Styles */
+        .screenshot {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .image-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .image-modal img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: color 0.2s;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .image-modal-close:hover {
+            color: var(--accent-green);
+        }
+
+        .image-modal-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
     </style>
 </head>
 
@@ -663,49 +754,71 @@
                     </div>
                 </div>
 
+                <!-- Bilgi Notu -->
+                <div class="card" style="margin-top:20px; background:#eaf7ff; border-left:5px solid #0074b8;">
+                    <h4>Bilgi Notu: Hit Ne Anlama Gelir?</h4>
+                    <p><strong>Hit</strong>, bir aramada kullanıcılara gösterilen sonuçlardan kaç tanesinin
+                        “eşleştiğini” ifade eder.
+                        Yani yüksek hit = kullanıcı aradığı şeye yakın sonuç buluyor, düşük hit = içerik eksikliği veya
+                        yanlış eşleşme vardır.</p>
+                </div>
+
                 <!-- GERÇEK MÜŞTERİ VERİSİ -->
                 <div class="highlight-box" style="margin-top: 30px;">
                     <h3>Gerçek Müşteri Arama Verileri (User Search)</h3>
+                    <p>150+ arama kaydının derlenmiş özeti aşağıdaki gibidir:</p>
                     <ul>
+                        <li><strong>sap:</strong> 107 kullanıcı · 65 hit</li>
                         <li><strong>mail:</strong> 98 kullanıcı · 121 hit</li>
+                        <li><strong>cihaz talebi:</strong> 38 kullanıcı · 37 hit</li>
+                        <li><strong>bilgisayar:</strong> 37 kullanıcı · 16 hit</li>
+                        <li><strong>vpn:</strong> 27 kullanıcı · 72 hit</li>
                         <li><strong>uygulama:</strong> 26 kullanıcı · 84 hit</li>
+                        <li><strong>ams:</strong> 25 kullanıcı · 27 hit</li>
+                        <li><strong>teams:</strong> 22 kullanıcı · 5 hit</li>
+                        <li><strong>e posta:</strong> 21 kullanıcı · 28 hit</li>
+                        <li><strong>file server:</strong> 19 kullanıcı · 17 hit</li>
+                        <li><strong>yetki:</strong> 18 kullanıcı · 2 hit</li>
+                        <li><strong>ortak klasör:</strong> 18 kullanıcı · 11 hit</li>
+                        <li><strong>outlook:</strong> 17 kullanıcı · 3 hit</li>
                         <li><strong>mouse:</strong> 16 kullanıcı · 9 hit</li>
                         <li><strong>program kurma:</strong> 16 kullanıcı · 14 hit</li>
-                        <li><strong>opera:</strong> 12 kullanıcı · 21 hit</li>
-                        <li><strong>e posta arızaları:</strong> 9 kullanıcı · 7 hit</li>
-                        <li><strong>sharepoint:</strong> 5 kullanıcı · 15 hit</li>
-                        <li><strong>ortak alan yetki:</strong> 1 kullanıcı · 1 hit</li>
-                        <li><strong>yükleme:</strong> 1 kullanıcı · 0 hit</li>
+                        <li><strong>cihaz:</strong> 14 kullanıcı · 122 hit</li>
+                        <li><strong>cihaz arızası:</strong> 14 kullanıcı · 27 hit</li>
+                        <li><strong>pam:</strong> 10 kullanıcı · 22 hit</li>
+                        <li><strong>anons:</strong> 10 kullanıcı · 7 hit</li>
+                        <li><strong>fıds:</strong> 9 kullanıcı · 141 hit</li>
+                        <li><strong>mail hesap:</strong> 15 kullanıcı · 13 hit</li>
+                        <li><strong>şifre:</strong> 16 kullanıcı · 12 hit</li>
+                        <li><strong>erişim:</strong> 16 kullanıcı · 2 hit</li>
+                        <li><strong>printer:</strong> 10 kullanıcı · 3 hit</li>
+                        <li>...</li>
                     </ul>
                 </div>
 
                 <div class="card" style="margin-top: 25px;">
-                    <h4>Hizmet Yöneticisi Analizi</h4>
+                    <h4>Hizmet Yöneticisi Analizi (Özet)</h4>
                     <ul>
-                        <li><strong>Mail</strong> en baskın konu. E-posta süreçlerinde tekrarlayan sorunlar veya eksik
-                            KB içerikleri var.</li>
-                        <li><strong>“Uygulama”</strong> araması çok genel: katalog yapısı ve KB yönlendirmeleri
-                            belirsiz.</li>
-                        <li><strong>“E posta arızaları”</strong> düşük hit → içerik eksik veya arama sonuçları yanlış
-                            eşleşiyor.</li>
-                        <li><strong>Mouse</strong> aramaları donanım arızalarının sık yaşandığını gösteriyor; ilgili
-                            makaleler eksik.</li>
-                        <li><strong>Program kurma</strong> yüksek hit → katalog ve KB bu konuda iyi çalışıyor.</li>
-                        <li>Düşük hacimle gelen aramalar (“sharepoint”, “ortak alan yetki”, “yükleme”) için net katalog
-                            hizmetleri gerekebilir.</li>
+                        <li><strong>E-posta, SAP ve erişim süreçleri</strong> en problemli alanlar.</li>
+                        <li><strong>Outlook ve yetki işlemleri</strong> en düşük hit oranlarına sahip → içerik ve
+                            katalog eksikleri kritik.</li>
+                        <li><strong>Cihaz talebi, VPN, FIDS ve AMS</strong> süreçleri yüksek performans gösteriyor.</li>
+                        <li><strong>Donanım arızaları</strong> (bilgisayar, mouse, yazıcı) için KB içerikleri zayıf.
+                        </li>
+                        <li><strong>45’ten fazla arama 0–5 hit arası</strong> → Smart Search modelinin kalitesi düşer,
+                            LDA kümelerini olumsuz etkiler.</li>
                     </ul>
                 </div>
 
                 <div class="screenshot-container">
-                    <img src="screenshots/ml/hot_topics_real_data.png" alt="Hot Topic Real Data" class="screenshot">
-                    <div class="screenshot-caption">Gerçek Kullanıcı Arama Verisi (User Search Output)</div>
+                    <img src="screenshots/ml/hot_topics_real_data.png" alt="Real User Search Data" class="screenshot">
+                    <div class="screenshot-caption">Gerçek Kullanıcı Arama Verisi</div>
                 </div>
 
                 <div class="screenshot-container">
                     <img src="screenshots/ml/hot_topics_1.png" alt="Hot Topic Analytics Dashboard" class="screenshot">
                     <div class="screenshot-caption">Hot Topic Analytics: Konu analizi ve görselleştirme</div>
                 </div>
-
 
                 <div class="screenshot-container">
                     <img src="screenshots/ml/LDA.png" alt="LDA Topic Modeling" class="screenshot">
@@ -714,6 +827,7 @@
 
             </div>
         </div>
+
 
 
         <!-- Slayt 9: Hot Topic – Ön İşleme -->
@@ -746,19 +860,24 @@
                     </div>
                 </div>
 
-                <div class="highlight-box" style="margin-top: 20px;">
-                    <h3>Gerçek Verinin Ön İşleme ile İlişkisi</h3>
+                <!-- GERÇEK VERİ BAĞLANTISI -->
+                <!-- <div class="highlight-box" style="margin-top: 20px;">
+                    <h3>Gerçek Verinin Ön İşleme ile İlişkili Bulguları</h3>
                     <ul>
-                        <li><strong>"mail" ve "uygulama"</strong> gibi yüksek hacimli kelimeler stop-word listesinde
-                            olmamalı.</li>
-                        <li><strong>"e posta arızaları"</strong> düşük hit → stemming/temizlik eksikliklerini
-                            gösteriyor.</li>
-                        <li><strong>"mouse"</strong> gibi donanım terimleri bigram/phrase olarak işlenirse sonuç
-                            kalitesi artar.</li>
-                        <li><strong>"yükleme"</strong> 0 hit → indeks kapsamı veya KB içeriği eksik.</li>
-                        <li>Ön işleme kalitesi artırıldıkça Hot Topic kümeleri daha doğru oturur.</li>
+                        <li><strong>"mail", "e posta", "outlook"</strong> gibi kelimelerin çok farklı varyasyonlarda
+                            aranması;
+                            synonym / eş anlamlı listelerinin eksik olduğunu gösteriyor.</li>
+                        <li><strong>“Yetki”, “erişim”, “ortak klasör”, “file server”</strong> aramalarının düşük hit
+                            oranları →
+                            kategori ve KB içeriklerinin indekslemesi hatalı.</li>
+                        <li><strong>"sap", "sap mm", "sap kullanıcı"</strong> gibi varyasyonlar doğru kümelenemiyor →
+                            LDA sonuçları bozulur.</li>
+                        <li><strong>"cihaz", "cihaz arızası", "cihaz talebi"</strong> gibi terimler için ön işleme doğru
+                            yapıldığı için hit oranı yüksek.</li>
+                        <li><strong>“teams”, “outlook”, “printer”</strong> gibi kritik uygulamalarda stemming ve kelime
+                            temizliği yanlış sonuç üretiyor.</li>
                     </ul>
-                </div>
+                </div>-->
 
                 <div class="screenshot-container">
                     <img src="screenshots/ml/hot_topics_2.png" alt="Hot Topic Data Processing" class="screenshot">
@@ -767,6 +886,7 @@
 
             </div>
         </div>
+
 
 
         <!-- Slayt 10: Hızlı CI Tespiti -->
@@ -956,6 +1076,53 @@
         });
 
         showSlide(0);
+
+        // Image Modal/Lightbox Functionality
+        (function () {
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'image-modal';
+            modal.innerHTML = `
+                <span class="image-modal-close">&times;</span>
+                <img src="" alt="Full size image">
+                <div class="image-modal-caption"></div>
+            `;
+            document.body.appendChild(modal);
+
+            const modalImg = modal.querySelector('img');
+            const modalCaption = modal.querySelector('.image-modal-caption');
+            const closeBtn = modal.querySelector('.image-modal-close');
+
+            // Add click handlers to all screenshot images
+            document.querySelectorAll('.screenshot').forEach(img => {
+                img.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    modal.classList.add('active');
+                    modalImg.src = this.src;
+                    modalCaption.textContent = this.alt || '';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close modal on click outside image
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal || e.target === closeBtn) {
+                    closeModal();
+                }
+            });
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        })();
     </script>
 </body>
 
