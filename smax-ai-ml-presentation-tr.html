@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAX’te Yapay Zekâ (AI) ve Makine Öğrenimi (ML)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-bg: #f4f5f7;
+            --primary-text: #2e2e2e;
+            --accent-green: #3db14e;
+            --secondary-gray: #6b6c6e;
+            --highlight-blue: #0074b8;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--accent-green) 0%, #2fa03f 100%);
+            overflow: hidden;
+        }
+        .presentation { width: 100vw; height: 100vh; position: relative; }
+        .slide {
+            width: 100%; height: 100%; display: none;
+            padding: 60px 80px;
+            background: var(--white);
+            position: absolute; top: 0; left: 0;
+            animation: slideIn 0.5s ease-out;
+            overflow-y: auto;
+        }
+        .slide.active { display: flex; flex-direction: column; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-header {
+            border-bottom: 4px solid var(--accent-green);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        h1 { font-size: 48px; color: var(--primary-text); margin-bottom: 10px; }
+        h2 { font-size: 36px; color: var(--accent-green); margin-bottom: 30px; }
+        h3 { font-size: 28px; color: var(--primary-text); margin: 20px 0; }
+        h4 { font-size: 20px; color: var(--accent-green); margin-bottom: 10px; }
+        .subtitle { font-size: 24px; color: var(--secondary-gray); }
+        .content { flex: 1; overflow-y: auto; }
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 25px;
+        }
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+        .card {
+            background: var(--primary-bg);
+            border-left: 5px solid var(--accent-green);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .card p, .card li {
+            color: var(--primary-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-green), #2fa03f);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        .highlight-box h3, .highlight-box h4 { color: var(--white); margin-top: 0; }
+        .highlight-box p, .highlight-box ul, .highlight-box li { color: var(--white); }
+        ul { margin-left: 0; list-style: none; line-height: 2; }
+        ul li {
+            padding-left: 1.5em; position: relative;
+            font-size: 18px; color: var(--primary-text);
+            margin-bottom: 10px;
+        }
+        ul li:before {
+            content: "";
+            position: absolute; left: 0; top: 0.6em;
+            width: 8px; height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+        }
+        ol { margin-left: 30px; line-height: 2; }
+        ol li { font-size: 18px; color: var(--primary-text); margin-bottom: 10px; }
+        .navigation {
+            position: fixed; bottom: 30px; right: 30px;
+            display: flex; gap: 15px; z-index: 1000;
+        }
+        .nav-button {
+            background: var(--accent-green); color: white;
+            border: none; padding: 15px 30px;
+            font-size: 16px; border-radius: 8px;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            background: #2fa03f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .nav-button:disabled {
+            background: #cbd5e0; cursor: not-allowed; transform: none;
+        }
+        .slide-number {
+            position: fixed; bottom: 30px; left: 30px;
+            color: var(--accent-green); font-size: 18px;
+            font-weight: 600; z-index: 1000;
+            background: var(--white);
+            padding: 10px 20px; border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .brand-footer {
+            position: fixed; bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            color: var(--secondary-gray); font-size: 13px;
+            font-weight: 500; z-index: 999;
+            background: var(--white);
+            display: flex; align-items: center; gap: 15px;
+            padding: 8px 20px; border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .title-slide {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #2fa03f 100%);
+            color: white;
+            justify-content: center; align-items: center;
+            text-align: center;
+        }
+        .title-slide h1 {
+            color: white; font-size: 72px; margin-bottom: 20px;
+        }
+        .title-slide .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 32px; margin-bottom: 40px;
+        }
+        .title-slide .meta {
+            color: rgba(255,255,255,0.85);
+            font-size: 22px;
+        }
+        .screenshot {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .screenshot:hover {
+            transform: scale(1.02);
+        }
+        .screenshot-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .screenshot-caption {
+            font-size: 14px;
+            color: var(--secondary-gray);
+            margin-top: 10px;
+            font-style: italic;
+        }
+        @media screen and (max-width: 768px) {
+            .two-column, .three-column { grid-template-columns: 1fr; }
+            .slide { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="presentation">
+
+    <!-- Slayt 1: Başlık -->
+    <div class="slide active title-slide">
+        <div>
+            <h1>SMAX’te Yapay Zekâ ve ML</h1>
+            <div class="subtitle">Akıllı Servis Yönetimi için AI/ML Özellikleri</div>
+            <div class="meta">
+                <p>Smart Ticketing · Smart Search · Hot Topic Analytics · Virtual Agent</p>
+                <p style="margin-top: 10px;">Hazırlayan: <strong>Rigosis Bilgi Sistemleri</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 2: Giriş -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Giriş: Neden SMAX’te AI/ML?</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>SMAX Neyi Farklı Yapıyor?</h3>
+                <p>
+                    SMAX, kurumsal hizmet yönetiminde yapay zekâ (AI) ve makine öğrenimi (ML) tekniklerini
+                    çekirdek ürünün içine gömülü olarak sunar. Amaç; tekrarlayan işleri otomatikleştirmek,
+                    destek ekiplerinin yükünü azaltmak ve kullanıcı deneyimini iyileştirmektir.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>AI/ML ile Sağlanan Katma Değer</h4>
+                    <ul>
+                        <li>Otomatik sınıflandırma ve atama</li>
+                        <li>Akıllı arama ve öneriler</li>
+                        <li>Popüler konuların ve trendlerin tespiti</li>
+                        <li>Doğal dil işleme ile self-servis</li>
+                        <li>Anomali ve büyük olay tespiti</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Tipik Kullanım Alanları</h4>
+                    <ul>
+                        <li>Çağrı yönetimi (Incident & Request)</li>
+                        <li>Bilgi yönetimi ve self-servis portal</li>
+                        <li>Problem yönetimi ve proaktif analiz</li>
+                        <li>Değişiklik analitiği ve CI tespiti</li>
+                        <li>Anket ve kullanıcı geri bildirim analizi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 3: Temel ML Görevleri ve Yaklaşımlar -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Makine Öğrenimi Temelleri (SMAX Perspektifi)</h2>
+        </div>
+        <div class="content">
+            <div class="two-column">
+                <div class="card">
+                    <h4>En Yaygın ML Görevleri</h4>
+                    <ul>
+                        <li><strong>Sınıflandırma:</strong> Smart Ticket kategorilendirme</li>
+                        <li><strong>Regresyon:</strong> Olay sayısı, değişiklik başarısı tahmini</li>
+                        <li><strong>Kümeleme:</strong> Hot Topic Analytics ile konu kümeleri</li>
+                        <li><strong>Transkripsiyon / OCR:</strong> Görselden metin çıkarma</li>
+                        <li><strong>Makine Çevirisi:</strong> Gerçek zamanlı dil çevirisi</li>
+                        <li><strong>Anomali Tespiti:</strong> Büyük olay / sıra dışı durum tespiti</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>SMAX’te Kullanılan Öğrenme Yaklaşımları</h4>
+                    <ul>
+                        <li><strong>Denetimli Öğrenme:</strong> Etiketli talep kayıtlarından kategori tahmini</li>
+                        <li><strong>Denetimsiz Öğrenme:</strong> Olayların otomatik konu kümeleri</li>
+                        <li><strong>Yarı Denetimli Öğrenme:</strong> Kısmen etiketli veriyle model iyileştirme</li>
+                        <li><strong>Pekiştirmeli Öğrenme:</strong> Kullanıcı geri bildirimleriyle sürekli iyileştirme</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 4: Smart Search -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Smart Search (Akıllı Arama)</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Doğru Bilgiye Hızlı Erişim</h3>
+                <p>
+                    Smart Search, portal, bilgi makaleleri ve harici kaynaklar (SharePoint, Wiki vb.)
+                    üzerinde bağlamsal arama yaparak kullanıcılara en alakalı sonuçları getirir.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Özellikler</h4>
+                    <ul>
+                        <li>Global arama ve zengin konektör desteği</li>
+                        <li>Doğal dil sorguları ile arama</li>
+                        <li>Bağlamsal sonuçlar (ör. olay–değişiklik ilişkisi)</li>
+                        <li>Uyarlanabilir öğrenme ile zamanla doğruluk artışı</li>
+                        <li>Akıllı dil tespiti ve otomatik çeviri</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Kullanım Senaryoları</h4>
+                    <ul>
+                        <li>Son kullanıcıların self-servis çözüm bulması</li>
+                        <li>Destek uzmanlarının benzer olay ve çözümlere hızla erişmesi</li>
+                        <li>Portal aramalarından trend ve hot topic üretimi</li>
+                        <li>Bilgi makalesi boşluklarının tespiti</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/smart_search.png" alt="Smart Search Interface" class="screenshot">
+                <div class="screenshot-caption">Smart Search kullanıcı arayüzü ve sonuç görünümü</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 5: Smart Ticketing Genel -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Smart Ticketing (Akıllı Çağrı Yönetimi)</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Talep Kategorilendirme ve Atamada Otomasyon</h3>
+                <p>
+                    Smart Ticketing, geçmiş kayıtları analiz edip kategori, etkilenen hizmet ve
+                    hizmet teklifi gibi alanları otomatik doldurarak çağrıları doğru ekibe yönlendirir.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Nasıl Çalışır?</h4>
+                    <ol>
+                        <li>Geçmiş talep ve olay kayıtları eğitim verisi olarak seçilir.</li>
+                        <li>Model bu kayıtların nasıl sınıflandırıldığına bakarak öğrenir.</li>
+                        <li>Yeni oluşturulan taleplerde açıklama metni analiz edilir.</li>
+                        <li>Önerilen kategori/hizmet/teklif alanları otomatik doldurulur.</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h4>Hazır (OOTB) Öngörülen Alanlar</h4>
+                    <ul>
+                        <li>Category (Kategori)</li>
+                        <li>Affected Service (Etkilenen Hizmet)</li>
+                        <li>Fulfillment Offering (Hizmet Teklifi)</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 15px;">
+                        Örnek: Kullanıcı “Bilgisayarım açılmıyor” yazdığında SMAX otomatik olarak
+                        “PC Support” kategorisini ve ilgili hizmeti önerebilir.
+                    </p>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/smart_ticketing.png" alt="Smart Ticketing Interface" class="screenshot">
+                <div class="screenshot-caption">Smart Ticketing otomatik kategori önerisi örneği</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 6: Smart Ticketing Eğitim/Test -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Smart Ticketing – Eğitim ve Test</h2>
+        </div>
+        <div class="content">
+            <div class="two-column">
+                <div class="card">
+                    <h4>Eğitim (Training) Süreci</h4>
+                    <ul>
+                        <li>PHASEID != "Close" kriteri ile eğitim verisi seçimi</li>
+                        <li>On binlerce / yüz binlerce talep üzerinden öğrenme</li>
+                        <li>Her tahmin edilecek alan için örnek sayısı sınırı (ör. 200 kayıt)</li>
+                        <li>İçerik alanı olarak açıklama metni ve ilgili alanlar kullanımı</li>
+                    </ul>
+                    <p style="font-size: 14px; margin-top: 10px;">
+                        Örnek ortamda yaklaşık 700.000 kayıt üzerinden eğitim yapılabilir.
+                    </p>
+                </div>
+                <div class="card">
+                    <h4>Test (Testing) Süreci</h4>
+                    <ul>
+                        <li>Eğitim setinin içinden rastgele ayrılan test verisi (%5 civarı)</li>
+                        <li>İlk, ikinci ve üçüncü eşleşme doğruluk oranlarının ölçülmesi</li>
+                        <li>Hedef doğruluk: %50 üzeri, idealde %80–90</li>
+                        <li>Düşük doğrulukta eğitim sorgusu ve alanlarının yeniden gözden geçirilmesi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/smart_ticketing_training_1.png" alt="Smart Ticketing Training Interface" class="screenshot">
+                <div class="screenshot-caption">Smart Ticketing eğitim yapılandırması ve parametre ayarları</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 7: Virtual Agent -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Virtual Agent ve Akıllı Sohbet</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Self-servis İçin Sanal Asistan</h3>
+                <p>
+                    Virtual Agent, son kullanıcıların doğal dil ile soru sorup yanıt alabildiği,
+                    arka planda Smart Search ve Smart Ticketing ile entegre çalışan sanal asistandır.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Öne Çıkan Özellikler</h4>
+                    <ul>
+                        <li>Bilgi makalesi, hizmet kataloğu ve Q&A entegrasyonu</li>
+                        <li>Kullanıcının niyetini anlamaya yönelik ML modelleri</li>
+                        <li>Benzer talepleri analiz ederek uygun hizmet önermesi</li>
+                        <li>Geçmiş çözümlerden öğrenerek yanıt kalitesini artırması</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>İş Faydaları</h4>
+                    <ul>
+                        <li>Çağrı açılmadan önce self-servis çözüm oranının artması</li>
+                        <li>Çağrı hacminde azalma ve destek ekibi yükünde düşüş</li>
+                        <li>7/24 kesintisiz hizmet</li>
+                        <li>Standart, tutarlı yanıt kalitesi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/virtual_agent.png" alt="Virtual Agent Interface" class="screenshot">
+                <div class="screenshot-caption">Virtual Agent kullanıcı etkileşim arayüzü</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 8: Hot Topic Analytics -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Hot Topic Analytics (Gündem Analitiği)</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Portalınızda Ne Konuşulduğunu Görün</h3>
+                <p>
+                    Hot Topic Analytics, kullanıcı aramaları, talepler, sosyal Q&A ve anket yorumlarını
+                    analiz ederek en çok konuşulan konuları ortaya çıkarır.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>LDA Tabanlı Konu Modelleme</h4>
+                    <ul>
+                        <li>LDA (Latent Dirichlet Allocation) ile konu kümeleri oluşturma</li>
+                        <li>Kayıt sayısına göre otomatik konu sayısı (3–40 arası)</li>
+                        <li>Her konu için 3–4 anahtar kelime ve konu etiketi</li>
+                        <li>Alt konu (sub-topic) yapısı ile detaylı görünüm</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>BT İçin Kullanım Senaryoları</h4>
+                    <ul>
+                        <li>Sık gelen taleplerden yeni katalog hizmetleri üretmek</li>
+                        <li>Yinelenen olaylardan problem kayıtları ve kök neden analizleri çıkarmak</li>
+                        <li>Bilgi makalesi eksik alanlarını görmek</li>
+                        <li>Anket yorumlarından memnuniyet/memnuniyetsizlik trendlerini izlemek</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/hot_topics_1.png" alt="Hot Topic Analytics Dashboard" class="screenshot">
+                <div class="screenshot-caption">Hot Topic Analytics: Konu analizi ve görselleştirme</div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/LDA.png" alt="LDA Topic Modeling" class="screenshot">
+                <div class="screenshot-caption">LDA (Latent Dirichlet Allocation) konu modelleme algoritması</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 9: Hot Topic – Ön İşleme -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Hot Topic Analytics – Veri Hazırlama</h2>
+        </div>
+        <div class="content">
+            <div class="two-column">
+                <div class="card">
+                    <h4>Ön İşleme Adımları</h4>
+                    <ul>
+                        <li>HTML etiketleri, tarihler, sayılar ve tek harfli kelimelerin temizlenmesi</li>
+                        <li>Çok sık ve çok seyrek kullanılan kelimelerin çıkarılması</li>
+                        <li>Stemming ile kelime köklerine indirgeme (computers → computer)</li>
+                        <li>OOTB ve kuruma özel stop-word listelerinin uygulanması</li>
+                        <li>Sık görülen iki kelimelik kalıpların birleştirilmesi (operating-system)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Sonuç</h4>
+                    <ul>
+                        <li>Daha temiz ve anlamlı metin kümeleri</li>
+                        <li>Daha yüksek isabetli konu modellemesi</li>
+                        <li>İş birimleriyle paylaşılabilir görsel raporlar</li>
+                        <li>Proaktif problem ve katalog yönetimi için girdi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/hot_topics_2.png" alt="Hot Topic Data Processing" class="screenshot">
+                <div class="screenshot-caption">Hot Topic Analytics: Veri ön işleme ve filtreleme sonuçları</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 10: Hızlı CI Tespiti -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Hızlı CI (Configuration Item) Tespiti</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>Metinden CI Çıkarma</h3>
+                <p>
+                    SMAX, talep ve değişiklik kayıtlarındaki zengin metin içeriğini analiz ederek CMDB’deki
+                    CI’ları otomatik olarak tespit eder ve ilgili CI listesine ekler.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Nasıl Çalışır?</h4>
+                    <ul>
+                        <li>Açıklama, özet ve yorum alanları taranır.</li>
+                        <li>CMDB’deki CI adlarıyla eşleşen ifadeler tespit edilir.</li>
+                        <li>Bulunan CI’lar kayıt üzerindeki “Involved CIs” alanına eklenir.</li>
+                        <li>Kullanıcı arayüzünde metin içinde vurgulama yapılabilir.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Faydalar</h4>
+                    <ul>
+                        <li>CI seçimi için manuel arama ihtiyacını azaltır.</li>
+                        <li>Impact ve root-cause analizini hızlandırır.</li>
+                        <li>Değişiklik ve olay yönetiminde doğruluğu artırır.</li>
+                        <li>CMDB kullanımını teşvik eder.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="screenshot-container">
+                <img src="screenshots/ml/CI_detection.png" alt="CI Detection Interface" class="screenshot">
+                <div class="screenshot-caption">Hızlı CI tespiti: Metinden otomatik CI tanıma ve bağlantılama</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 11: Yönetici Perspektifi -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Tenant & Suite Admin Perspektifi</h2>
+        </div>
+        <div class="content">
+            <div class="two-column">
+                <div class="card">
+                    <h4>Tenant Admin Görevleri</h4>
+                    <ul>
+                        <li>Smart Ticket yapılandırma, eğitim ve test yönetimi</li>
+                        <li>Smart Search yapılandırması ve portal entegrasyonları</li>
+                        <li>Stop-word ve eşanlamlı listelerini ihtiyaçlara göre uyarlama</li>
+                        <li>Indeks kapsamı ve performansını izleme</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Suite Admin Görevleri</h4>
+                    <ul>
+                        <li>Smart Analytics bileşenlerini ölçeklendirme (DAH, Content Group)</li>
+                        <li>Index ağırlıklarının (title/description) ayarlanması</li>
+                        <li>Synonym dosyalarının güncellenmesi</li>
+                        <li>Otomatik indeksleme parametrelerinin ve re-index süreçlerinin yönetimi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 12: Yaygın Kullanım Senaryoları -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Yaygın Kullanım Senaryoları</h2>
+        </div>
+        <div class="content">
+            <div class="three-column">
+                <div class="card">
+                    <h4>Çağrı ve Talep Yönetimi</h4>
+                    <ul>
+                        <li>Smart Ticket ile otomatik kategori/teklif atama</li>
+                        <li>Virtual Agent ile ön filtreleme ve self-servis</li>
+                        <li>Smart Search ile hızlı çözüm bulma</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Bilgi ve Problem Yönetimi</h4>
+                    <ul>
+                        <li>Hot Topic ile en çok sorulan konuların çıkarılması</li>
+                        <li>Yinelenen olaylardan problem kaydı oluşturma</li>
+                        <li>Bilgi makalesi boşluklarının tespiti ve yeni makale üretimi</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Analitik ve Sürekli İyileştirme</h4>
+                    <ul>
+                        <li>Trend analizi ve anomali tespiti</li>
+                        <li>Değişiklik ve CI etkilerinin izlenmesi</li>
+                        <li>Anket ve geri bildirimlerde duygu ve konu analizi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slayt 13: Sonuç -->
+    <div class="slide">
+        <div class="slide-header">
+            <h2>Sonuç ve Özet</h2>
+        </div>
+        <div class="content">
+            <div class="highlight-box">
+                <h3>SMAX ile AI/ML: Akıllı, Otomatik ve Öğrenen Servis Yönetimi</h3>
+                <p>
+                    SMAX’in yerleşik yapay zekâ ve makine öğrenimi özellikleri; Smart Ticketing,
+                    Smart Search, Virtual Agent, Hot Topic Analytics ve CI tespiti gibi yeteneklerle
+                    BT servis yönetimini daha hızlı, daha doğru ve daha kullanıcı odaklı hale getirir.
+                </p>
+            </div>
+            <div class="two-column">
+                <div class="card">
+                    <h4>Öne Çıkan Kazanımlar</h4>
+                    <ul>
+                        <li>Çağrı başına işlem süresinde azalma</li>
+                        <li>İlk çağrıda çözüm oranında artış</li>
+                        <li>Self-servis kullanımında yükseliş</li>
+                        <li>Destek ekibi yükünde ve maliyette düşüş</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Bir Sonraki Adım</h4>
+                    <ul>
+                        <li>Mevcut talep ve olay verilerinizle bir PoC ortamı oluşturma</li>
+                        <li>Smart Ticket ve Hot Topic modellerini birlikte tasarlama</li>
+                        <li>Virtual Agent senaryolarını kurumunuza göre özelleştirme</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 30px; font-size: 16px; color: var(--secondary-gray);">
+                Daha fazla bilgi ve demo için: <strong>Rigosis Bilgi Sistemleri</strong>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="slide-number"></div>
+<div class="brand-footer">
+    <span style="color: var(--highlight-blue); font-weight: 600;">OpenText SMAX</span>
+    <span style="color: var(--secondary-gray);">|</span>
+    <span>by <strong style="color: var(--accent-green);">Rigosis Bilgi Sistemleri</strong></span>
+</div>
+
+<div class="navigation">
+    <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Önceki</button>
+    <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Sonraki →</button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    function showSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (n + totalSlides) % totalSlides;
+        slides[currentSlide].classList.add('active');
+
+        document.querySelector('.slide-number').textContent =
+            `Slide ${currentSlide + 1} / ${totalSlides}`;
+
+        document.getElementById('prevBtn').disabled = currentSlide === 0;
+        document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+    }
+
+    function changeSlide(direction) {
+        showSlide(currentSlide + direction);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+            e.preventDefault();
+            changeSlide(1);
+        }
+    });
+
+    showSlide(0);
+</script>
+</body>
+</html>
