@@ -410,95 +410,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Image Modal/Lightbox Styles */
-        .screenshot-placeholder img {
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .screenshot-placeholder img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .image-modal.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .image-modal img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            animation: zoomIn 0.3s ease-out;
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .image-modal-close {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            color: white;
-            font-size: 48px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10001;
-            transition: color 0.2s;
-            line-height: 1;
-            user-select: none;
-        }
-
-        .image-modal-close:hover {
-            color: var(--accent-green);
-        }
-
-        .image-modal-caption {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 18px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 8px;
-            max-width: 80%;
-        }
     </style>
 </head>
 
@@ -538,142 +449,7 @@
             </div>
         </div>
 
-        <!-- Slide 3: Dijital Dönüşüm Odak Alanları -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>Dijital Dönüşüm Odak Alanları</h2>
-            </div>
-            <div class="content">
-                <div class="highlight-box">
-                    <h3>Modern BT Hizmet Yönetiminin Temel Dinamikleri</h3>
-                    <p style="font-size: 18px;">Yapay zekâ destekli hizmet yönetimi, dijital dönüşümün dört kritik odak alanında kurumların başarısını destekler.</p>
-                </div>
-
-                <div class="screenshot-placeholder" style="margin: 30px 0;">
-                    <img src="screenshots/Digital_transformation_Focus_Areas.png" alt="Dijital Dönüşüm Odak Alanları">
-                </div>
-
-                <div class="two-column">
-                    <div class="card">
-                        <h4>💼 İş Sonuçları</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Müşteri memnuniyetini artırma</li>
-                            <li>Operasyonel verimliliği iyileştirme</li>
-                            <li>Hizmet maliyetlerini optimize etme</li>
-                            <li>İş değeri sağlama hızını artırma</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>👥 Çalışan Deneyimi</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Self-servis yetenekleri geliştirme</li>
-                            <li>Destek uzmanı verimliliğini artırma</li>
-                            <li>Tekrarlayan görevleri otomatikleştirme</li>
-                            <li>Bilgiye anında erişim sağlama</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🔒 Güvenlik & Uyumluluk</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Veri gizliliği ve güvenliği koruma</li>
-                            <li>Düzenleyici gereksinimlere uyum</li>
-                            <li>Risk yönetimi ve kontrolü</li>
-                            <li>Denetlenebilirlik ve şeffaflık</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>⚡ Teknolojik Yenilik</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Yapay zekâ ve makine öğrenmesi</li>
-                            <li>Bulut platformları ve ölçeklenebilirlik</li>
-                            <li>Entegrasyon ve otomasyon</li>
-                            <li>Sürekli iyileştirme ve inovasyon</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="blue-callout" style="margin-top: 30px;">
-                    <h4>🎯 Aviator'ın Rolü</h4>
-                    <p>Aviator, bu dört odak alanını yapay zekâ gücüyle bir araya getirerek kurumların dijital dönüşüm hedeflerine ulaşmasını sağlar. İş sonuçlarını iyileştirirken, çalışan deneyimini zenginleştirir, güvenlik standartlarını korur ve teknolojik yeniliğin önünü açar.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: OPTIC Mimarisi -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>OPTIC Mimarisi</h2>
-            </div>
-            <div class="content">
-                <div class="highlight-box">
-                    <h3>OpenText OPTIC Architecture</h3>
-                    <p style="font-size: 18px;">Aviator, OpenText'in kurumsal sınıf OPTIC (Operations Platform for Transformation, Intelligence, and Cloud) altyapısı üzerinde çalışır ve tam güvenlik, ölçeklenebilirlik ve yüksek kullanılabilirlik sağlar.</p>
-                </div>
-
-                <div class="screenshot-placeholder" style="margin: 30px 0;">
-                    <img src="screenshots/OPTIC_Mimarisi.png" alt="OPTIC Mimarisi">
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: IT Operations Management Ekosistemi -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2>IT Operations Management Ekosistemi</h2>
-            </div>
-            <div class="content">
-                <div class="highlight-box">
-                    <h3>Uçtan Uca ITOM Çözümleri</h3>
-                    <p style="font-size: 18px;">SMAX Aviator, OpenText'in kapsamlı IT Operations Management portföyünün merkezinde yer alarak tüm ITOM süreçlerine yapay zekâ destekli otomasyon getirir.</p>
-                </div>
-
-                <div class="screenshot-placeholder" style="margin: 30px 0;">
-                    <img src="screenshots/IT_Operations_Managment_Ecosystem.png" alt="IT Operations Management Ekosistemi">
-                </div>
-
-                <div class="two-column">
-                    <div class="card">
-                        <h4>🎯 SMAX (Service Management Automation X)</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Olay, Problem ve Değişiklik Yönetimi</li>
-                            <li>Hizmet Kataloğu ve Talep Yönetimi</li>
-                            <li>Yapılandırma ve Varlık Yönetimi (CMDB)</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>📊 Operations Bridge</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Olay İzleme ve Yönetimi</li>
-                            <li>Çoklu kaynak olay korelasyonu</li>
-                            <li>Proaktif uyarı ve bildirimler</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🔧 OPTIC Tenant Management</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Merkezi platform yönetimi</li>
-                            <li>Kiracı yapılandırması ve izolasyonu</li>
-                            <li>Güvenlik ve uyumluluk kontrolü</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h4>🤖 Aviator - AI Hub</h4>
-                        <ul style="font-size: 15px;">
-                            <li>Tüm ITOM ürünleri için yapay zekâ motoru</li>
-                            <li>Doğal dil etkileşimi</li>
-                            <li>Akıllı otomasyon ve öneriler</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="blue-callout" style="margin-top: 30px;">
-                    <h4>🔗 Entegre Ekosistem</h4>
-                    <p>Aviator, tüm OpenText ITOM ürünleriyle sorunsuz entegrasyon sağlayarak merkezi bir yapay zekâ katmanı oluşturur. Bu sayede kullanıcılar tek bir arayüzden tüm ITOM süreçlerine erişebilir ve yapay zekâ destekli otomasyondan faydalanabilir.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: SMAX Aviator ile Tanışın -->
+        <!-- Slide 3: SMAX Aviator ile Tanışın -->
         <div class="slide">
             <div class="slide-header">
                 <h2>SMAX Aviator ile Tanışın</h2>
@@ -768,7 +544,7 @@
             </div>
         </div>
 
-        <!-- Slayt 8: Son Kullanıcılar için Aviator -->
+        <!-- Slayt 5: Son Kullanıcılar için Aviator -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Son Kullanıcılar için Aviator</h2>
@@ -828,7 +604,7 @@
         </div>
 
 
-        <!-- Slayt 9: Demo - Bilgi Soru-Cevap -->
+        <!-- Slayt 6: Demo - Bilgi Soru-Cevap -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Kaynak Referanslı Bilgi Soru-Cevap</h2>
@@ -854,7 +630,7 @@
             </div>
         </div>
 
-        <!-- Slayt 10: Demo - Niyet ve Teklif Önerileri -->
+        <!-- Slayt 7: Demo - Niyet ve Teklif Önerileri -->
         <!--
 		<div class="slide">
             <div class="slide-header">
@@ -878,7 +654,7 @@
         </div>
 -->
 
-        <!-- Slayt 11: SMAX Destek Uzmanları için Aviator -->
+        <!-- Slayt 8: SMAX Destek Uzmanları için Aviator -->
         <div class="slide">
             <div class="slide-header">
                 <h2>SMAX Destek Uzmanları için Aviator</h2>
@@ -932,7 +708,7 @@
             </div>
         </div>
 
-        <!-- Slayt 12: Demo - Akıllı Talep Özetleme -->
+        <!-- Slayt 9: Demo - Akıllı Talep Özetleme -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Akıllı Talep Özetleme</h2>
@@ -964,7 +740,7 @@
             </div>
         </div>
 
-        <!-- Slayt 13: Demo - Yapay Zekâ Destekli Çözüm Önerileri -->
+        <!-- Slayt 10: Demo - Yapay Zekâ Destekli Çözüm Önerileri -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Yapay Zekâ Destekli Çözüm Önerileri</h2>
@@ -990,7 +766,7 @@
         </div>
 
 
-        <!-- Slayt 14: Demo - Otomatik Bilgi Makalesi Oluşturma -->
+        <!-- Slayt 11: Demo - Otomatik Bilgi Makalesi Oluşturma -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Otomatik Bilgi Makalesi Oluşturma</h2>
@@ -1014,7 +790,7 @@
             </div>
         </div>
 
-        <!-- Slayt 15: Demo - Akıllı Değişiklik Risk Değerlendirmesi -->
+        <!-- Slayt 12: Demo - Akıllı Değişiklik Risk Değerlendirmesi -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Akıllı Değişiklik Risk Değerlendirmesi</h2>
@@ -1049,7 +825,7 @@
             </div>
         </div>
 
-        <!-- Slayt 16: Demo - Duygu Analizi -->
+        <!-- Slayt 13: Demo - Duygu Analizi -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Demo: Duygu Analizi</h2>
@@ -1130,7 +906,7 @@
         </div>
 
 
-        <!-- Slayt 18: Destek Uzmanı Katma Değer Özeti -->
+        <!-- Slayt 15: Destek Uzmanı Katma Değer Özeti -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Destek Uzmanı Katma Değer Özeti</h2>
@@ -1172,7 +948,7 @@
         </div>
 
 
-        <!-- Slayt 19: Arka Planda Akıllı Otomasyon -->
+        <!-- Slayt 16: Arka Planda Akıllı Otomasyon -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Arka Planda Akıllı Otomasyon</h2>
@@ -1307,7 +1083,7 @@
 
 
 
-        <!-- Slayt 20: Tam Yapay Zekâ Yetkinlikleri Kataloğu -->
+        <!-- Slayt 17: Tam Yapay Zekâ Yetkinlikleri Kataloğu -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Tam Yapay Zekâ Yetkinlikleri Kataloğu</h2>
@@ -1378,7 +1154,7 @@
             </div>
         </div>
 
-        <!-- Slayt 21: Uçtan Uca Akıllı İş Akışı -->
+        <!-- Slayt 18: Uçtan Uca Akıllı İş Akışı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Uçtan Uca Demo: Akıllı İş Akışı</h2>
@@ -1475,7 +1251,7 @@
             </div>
         </div>
 
-        <!-- Slayt 22: Etki ve Sonuçlar 
+        <!-- Slayt 19: Etki ve Sonuçlar 
         <div class="slide">
             <div class="slide-header">
                 <h2>Etki ve Sonuçlar</h2>
@@ -1523,7 +1299,7 @@
         </div>
 		-->
 
-        <!-- Slayt 23: SMAX 25.4 ile Gelen Yenilikler -->
+        <!-- Slayt 20: SMAX 25.4 ile Gelen Yenilikler -->
         <div class="slide">
             <div class="slide-header">
                 <h2>SMAX 25.4 ile Gelen Yenilikler</h2>
@@ -1659,7 +1435,7 @@
         </div>
 
 
-        <!-- Slayt 24: Temel Çıkarımlar -->
+        <!-- Slayt 21: Temel Çıkarımlar -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Temel Çıkarımlar</h2>
@@ -1697,7 +1473,7 @@
             </div>
         </div>
 
-        <!-- Slayt 25: Sonraki Adımlar -->
+        <!-- Slayt 22: Sonraki Adımlar -->
         <div class="slide title-slide">
             <h2 style="color: white; border: none; font-size: 48px;">Sonraki Adımlar</h2>
             <div style="background: white; padding: 50px; border-radius: 12px; margin: 40px auto; max-width: 850px;">
@@ -1789,53 +1565,6 @@
         const urlText = document.getElementById('url-final-tr');
         if (qrImg) qrImg.src = qrApiUrl;
         if (urlText) urlText.textContent = currentUrl;
-
-        // Image Modal/Lightbox Functionality
-        (function() {
-            // Create modal element
-            const modal = document.createElement('div');
-            modal.className = 'image-modal';
-            modal.innerHTML = `
-                <span class="image-modal-close">&times;</span>
-                <img src="" alt="Full size image">
-                <div class="image-modal-caption"></div>
-            `;
-            document.body.appendChild(modal);
-
-            const modalImg = modal.querySelector('img');
-            const modalCaption = modal.querySelector('.image-modal-caption');
-            const closeBtn = modal.querySelector('.image-modal-close');
-
-            // Add click handlers to all screenshot images
-            document.querySelectorAll('.screenshot-placeholder img').forEach(img => {
-                img.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    modal.classList.add('active');
-                    modalImg.src = this.src;
-                    modalCaption.textContent = this.alt || '';
-                    document.body.style.overflow = 'hidden';
-                });
-            });
-
-            // Close modal on click outside image
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal || e.target === closeBtn) {
-                    closeModal();
-                }
-            });
-
-            // Close modal on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    closeModal();
-                }
-            });
-
-            function closeModal() {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        })();
     </script>
 </body>
 
