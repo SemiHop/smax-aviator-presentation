@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
 <html lang="tr">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ResetHub – ResetHub Şifre Sıfırlama Platformu</title>
-<style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ResetHub – ResetHub Şifre Sıfırlama Platformu</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -52,8 +53,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .slide-header {
@@ -62,13 +70,40 @@
             margin-bottom: 25px;
         }
 
-        h1 { font-size: 48px; color: var(--primary-text); margin-bottom: 10px; }
-        h2 { font-size: 32px; color: var(--accent-green); margin-bottom: 20px; }
-        h3 { font-size: 24px; color: var(--primary-text); margin-bottom: 15px; margin-top: 15px; }
-        h4 { font-size: 18px; color: var(--accent-green); margin-bottom: 10px; }
+        h1 {
+            font-size: 48px;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+        }
 
-        .subtitle { font-size: 24px; color: var(--secondary-gray); }
-        .content { flex: 1; overflow-y: auto; }
+        h2 {
+            font-size: 32px;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: var(--primary-text);
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        h4 {
+            font-size: 18px;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: var(--secondary-gray);
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
 
         .two-column {
             display: grid;
@@ -99,7 +134,8 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
 
-        .card p, .card li {
+        .card p,
+        .card li {
             color: var(--primary-text);
             line-height: 1.5;
             font-size: 14px;
@@ -113,8 +149,18 @@
             margin: 20px 0;
         }
 
-        .highlight-box h3, .highlight-box h4 { color: var(--white); margin-top: 0; }
-        .highlight-box p, .highlight-box ul, .highlight-box ol, .highlight-box li { color: var(--white); }
+        .highlight-box h3,
+        .highlight-box h4 {
+            color: var(--white);
+            margin-top: 0;
+        }
+
+        .highlight-box p,
+        .highlight-box ul,
+        .highlight-box ol,
+        .highlight-box li {
+            color: var(--white);
+        }
 
         ul {
             margin-left: 0;
@@ -205,8 +251,16 @@
             border-radius: 12px;
         }
 
-        .metric-box .number { font-size: 42px; font-weight: bold; display: block; }
-        .metric-box .label { font-size: 14px; margin-top: 8px; }
+        .metric-box .number {
+            font-size: 42px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .metric-box .label {
+            font-size: 14px;
+            margin-top: 8px;
+        }
 
         .challenge-list {
             background: #fff4e6;
@@ -215,8 +269,14 @@
             border-radius: 8px;
         }
 
-        .challenge-list h3 { color: #e65100; margin-top: 0; }
-        .challenge-list ul li:before { background-color: #ff9800; }
+        .challenge-list h3 {
+            color: #e65100;
+            margin-top: 0;
+        }
+
+        .challenge-list ul li:before {
+            background-color: #ff9800;
+        }
 
         .blue-callout {
             background: #e6f2f8;
@@ -226,7 +286,10 @@
             margin: 20px 0;
         }
 
-        .blue-callout h4 { color: var(--highlight-blue); margin-top: 0; }
+        .blue-callout h4 {
+            color: var(--highlight-blue);
+            margin-top: 0;
+        }
 
         .navigation {
             position: fixed;
@@ -249,8 +312,16 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-button:hover { background: #2fa03f; transform: translateY(-2px); }
-        .nav-button:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; }
+        .nav-button:hover {
+            background: #2fa03f;
+            transform: translateY(-2px);
+        }
+
+        .nav-button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
 
         .slide-number {
             position: fixed;
@@ -292,10 +363,28 @@
             text-align: center;
         }
 
-        .title-slide h1 { color: white; font-size: 64px; margin-bottom: 20px; }
-        .title-slide h2, .title-slide h3 { color: white; border: none; }
-        .title-slide .subtitle { color: rgba(255, 255, 255, 0.9); font-size: 32px; margin-bottom: 50px; }
-        .title-slide .meta { color: rgba(255, 255, 255, 0.8); font-size: 24px; }
+        .title-slide h1 {
+            color: white;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .title-slide h2,
+        .title-slide h3 {
+            color: white;
+            border: none;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 32px;
+            margin-bottom: 50px;
+        }
+
+        .title-slide .meta {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+        }
 
         .image-modal {
             display: none;
@@ -309,9 +398,21 @@
             animation: fadeIn 0.3s ease-out;
         }
 
-        .image-modal.active { display: flex; justify-content: center; align-items: center; }
+        .image-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
 
         .image-modal img {
             max-width: 95%;
@@ -331,124 +432,136 @@
             z-index: 10001;
         }
 
-        .image-modal-close:hover { color: var(--accent-green); }
+        .image-modal-close:hover {
+            color: var(--accent-green);
+        }
 
         @media screen and (max-width: 768px) {
-            .two-column, .three-column, .four-column { grid-template-columns: 1fr; }
+
+            .two-column,
+            .three-column,
+            .four-column {
+                grid-template-columns: 1fr;
+            }
         }
-    
-.deploy-logos {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 30px;
-}
-.deploy-logos img {
-    height: 48px;
-    opacity: 0.9;
-    transition: opacity 0.2s;
-}
-.deploy-logos img:hover {
-    opacity: 1;
-}
-</style>
+
+        .deploy-logos {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .deploy-logos img {
+            height: 48px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .deploy-logos img:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
+
 <body>
-<div class="presentation">
-<!-- Slayt 1: Başlık -->
-<div class="slide active title-slide">
-<h1>ResetHub – Şifre Sıfırlama Platformu</h1>
-<div class="subtitle">Kurumsal Şifre Yönetim Platformu</div>
-<div class="meta">
-<p>Güvenli Active Directory Entegrasyonu | Çoklu Dil Desteği</p>
-<p style="margin-top: 15px; font-size: 20px;">Geliştiren: <strong>Rigosis Bilgi Sistemleri</strong></p>
-</div>
-</div>
-<!-- Slayt 2: Sorun ve Çözüm -->
-<div class="slide">
-<div class="slide-header">
-<h2>Sorun ve Çözüm</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div class="challenge-list">
-<h3>Şifre Yönetimindeki Sorunlar</h3>
-<ul>
-<li><strong>Yardım Masası Yükü:</strong> BT taleplerinin %20-50'si</li>
-<li><strong>Verimlilik Kaybı:</strong> Sıfırlama için bekleme</li>
-<li><strong>Güvenlik Riskleri:</strong> Zayıf telefon doğrulama</li>
-<li><strong>Mesai Dışı Sorunlar:</strong> 7/24 destek yok</li>
-<li><strong>Uyumluluk Eksiklikleri:</strong> Denetim izleri eksik</li>
-</ul>
-</div>
-<div class="highlight-box">
-<h3>ResetHub – ResetHub Şifre Sıfırlama Platformu</h3>
-<p style="font-size: 16px; margin-bottom: 15px;">Tam AD entegrasyonu ile kurumsal düzeyde şifre yönetimi</p>
-<ul style="font-size: 14px;">
-<li><strong>Self-Service:</strong> Kullanıcılar 7/24 şifre sıfırlar</li>
-<li><strong>Agent Portalı:</strong> Denetim izli yardım masası</li>
-<li><strong>Yönetici Portalı:</strong> Tam sistem yapılandırması</li>
-<li><strong>Çoklu Dil:</strong> Türkçe/İngilizce desteği</li>
-</ul>
-</div>
-</div>
-<div class="four-column" style="margin-top: 25px;">
-<div class="metric-box">
-<span class="number">%70</span>
-<span class="label">Daha Az BT Talebi</span>
-</div>
-<div class="metric-box">
-<span class="number">&lt;5 dk</span>
-<span class="label">Sıfırlama Süresi</span>
-</div>
-<div class="metric-box">
-<span class="number">7/24</span>
-<span class="label">Erişilebilirlik</span>
-</div>
-<div class="metric-box">
-<span class="number">%100</span>
-<span class="label">Denetim Kapsamı</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 3: Mimari -->
-<div class="slide">
-<div class="slide-header">
-<h2>Mimari ve Şifre Sıfırlama Yöntemleri</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div>
-<h4>Hibrit LDAP + Yerel AD RSAT</h4>
-<div class="card" style="margin-top: 10px;">
-<h4>LDAP - Okuma İşlemleri</h4>
-<ul style="font-size: 13px;">
-<li>Kullanıcı arama ve keşif</li>
-<li>Agent/Yönetici kimlik doğrulama</li>
-<li>Dizin öznitelik sorguları</li>
-</ul>
-</div>
-<div class="card" style="margin-top: 10px;">
-<h4>Yerel AD RSAT - Yazma (Birincil)</h4>
-<ul style="font-size: 13px;">
-<li>AD PowerShell ile şifre sıfırlama</li>
-<li>AD Web Servisleri (port 9389)</li>
-<li>Yerel Windows entegrasyonu</li>
-</ul>
-</div>
-<div class="card" style="margin-top: 10px;">
-<h4>WinRM - Yazma (Yedek)</h4>
-<ul style="font-size: 13px;">
-<li>Uzak PowerShell oturumları</li>
-<li>Tüm işletim sistemlerinde çalışır</li>
-<li>SecureString koruması</li>
-</ul>
-</div>
-</div>
-<div>
-<div class="card" style="background: #1a1a2e; color: #eee; font-family: 'Consolas', monospace; font-size: 12px; padding: 15px; border-left: 5px solid var(--accent-green);">
-<pre style="margin: 0; line-height: 1.6;">
+    <div class="presentation">
+        <!-- Slayt 1: Başlık -->
+        <div class="slide active title-slide">
+            <h1>ResetHub – Şifre Sıfırlama Platformu</h1>
+            <div class="subtitle">Kurumsal Şifre Yönetim Platformu</div>
+            <div class="meta">
+                <p>Güvenli Active Directory Entegrasyonu | Çoklu Dil Desteği</p>
+                <p style="margin-top: 15px; font-size: 20px;">Geliştiren: <strong>Rigosis Bilgi Sistemleri</strong></p>
+            </div>
+        </div>
+        <!-- Slayt 2: Sorun ve Çözüm -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Sorun ve Çözüm</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div class="challenge-list">
+                        <h3>Şifre Yönetimindeki Sorunlar</h3>
+                        <ul>
+                            <li><strong>Yardım Masası Yükü:</strong> BT taleplerinin %20-50'si</li>
+                            <li><strong>Verimlilik Kaybı:</strong> Sıfırlama için bekleme</li>
+                            <li><strong>Güvenlik Riskleri:</strong> Zayıf telefon doğrulama</li>
+                            <li><strong>Mesai Dışı Sorunlar:</strong> 7/24 destek yok</li>
+                            <li><strong>Uyumluluk Eksiklikleri:</strong> Denetim izleri eksik</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <h3>ResetHub – ResetHub Şifre Sıfırlama Platformu</h3>
+                        <p style="font-size: 16px; margin-bottom: 15px;">Tam AD entegrasyonu ile kurumsal düzeyde şifre
+                            yönetimi</p>
+                        <ul style="font-size: 14px;">
+                            <li><strong>Self-Service:</strong> Kullanıcılar 7/24 şifre sıfırlar</li>
+                            <li><strong>Agent Portalı:</strong> Denetim izli yardım masası</li>
+                            <li><strong>Yönetici Portalı:</strong> Tam sistem yapılandırması</li>
+                            <li><strong>Çoklu Dil:</strong> Türkçe/İngilizce desteği</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="four-column" style="margin-top: 25px;">
+                    <div class="metric-box">
+                        <span class="number">%70</span>
+                        <span class="label">Daha Az BT Talebi</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">&lt;5 dk</span>
+                        <span class="label">Sıfırlama Süresi</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">7/24</span>
+                        <span class="label">Erişilebilirlik</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="number">%100</span>
+                        <span class="label">Denetim Kapsamı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 3: Mimari -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Mimari ve Şifre Sıfırlama Yöntemleri</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div>
+                        <h4>Hibrit LDAP + Yerel AD RSAT</h4>
+                        <div class="card" style="margin-top: 10px;">
+                            <h4>LDAP - Okuma İşlemleri</h4>
+                            <ul style="font-size: 13px;">
+                                <li>Kullanıcı arama ve keşif</li>
+                                <li>Agent/Yönetici kimlik doğrulama</li>
+                                <li>Dizin öznitelik sorguları</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="margin-top: 10px;">
+                            <h4>Yerel AD RSAT - Yazma (Birincil)</h4>
+                            <ul style="font-size: 13px;">
+                                <li>AD PowerShell ile şifre sıfırlama</li>
+                                <li>AD Web Servisleri (port 9389)</li>
+                                <li>Yerel Windows entegrasyonu</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="margin-top: 10px;">
+                            <h4>WinRM - Yazma (Yedek)</h4>
+                            <ul style="font-size: 13px;">
+                                <li>Uzak PowerShell oturumları</li>
+                                <li>Tüm işletim sistemlerinde çalışır</li>
+                                <li>SecureString koruması</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="card"
+                            style="background: #1a1a2e; color: #eee; font-family: 'Consolas', monospace; font-size: 12px; padding: 15px; border-left: 5px solid var(--accent-green);">
+                            <pre style="margin: 0; line-height: 1.6;">
 ┌─────────────────┐      ┌─────────────────┐
 │   Kullanıcı     │      │     Agent       │
 │   (Browser)     │      │   (Browser)     │
@@ -482,466 +595,559 @@
          │   (DC Server)   │
          └─────────────────┘
 </pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 4: Self-Service Portalı -->
-<div class="slide">
-<div class="slide-header">
-<h2>Self-Service Portalı</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Self-Service Portalı" src="screenshots/resethub/public_01_ana_sayfa.png"/>
-</div>
-</div>
-<div>
-<h4>Şifre Sıfırlama Akışı</h4>
-<div class="flow-step">
-<div class="flow-number">1</div>
-<div>Kullanıcı kullanıcı adını girer</div>
-</div>
-<div class="flow-step">
-<div class="flow-number">2</div>
-<div>Sistem maskelenmiş iletişim bilgilerini gösterir</div>
-</div>
-<div class="flow-step">
-<div class="flow-number">3</div>
-<div>SMS veya E-posta doğrulama seçilir</div>
-</div>
-<div class="flow-step">
-<div class="flow-number">4</div>
-<div>6 haneli doğrulama kodu girilir</div>
-</div>
-<div class="flow-step">
-<div class="flow-number">5</div>
-<div>Doğrulama ile yeni şifre belirlenir</div>
-</div>
-<div class="flow-step">
-<div class="flow-number">6</div>
-<div>Şifre sıfırlanır - onay gösterilir</div>
-</div>
-</div>
-</div>
-<div class="two-column" style="margin-top: 15px;">
-<div class="card">
-<h4>Güvenlik</h4>
-<ul style="font-size: 13px;">
-<li>Uç noktalarda hız sınırlama</li>
-<li>JWT tokenları (15 dk süre sonu)</li>
-<li>Tam denetim kaydı</li>
-</ul>
-</div>
-<div class="card">
-<h4>Kullanıcı Deneyimi</h4>
-<ul style="font-size: 13px;">
-<li>Çoklu dil (TR/EN)</li>
-<li>Mobil uyumlu</li>
-<li>Gerçek zamanlı doğrulama</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 5: Agent Portalı -->
-<div class="slide">
-<div class="slide-header">
-<h2>Agent Portalı</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Agent Girişi" src="screenshots/resethub/agent_01_giris_sayfasi.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Agent Girişi</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Agent Kontrol Paneli" src="screenshots/resethub/agent_03_kontrol_paneli.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Agent Kontrol Paneli</p>
-</div>
-</div>
-<div class="highlight-box" style="margin-top: 15px;">
-  <h4>Temel Avantaj: Active Directory Entegrasyonu</h4>
-  <p style="font-size: 14px; margin-bottom: 10px;">Agent yetkilerinin doğrudan Active Directory’den devralınması sayesinde:</p>
-  <ul style="font-size: 13px; margin-left: 10px;">
-    <li><strong>Hızlı Entegrasyon:</strong> Kurumsal ortamlara sorunsuz uyum</li>
-    <li><strong>Ek Yetkilendirme İhtiyacı Yok:</strong> AD grupları üzerinden merkezi erişim kontrolü</li>
-    <li><strong>Güvenli Mimari:</strong> Mevcut AD güvenlik politikalarının otomatik uygulanması</li>
-    <li><strong>Azaltılmış Operasyonel Yük:</strong> Ayrı kullanıcı ve rol yönetimine gerek kalmaz</li>
-  </ul>
-</div>
-<div class="two-column" style="margin-top: 15px;">
-<div class="card">
-<h4>Agent Yetenekleri</h4>
-<ul style="font-size: 13px;">
-<li><strong>Arama:</strong> Kullanıcı adı, e-posta, isim ile bulma</li>
-<li><strong>Sıfırlama:</strong> Güvenli şifre oluşturma</li>
-<li><strong>Teslim:</strong> SMS veya E-posta ile gönderme</li>
-<li><strong>Geçmiş:</strong> Tüm işlemleri takip etme</li>
-</ul>
-</div>
-<div class="card">
-<h4>Güvenlik Kontrolleri</h4>
-<ul style="font-size: 13px;">
-<li><strong>LDAP Kimlik Doğrulama:</strong> AGENT grubunda olmalı</li>
-<li><strong>Rol Tabanlı:</strong> İzin kontrolü</li>
-<li><strong>Denetim İzi:</strong> Agent ID kaydedilir</li>
-<li><strong>Hız Sınırlama:</strong> Kötüye kullanım önleme</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 6: Agent Portalı Akışı -->
-<div class="slide">
-<div class="slide-header">
-<h2>Agent Portalı - Şifre Sıfırlama Akışı</h2>
-</div>
-<div class="content">
-<div class="three-column">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Kullanıcı Arama" src="screenshots/resethub/agent_05_kullanici_arama.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">1. Kullanıcı Ara</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Teslimat Yöntemi" src="screenshots/resethub/agent_06_teslim_yontemi.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">2. Teslimat Seç</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Sıfırlamayı Başlat" src="screenshots/resethub/agent_07_sifirlama_baslat.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">3. Sıfırlamayı Başlat</p>
-</div>
-</div>
-<div class="two-column" style="margin-top: 20px;">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Onay" src="screenshots/resethub/agent_08_onay.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">4. Sıfırlamayı Onayla</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Başarılı" src="screenshots/resethub/agent_09_basarili.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">5. Başarılı</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 7: Yönetici Portalı -->
-<div class="slide">
-<div class="slide-header">
-<h2>Yönetici Portalı</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Yönetici Girişi" src="screenshots/resethub/admin_login.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Yönetici Girişi</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Yönetici Kontrol Paneli" src="screenshots/resethub/admin_dashboard.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Yönetici Kontrol Paneli</p>
-</div>
-</div>
-<div class="three-column" style="margin-top: 15px;">
-<div class="card">
-<h4>LDAP Yapılandırması</h4>
-<ul style="font-size: 12px;">
-<li>Çoklu AD domain'leri</li>
-<li>Servis hesapları</li>
-<li>Bağlantı testi</li>
-<li>SSL/TLS yapılandırması</li>
-</ul>
-</div>
-<div class="card">
-<h4>Rol Yönetimi</h4>
-<ul style="font-size: 12px;">
-<li>AGENT izinleri</li>
-<li>SYSTEMADMIN erişimi</li>
-<li>AD grup eşleme</li>
-<li>Domain bazlı roller</li>
-</ul>
-</div>
-<div class="card">
-<h4>Sistem Ayarları</h4>
-<ul style="font-size: 12px;">
-<li>Şifre politikaları</li>
-<li>Hız sınırlama</li>
-<li>Denetim saklama</li>
-<li>SMS/E-posta yapılandırması</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 8: Güvenlik ve Şifre Teslimi -->
-<div class="slide">
-<div class="slide-header">
-<h2>Güvenlik ve Şifre Teslimi</h2>
-</div>
-<div class="content">
-<div class="two-column">
-<div>
-<div class="card" style="margin-bottom: 15px;">
-<h4>Kimlik Doğrulama</h4>
-<ul style="font-size: 13px;">
-<li><strong>JWT:</strong> 15 dakika süre sonu</li>
-<li><strong>LDAP:</strong> AD kimlik doğrulama</li>
-<li><strong>MFA:</strong> SMS/E-posta kodları</li>
-<li><strong>RBAC:</strong> Rol tabanlı erişim</li>
-</ul>
-</div>
-<div class="card" style="margin-bottom: 15px;">
-<h4>Veri Koruma</h4>
-<ul style="font-size: 13px;">
-<li><strong>Fernet:</strong> Durağan şifreleme</li>
-<li><strong>bcrypt:</strong> Şifre karma</li>
-<li><strong>HTTPS:</strong> Zorunlu</li>
-<li><strong>Hız Sınırlama:</strong> Redis destekli</li>
-</ul>
-</div>
-<div class="card">
-<h4>Denetim ve Uyumluluk</h4>
-<ul style="font-size: 13px;">
-<li>Tüm işlemler kaydedilir</li>
-<li>Kullanıcı ilişkilendirme</li>
-<li>Dışa aktarma yeteneği</li>
-<li>OWASP Top 10 koruması</li>
-</ul>
-</div>
-</div>
-<div>
-<div class="two-column">
-<div>
-<div class="screenshot-placeholder">
-<img alt="Şifre E-postası" src="screenshots/resethub/password_email.png"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">HTML E-posta Bildirimi</p>
-</div>
-<div>
-<div class="screenshot-placeholder">
-<img alt="Şifre SMS" src="screenshots/resethub/password_sms.jpeg"/>
-</div>
-<p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">SMS Bildirimi</p>
-</div>
-</div>
-<div class="two-column" style="margin-top: 15px;">
-<div class="card">
-<h4>E-posta</h4>
-<ul style="font-size: 12px;">
-<li>HTML şablonları</li>
-<li>Çoklu dil</li>
-<li>SMTP/SendGrid</li>
-</ul>
-</div>
-<div class="card">
-<h4>SMS</h4>
-<ul style="font-size: 12px;">
-<li>NAC Gateway</li>
-<li>Sağlayıcı yedeklemesi</li>
-<li>Teslimat takibi</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Slayt 9: Dağıtım Seçenekleri -->
-<div class="slide">
-<div class="slide-header">
-<h2>Dağıtım Seçenekleri</h2>
-</div>
-<div class="content">
-<div class="deploy-logos">
-<img src="screenshots/resethub/icons/icons8-azure-48.png" alt="Azure"/>
-<img src="screenshots/resethub/icons/icons8-docker-48.png" alt="Docker"/>
-<img src="screenshots/resethub/icons/icons8-kubernetes-48.png" alt="Kubernetes"/>
-<img src="screenshots/resethub/icons/icons8-windows-48.png" alt="Windows"/>
-<img src="screenshots/resethub/icons/icons8-postgresql-48.png" alt="PostgreSQL"/>
-<img src="screenshots/resethub/icons/icons8-active-directory-48.png" alt="Active Directory"/>
-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 4: Self-Service Portalı -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Self-Service Portalı</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Self-Service Portalı" src="screenshots/resethub/public_01_ana_sayfa.png" />
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Şifre Sıfırlama Akışı</h4>
+                        <div class="flow-step">
+                            <div class="flow-number">1</div>
+                            <div>Kullanıcı kullanıcı adını girer</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">2</div>
+                            <div>Sistem maskelenmiş iletişim bilgilerini gösterir</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">3</div>
+                            <div>SMS veya E-posta doğrulama seçilir</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">4</div>
+                            <div>6 haneli doğrulama kodu girilir</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">5</div>
+                            <div>Doğrulama ile yeni şifre belirlenir</div>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-number">6</div>
+                            <div>Şifre sıfırlanır - onay gösterilir</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="two-column" style="margin-top: 15px;">
+                    <div class="card">
+                        <h4>Güvenlik</h4>
+                        <ul style="font-size: 13px;">
+                            <li>Uç noktalarda hız sınırlama</li>
+                            <li>JWT tokenları (15 dk süre sonu)</li>
+                            <li>Tam denetim kaydı</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Kullanıcı Deneyimi</h4>
+                        <ul style="font-size: 13px;">
+                            <li>Çoklu dil (TR/EN)</li>
+                            <li>Mobil uyumlu</li>
+                            <li>Gerçek zamanlı doğrulama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 5: Agent Portalı -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Agent Portalı</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Agent Girişi" src="screenshots/resethub/agent_01_giris_sayfasi.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Agent Girişi</p>
+                    </div>
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Agent Kontrol Paneli" src="screenshots/resethub/agent_03_kontrol_paneli.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Agent Kontrol
+                            Paneli</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 15px;">
+                    <h4>Temel Avantaj: Active Directory Entegrasyonu</h4>
+                    <p style="font-size: 14px; margin-bottom: 10px;">Agent yetkilerinin doğrudan Active Directory’den
+                        devralınması sayesinde:</p>
+                    <ul style="font-size: 13px; margin-left: 10px;">
+                        <li><strong>Hızlı Entegrasyon:</strong> Kurumsal ortamlara sorunsuz uyum</li>
+                        <li><strong>Ek Yetkilendirme İhtiyacı Yok:</strong> AD grupları üzerinden merkezi erişim
+                            kontrolü</li>
+                        <li><strong>Güvenli Mimari:</strong> Mevcut AD güvenlik politikalarının otomatik uygulanması
+                        </li>
+                        <li><strong>Azaltılmış Operasyonel Yük:</strong> Ayrı kullanıcı ve rol yönetimine gerek kalmaz
+                        </li>
+                    </ul>
+                </div>
+                <div class="two-column" style="margin-top: 15px;">
+                    <div class="card">
+                        <h4>Agent Yetenekleri</h4>
+                        <ul style="font-size: 13px;">
+                            <li><strong>Arama:</strong> Kullanıcı adı, e-posta, isim ile bulma</li>
+                            <li><strong>Sıfırlama:</strong> Güvenli şifre oluşturma</li>
+                            <li><strong>Teslim:</strong> SMS veya E-posta ile gönderme</li>
+                            <li><strong>Geçmiş:</strong> Tüm işlemleri takip etme</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Güvenlik Kontrolleri</h4>
+                        <ul style="font-size: 13px;">
+                            <li><strong>LDAP Kimlik Doğrulama:</strong> AGENT grubunda olmalı</li>
+                            <li><strong>Rol Tabanlı:</strong> İzin kontrolü</li>
+                            <li><strong>Denetim İzi:</strong> Agent ID kaydedilir</li>
+                            <li><strong>Hız Sınırlama:</strong> Kötüye kullanım önleme</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 6: Agent Portalı Akışı -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Agent Portalı - Şifre Sıfırlama Akışı</h2>
+            </div>
+            <div class="content">
+                <div class="three-column">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Kullanıcı Arama" src="screenshots/resethub/agent_05_kullanici_arama.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">1. Kullanıcı Ara
+                        </p>
+                    </div>
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Teslimat Yöntemi" src="screenshots/resethub/agent_06_teslim_yontemi.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">2. Teslimat Seç
+                        </p>
+                    </div>
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Sıfırlamayı Başlat" src="screenshots/resethub/agent_07_sifirlama_baslat.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">3. Sıfırlamayı
+                            Başlat</p>
+                    </div>
+                </div>
+                <div class="two-column" style="margin-top: 20px;">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Onay" src="screenshots/resethub/agent_08_onay.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">4. Sıfırlamayı
+                            Onayla</p>
+                    </div>
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Başarılı" src="screenshots/resethub/agent_09_basarili.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">5. Başarılı</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 7: Yönetici Portalı -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Yönetici Portalı</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Yönetici Girişi" src="screenshots/resethub/admin_login.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Yönetici Girişi
+                        </p>
+                    </div>
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Yönetici Kontrol Paneli" src="screenshots/resethub/admin_dashboard.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">Yönetici Kontrol
+                            Paneli</p>
+                    </div>
+                </div>
+                <div class="three-column" style="margin-top: 15px;">
+                    <div class="card">
+                        <h4>LDAP Yapılandırması</h4>
+                        <ul style="font-size: 12px;">
+                            <li>Çoklu AD domain'leri</li>
+                            <li>Servis hesapları</li>
+                            <li>Bağlantı testi</li>
+                            <li>SSL/TLS yapılandırması</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Rol Yönetimi</h4>
+                        <ul style="font-size: 12px;">
+                            <li>AGENT izinleri</li>
+                            <li>SYSTEMADMIN erişimi</li>
+                            <li>AD grup eşleme</li>
+                            <li>Domain bazlı roller</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>Sistem Ayarları</h4>
+                        <ul style="font-size: 12px;">
+                            <li>Şifre politikaları</li>
+                            <li>Hız sınırlama</li>
+                            <li>Denetim saklama</li>
+                            <li>SMS/E-posta yapılandırması</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 8: Denetim Kayıtları (Audit Logs) -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Denetim Kayıtları</h2>
+            </div>
+            <div class="content">
 
-<div class="three-column">
-<div class="card" style="border-top: 5px solid var(--accent-green); border-left: none;">
-<h4>On-Premise (Yerinde) - Birincil</h4>
-<ul style="font-size: 13px;">
-<li>Windows Server + RSAT</li>
-<li>PostgreSQL</li>
-<li>Redis (isteğe bağlı)</li>
-<li>Waitress/Gunicorn</li>
-<li>IIS/nginx proxy</li>
-</ul>
-</div>
-<div class="card" style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
-<h4>Bulut (Azure) - Opsiyonel</h4>
-<ul style="font-size: 13px;">
-<li>Azure App Service</li>
-<li>Azure PostgreSQL</li>
-<li>Azure Redis Cache</li>
-<li>ARM şablonları</li>
-<li>CI/CD pipeline</li>
-</ul>
-</div>
-<div class="card" style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
-<h4>Container (Docker) - Opsiyonel</h4>
-<ul style="font-size: 13px;">
-<li>Çok aşamalı derleme</li>
-<li>Docker Compose</li>
-<li>Kubernetes manifest'leri</li>
-<li>Sağlık kontrolleri</li>
-<li>Yatay ölçekleme</li>
-</ul>
-</div>
-</div>
-<div class="highlight-box" style="margin-top: 20px;">
-<h4>Minimum Gereksinimler</h4>
-<div class="three-column" style="margin-top: 10px;">
-<div style="text-align: center;">
-<img src="screenshots/resethub/icons/icons8-postgresql-48.png" alt="PostgreSQL" style="width: 40px; height: 40px; margin-bottom: 8px;"/>
-<p style="margin: 0; font-weight: bold;">PostgreSQL 12+</p>
-<p style="font-size: 12px; margin: 5px 0 0 0;">Birincil Veritabanı</p>
-</div>
-<div style="text-align: center;">
-<img src="screenshots/resethub/icons/icons8-active-directory-48.png" alt="Active Directory" style="width: 40px; height: 40px; margin-bottom: 8px;"/>
-<p style="margin: 0; font-weight: bold;">Active Directory</p>
-<p style="font-size: 12px; margin: 5px 0 0 0;">LDAP + AD Web Servisleri</p>
-</div>
-<div style="text-align: center;">
-<img src="screenshots/resethub/icons/icons8-windows-48.png" alt="Windows" style="width: 40px; height: 40px; margin-bottom: 8px;"/>
-<p style="margin: 0; font-weight: bold;">Windows + RSAT</p>
-<p style="font-size: 12px; margin: 5px 0 0 0;">veya Linux + WinRM</p>
-</div>
-</div>
-</div>
-<div class="blue-callout" style="margin-top: 20px;">
-<h4>Çoklu Dil Desteği</h4>
-<p style="margin: 0; font-size: 14px;">Flask-Babel ile Türkçe ve İngilizce | UI çevirileri, hata mesajları, e-posta/SMS şablonları | Tarayıcı algılama + kullanıcı tercihi | Dinamik dil değiştirme</p>
-</div>
-</div>
-</div>
-<!-- Slayt 10: Sonraki Adımlar -->
-<div class="slide title-slide">
-  <h2 style="color: white; border: none; font-size: 42px;">Sonraki Adımlar</h2>
+                <div class="two-column">
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Denetim Panosu" src="screenshots/resethub/admin_audit_logs_dashboard.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">
+                            Denetim Panosu
+                        </p>
+                    </div>
 
-  <div style="
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="Kayıt Tarayıcısı" src="screenshots/resethub/admin_audit_logs_browser.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">
+                            Kayıt Tarayıcısı
+                        </p>
+                    </div>
+                </div>
+
+                <div class="two-column" style="margin-top: 15px;">
+                    <div class="card">
+                        <h4>Denetim Panosu</h4>
+                        <ul style="font-size: 13px;">
+                            <li><strong>İstatistik Kartları:</strong> Toplam, Başarılı, Başarısız, Ortalama Süre</li>
+                            <li><strong>Grafikler:</strong> Zamana göre olaylar, işlem dağılımı</li>
+                            <li><strong>Durum Dağılımı:</strong> Başarı/Başarısızlık oranları</li>
+                            <li><strong>Hızlı Filtre:</strong> 1/7/30/90 günlük görünüm seçenekleri</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>Kayıt Tarayıcısı</h4>
+                        <ul style="font-size: 13px;">
+                            <li><strong>Gelişmiş Filtre:</strong> Tarih, işlem, durum, kaynak, IP</li>
+                            <li><strong>JSON Arama:</strong> Detay alanlarında metin arama</li>
+                            <li><strong>Modal Görünüm:</strong> Tam JSON detay görüntüleme</li>
+                            <li><strong>Sayfalama:</strong> Büyük veri setlerini verimli görüntüleme</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 15px;">
+                    <h4>Uyumluluk ve Raporlama</h4>
+
+                    <div class="three-column" style="margin-top: 10px;">
+                        <div style="text-align: center;">
+                            <p style="font-size: 28px; font-weight: bold; margin: 0;">%100</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">İşlem Kaydı Kapsamı</p>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <p style="font-size: 28px; font-weight: bold; margin: 0;">JSONB</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">Detaylı Veri Depolama</p>
+                        </div>
+
+                        <div style="text-align: center%;">
+                            <p style="font-size: 28px; font-weight: bold; margin: 0;">REST</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">API Üzerinden Erişim</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Slayt 9: Güvenlik ve Şifre Teslimi (eski 8) -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Güvenlik ve Şifre Teslimi</h2>
+            </div>
+            <div class="content">
+                <div class="two-column">
+                    <div>
+                        <div class="card" style="margin-bottom: 15px;">
+                            <h4>Kimlik Doğrulama</h4>
+                            <ul style="font-size: 13px;">
+                                <li><strong>JWT:</strong> 15 dakika süre sonu</li>
+                                <li><strong>LDAP:</strong> AD kimlik doğrulama</li>
+                                <li><strong>MFA:</strong> SMS/E-posta kodları</li>
+                                <li><strong>RBAC:</strong> Rol tabanlı erişim</li>
+                            </ul>
+                        </div>
+                        <div class="card" style="margin-bottom: 15px;">
+                            <h4>Veri Koruma</h4>
+                            <ul style="font-size: 13px;">
+                                <li><strong>Fernet:</strong> Durağan şifreleme</li>
+                                <li><strong>bcrypt:</strong> Şifre karma</li>
+                                <li><strong>HTTPS:</strong> Zorunlu</li>
+                                <li><strong>Hız Sınırlama:</strong> Redis destekli</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Denetim ve Uyumluluk</h4>
+                            <ul style="font-size: 13px;">
+                                <li>Tüm işlemler kaydedilir</li>
+                                <li>Kullanıcı ilişkilendirme</li>
+                                <li>Dışa aktarma yeteneği</li>
+                                <li>OWASP Top 10 koruması</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="two-column">
+                            <div>
+                                <div class="screenshot-placeholder">
+                                    <img alt="Şifre E-postası" src="screenshots/resethub/password_email.png" />
+                                </div>
+                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">HTML
+                                    E-posta Bildirimi</p>
+                            </div>
+                            <div>
+                                <div class="screenshot-placeholder">
+                                    <img alt="Şifre SMS" src="screenshots/resethub/password_sms.jpeg" />
+                                </div>
+                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">SMS
+                                    Bildirimi</p>
+                            </div>
+                        </div>
+                        <div class="two-column" style="margin-top: 15px;">
+                            <div class="card">
+                                <h4>E-posta</h4>
+                                <ul style="font-size: 12px;">
+                                    <li>HTML şablonları</li>
+                                    <li>Çoklu dil</li>
+                                    <li>SMTP/SendGrid</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <h4>SMS</h4>
+                                <ul style="font-size: 12px;">
+                                    <li>NAC Gateway</li>
+                                    <li>Sağlayıcı yedeklemesi</li>
+                                    <li>Teslimat takibi</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 10: Dağıtım Seçenekleri (eski 9) -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>Dağıtım Seçenekleri</h2>
+            </div>
+            <div class="content">
+                <div class="deploy-logos">
+                    <img src="screenshots/resethub/icons/icons8-azure-48.png" alt="Azure" />
+                    <img src="screenshots/resethub/icons/icons8-docker-48.png" alt="Docker" />
+                    <img src="screenshots/resethub/icons/icons8-kubernetes-48.png" alt="Kubernetes" />
+                    <img src="screenshots/resethub/icons/icons8-windows-48.png" alt="Windows" />
+                    <img src="screenshots/resethub/icons/icons8-postgresql-48.png" alt="PostgreSQL" />
+                    <img src="screenshots/resethub/icons/icons8-active-directory-48.png" alt="Active Directory" />
+                </div>
+
+                <div class="three-column">
+                    <div class="card" style="border-top: 5px solid var(--accent-green); border-left: none;">
+                        <h4>On-Premise (Yerinde) - Birincil</h4>
+                        <ul style="font-size: 13px;">
+                            <li>Windows Server + RSAT</li>
+                            <li>PostgreSQL</li>
+                            <li>Redis (isteğe bağlı)</li>
+                            <li>Waitress/Gunicorn</li>
+                            <li>IIS/nginx proxy</li>
+                        </ul>
+                    </div>
+                    <div class="card"
+                        style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
+                        <h4>Bulut (Azure) - Opsiyonel</h4>
+                        <ul style="font-size: 13px;">
+                            <li>Azure App Service</li>
+                            <li>Azure PostgreSQL</li>
+                            <li>Azure Redis Cache</li>
+                            <li>ARM şablonları</li>
+                            <li>CI/CD pipeline</li>
+                        </ul>
+                    </div>
+                    <div class="card"
+                        style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
+                        <h4>Container (Docker) - Opsiyonel</h4>
+                        <ul style="font-size: 13px;">
+                            <li>Çok aşamalı derleme</li>
+                            <li>Docker Compose</li>
+                            <li>Kubernetes manifest'leri</li>
+                            <li>Sağlık kontrolleri</li>
+                            <li>Yatay ölçekleme</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <h4>Minimum Gereksinimler</h4>
+                    <div class="three-column" style="margin-top: 10px;">
+                        <div style="text-align: center;">
+                            <img src="screenshots/resethub/icons/icons8-postgresql-48.png" alt="PostgreSQL"
+                                style="width: 40px; height: 40px; margin-bottom: 8px;" />
+                            <p style="margin: 0; font-weight: bold;">PostgreSQL 12+</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">Birincil Veritabanı</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="screenshots/resethub/icons/icons8-active-directory-48.png" alt="Active Directory"
+                                style="width: 40px; height: 40px; margin-bottom: 8px;" />
+                            <p style="margin: 0; font-weight: bold;">Active Directory</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">LDAP + AD Web Servisleri</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="screenshots/resethub/icons/icons8-windows-48.png" alt="Windows"
+                                style="width: 40px; height: 40px; margin-bottom: 8px;" />
+                            <p style="margin: 0; font-weight: bold;">Windows + RSAT</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">veya Linux + WinRM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="blue-callout" style="margin-top: 20px;">
+                    <h4>Çoklu Dil Desteği</h4>
+                    <p style="margin: 0; font-size: 14px;">Flask-Babel ile Türkçe ve İngilizce | UI çevirileri, hata
+                        mesajları, e-posta/SMS şablonları | Tarayıcı algılama + kullanıcı tercihi | Dinamik dil
+                        değiştirme</p>
+                </div>
+            </div>
+        </div>
+        <!-- Slayt 11: Sonraki Adımlar (eski 10) -->
+        <div class="slide title-slide">
+            <h2 style="color: white; border: none; font-size: 42px;">Sonraki Adımlar</h2>
+
+            <div style="
     background: white;
     padding: 40px;
     border-radius: 12px;
     margin: 30px auto;
     max-width: 850px;
   ">
-    <h3 style="
+                <h3 style="
       color: var(--accent-green);
       margin-top: 0;
       font-size: 26px;
       font-weight: 700;
       border: none;
     ">
-      Test Etmeye Hazır mısınız?
-    </h3>
+                    Test Etmeye Hazır mısınız?
+                </h3>
 
-    <div style="text-align: left; margin-top: 30px; line-height: 1.55;">
-      
-      <h4 style="color: var(--primary-text); margin-bottom: 6px;">1. Ortam Kurulumu</h4>
-      <p style="color: var(--secondary-gray); font-size: 15px;">
-        RSAT özellikli Windows Server veya WinRM destekli Linux sunucusu yapılandırın.
-      </p>
+                <div style="text-align: left; margin-top: 30px; line-height: 1.55;">
 
-      <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">2. AD Servis Hesabı</h4>
-      <p style="color: var(--secondary-gray); font-size: 15px;">
-        Yetkilendirilmiş şifre sıfırlama izinleriyle <strong>svc-sspr</strong> servis hesabını oluşturun.
-      </p>
+                    <h4 style="color: var(--primary-text); margin-bottom: 6px;">1. Ortam Kurulumu</h4>
+                    <p style="color: var(--secondary-gray); font-size: 15px;">
+                        RSAT özellikli Windows Server veya WinRM destekli Linux sunucusu yapılandırın.
+                    </p>
 
-      <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">3. Veritabanı Kurulumu</h4>
-      <p style="color: var(--secondary-gray); font-size: 15px;">
-        PostgreSQL'i kurun ve ilk şema migrasyonunu çalıştırın.
-      </p>
-	  
-	  <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">4. Bildirim Altyapısı Entegrasyonu</h4>
-<p style="color: var(--secondary-gray); font-size: 15px;">
-  SMS Gateway (NAC API veya alternatif sağlayıcı) ve SMTP e-posta sunucusu üzerinden bildirim mekanizmalarını yapılandırın.
-</p>
+                    <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">2. AD Servis Hesabı
+                    </h4>
+                    <p style="color: var(--secondary-gray); font-size: 15px;">
+                        Yetkilendirilmiş şifre sıfırlama izinleriyle <strong>svc-sspr</strong> servis hesabını
+                        oluşturun.
+                    </p>
+
+                    <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">3. Veritabanı Kurulumu
+                    </h4>
+                    <p style="color: var(--secondary-gray); font-size: 15px;">
+                        PostgreSQL'i kurun ve ilk şema migrasyonunu çalıştırın.
+                    </p>
+
+                    <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">4. Bildirim Altyapısı
+                        Entegrasyonu</h4>
+                    <p style="color: var(--secondary-gray); font-size: 15px;">
+                        SMS Gateway (NAC API veya alternatif sağlayıcı) ve SMTP e-posta sunucusu üzerinden bildirim
+                        mekanizmalarını yapılandırın.
+                    </p>
 
 
-    </div>
-  </div>
+                </div>
+            </div>
 
-  <div style="margin-top: 30px;">
-    <p style="font-size: 22px; font-weight: 600;">Sorularınız mı var?</p>
-    <p style="font-size: 18px; margin-top: 10px;">
-      <a href="mailto:destek@rigosis.com"
-        style="
+            <div style="margin-top: 30px;">
+                <p style="font-size: 22px; font-weight: 600;">Sorularınız mı var?</p>
+                <p style="font-size: 18px; margin-top: 10px;">
+                    <a href="mailto:destek@rigosis.com" style="
           color: white;
           text-decoration: none;
           background: rgba(255,255,255,0.2);
           padding: 10px 22px;
           border-radius: 6px;
         ">
-        destek@rigosis.com
-      </a>
-    </p>
-  </div>
+                        destek@rigosis.com
+                    </a>
+                </p>
+            </div>
 
-  <div style="
+            <div style="
     margin-top: 35px;
     padding-top: 18px;
     border-top: 1px solid rgba(255,255,255,0.25);
   ">
-    <p style="font-size: 16px; opacity: 0.9;">
-      ResetHub – Şifre Sıfırlama Platformu
-      | <strong>Rigosis Bilgi Sistemleri</strong> tarafından geliştirilmiştir
-    </p>
-  </div>
-</div>
-</div>
-<div class="slide-number"></div>
-<div class="brand-footer">
-<span style="color: var(--highlight-blue); font-weight: 600;">ResetHub Platformu</span>
-<span style="color: var(--secondary-gray);">|</span>
-<span style="color: var(--secondary-gray);">v1.0.0</span>
-<span style="color: var(--secondary-gray);">|</span>
-<span style="
+                <p style="font-size: 16px; opacity: 0.9;">
+                    ResetHub – Şifre Sıfırlama Platformu
+                    | <strong>Rigosis Bilgi Sistemleri</strong> tarafından geliştirilmiştir
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number"></div>
+    <div class="brand-footer">
+        <span style="color: var(--highlight-blue); font-weight: 600;">ResetHub Platformu</span>
+        <span style="color: var(--secondary-gray);">|</span>
+        <span style="color: var(--secondary-gray);">v1.0.0</span>
+        <span style="color: var(--secondary-gray);">|</span>
+        <span style="
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 14px;
   opacity: 0.95;
 ">
-  <img
-    src="screenshots/resethub/logo/rigosis-logo-symbol.png"
-    alt="Rigosis"
-    style="height: 18px;"
-  />
-  <span>
-    <strong style="color: var(--accent-green);">Rigosis</strong> tarafından geliştirilmiştir
-  </span>
-</span>
+            <img src="screenshots/resethub/logo/rigosis-logo-symbol.png" alt="Rigosis" style="height: 18px;" />
+            <span>
+                <strong style="color: var(--accent-green);">Rigosis</strong> tarafından geliştirilmiştir
+            </span>
+        </span>
 
-</div>
-<div class="navigation">
-<button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">Önceki</button>
-<button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Sonraki</button>
-</div>
-<script>
+    </div>
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">Önceki</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Sonraki</button>
+    </div>
+    <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
@@ -970,7 +1176,7 @@
         showSlide(0);
 
         // Görsel Modal
-        (function() {
+        (function () {
             const modal = document.createElement('div');
             modal.className = 'image-modal';
             modal.innerHTML = '<span class="image-modal-close">&times;</span><img src="" alt="">';
@@ -980,7 +1186,7 @@
             const closeBtn = modal.querySelector('.image-modal-close');
 
             document.querySelectorAll('.screenshot-placeholder img').forEach(img => {
-                img.addEventListener('click', function(e) {
+                img.addEventListener('click', function (e) {
                     e.stopPropagation();
                     modal.classList.add('active');
                     modalImg.src = this.src;
@@ -988,14 +1194,14 @@
                 });
             });
 
-            modal.addEventListener('click', function(e) {
+            modal.addEventListener('click', function (e) {
                 if (e.target === modal || e.target === closeBtn) {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             });
 
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
@@ -1004,4 +1210,5 @@
         })();
     </script>
 </body>
+
 </html>
