@@ -896,79 +896,91 @@
             </div>
             <div class="content">
                 <div class="two-column">
+
                     <div>
                         <div class="card" style="margin-bottom: 15px;">
                             <h4>Kimlik Doğrulama</h4>
                             <ul style="font-size: 13px;">
-                                <li><strong>JWT:</strong> 15 dakika süre sonu</li>
-                                <li><strong>LDAP:</strong> AD kimlik doğrulama</li>
-                                <li><strong>MFA:</strong> SMS/E-posta kodları</li>
-                                <li><strong>RBAC:</strong> Rol tabanlı erişim</li>
+                                <li><strong>JWT:</strong> 15 dakikalık oturum süresi</li>
+                                <li><strong>LDAP:</strong> Active Directory doğrulaması</li>
+                                <li><strong>MFA:</strong> SMS/E-posta doğrulama kodları</li>
+                                <li><strong>RBAC:</strong> Rol tabanlı erişim kontrolü</li>
                             </ul>
                         </div>
+
                         <div class="card" style="margin-bottom: 15px;">
                             <h4>Veri Koruma</h4>
                             <ul style="font-size: 13px;">
-                                <li><strong>Fernet:</strong> Durağan şifreleme</li>
-                                <li><strong>bcrypt:</strong> Şifre karma</li>
-                                <li><strong>HTTPS:</strong> Zorunlu</li>
-                                <li><strong>Hız Sınırlama:</strong> Redis destekli</li>
+                                <li><strong>Fernet:</strong> Durağan veri şifreleme</li>
+                                <li><strong>bcrypt:</strong> Parola karma işlemi</li>
+                                <li><strong>HTTPS:</strong> Zorunlu güvenli bağlantı</li>
+                                <li><strong>Hız Sınırlama:</strong> Redis tabanlı istek denetimi</li>
                             </ul>
                         </div>
+
                         <div class="card">
                             <h4>Denetim ve Uyumluluk</h4>
                             <ul style="font-size: 13px;">
-                                <li>Tüm işlemler kaydedilir</li>
-                                <li>Kullanıcı ilişkilendirme</li>
-                                <li>Dışa aktarma yeteneği</li>
-                                <li>OWASP Top 10 koruması</li>
+                                <li>Tüm işlemler kayıt altına alınır</li>
+                                <li>Kullanıcı bazlı izleme ve ilişkilendirme</li>
+                                <li>Dışa aktarma desteği</li>
+                                <li>OWASP Top 10 güvenlik ilkelerine uyum</li>
                             </ul>
                         </div>
                     </div>
+
                     <div>
                         <div class="two-column">
                             <div>
                                 <div class="screenshot-placeholder">
                                     <img alt="Şifre E-postası" src="screenshots/resethub/password_email.png" />
                                 </div>
-                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">HTML
-                                    E-posta Bildirimi</p>
+                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">
+                                    HTML E-posta Bildirimi
+                                </p>
                             </div>
+
                             <div>
                                 <div class="screenshot-placeholder">
                                     <img alt="Şifre SMS" src="screenshots/resethub/password_sms.jpeg" />
                                 </div>
-                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">SMS
-                                    Bildirimi</p>
+                                <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">
+                                    SMS Bildirimi
+                                </p>
                             </div>
                         </div>
+
                         <div class="two-column" style="margin-top: 15px;">
                             <div class="card">
                                 <h4>E-posta</h4>
                                 <ul style="font-size: 12px;">
-                                    <li>HTML şablonları</li>
-                                    <li>Çoklu dil</li>
-                                    <li>SMTP/SendGrid</li>
+                                    <li>HTML e-posta şablonları</li>
+                                    <li>Çoklu dil desteği</li>
+                                    <li>SMTP / SendGrid entegrasyonu</li>
                                 </ul>
                             </div>
+
                             <div class="card">
                                 <h4>SMS</h4>
                                 <ul style="font-size: 12px;">
-                                    <li>NAC Gateway</li>
-                                    <li>Sağlayıcı yedeklemesi</li>
-                                    <li>Teslimat takibi</li>
+                                    <li>NAC SMS Gateway</li>
+                                    <li>Yedekli sağlayıcı yapısı</li>
+                                    <li>Teslimat durumu takibi</li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Slayt 10: Dağıtım Seçenekleri (eski 9) -->
         <div class="slide">
             <div class="slide-header">
-                <h2>Dağıtım Seçenekleri</h2>
+                <h2>Kurulum Seçenekleri</h2>
             </div>
+
             <div class="content">
                 <div class="deploy-logos">
                     <img src="screenshots/resethub/icons/icons8-azure-48.png" alt="Azure" />
@@ -981,53 +993,59 @@
 
                 <div class="three-column">
                     <div class="card" style="border-top: 5px solid var(--accent-green); border-left: none;">
-                        <h4>On-Premise (Yerinde) - Birincil</h4>
+                        <h4>On-Premise (Yerinde) – Birincil Yöntem</h4>
                         <ul style="font-size: 13px;">
                             <li>Windows Server + RSAT</li>
                             <li>PostgreSQL</li>
-                            <li>Redis (isteğe bağlı)</li>
-                            <li>Waitress/Gunicorn</li>
-                            <li>IIS/nginx proxy</li>
+                            <li>Redis (opsiyonel)</li>
+                            <li>Waitress / Gunicorn</li>
+                            <li>IIS veya nginx ters proxy</li>
                         </ul>
                     </div>
+
                     <div class="card"
                         style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
-                        <h4>Bulut (Azure) - Opsiyonel</h4>
+                        <h4>Bulut (Azure) – Opsiyonel</h4>
                         <ul style="font-size: 13px;">
                             <li>Azure App Service</li>
                             <li>Azure PostgreSQL</li>
                             <li>Azure Redis Cache</li>
                             <li>ARM şablonları</li>
-                            <li>CI/CD pipeline</li>
+                            <li>CI/CD süreçleri</li>
                         </ul>
                     </div>
+
                     <div class="card"
                         style="border-top: 5px solid var(--secondary-gray); border-left: none; opacity: 0.85;">
-                        <h4>Container (Docker) - Opsiyonel</h4>
+                        <h4>Konteyner (Docker) – Opsiyonel</h4>
                         <ul style="font-size: 13px;">
-                            <li>Çok aşamalı derleme</li>
+                            <li>Çok aşamalı Docker derleme</li>
                             <li>Docker Compose</li>
-                            <li>Kubernetes manifest'leri</li>
+                            <li>Kubernetes manifest dosyaları</li>
                             <li>Sağlık kontrolleri</li>
                             <li>Yatay ölçekleme</li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="highlight-box" style="margin-top: 20px;">
                     <h4>Minimum Gereksinimler</h4>
+
                     <div class="three-column" style="margin-top: 10px;">
                         <div style="text-align: center;">
                             <img src="screenshots/resethub/icons/icons8-postgresql-48.png" alt="PostgreSQL"
                                 style="width: 40px; height: 40px; margin-bottom: 8px;" />
                             <p style="margin: 0; font-weight: bold;">PostgreSQL 12+</p>
-                            <p style="font-size: 12px; margin: 5px 0 0 0;">Birincil Veritabanı</p>
+                            <p style="font-size: 12px; margin: 5px 0 0 0;">Birincil veritabanı</p>
                         </div>
-                        <div style="text-align: center;">
+
+                        <div style="text-align: center%;">
                             <img src="screenshots/resethub/icons/icons8-active-directory-48.png" alt="Active Directory"
                                 style="width: 40px; height: 40px; margin-bottom: 8px;" />
                             <p style="margin: 0; font-weight: bold;">Active Directory</p>
                             <p style="font-size: 12px; margin: 5px 0 0 0;">LDAP + AD Web Servisleri</p>
                         </div>
+
                         <div style="text-align: center;">
                             <img src="screenshots/resethub/icons/icons8-windows-48.png" alt="Windows"
                                 style="width: 40px; height: 40px; margin-bottom: 8px;" />
@@ -1036,32 +1054,37 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="blue-callout" style="margin-top: 20px;">
                     <h4>Çoklu Dil Desteği</h4>
-                    <p style="margin: 0; font-size: 14px;">Flask-Babel ile Türkçe ve İngilizce | UI çevirileri, hata
-                        mesajları, e-posta/SMS şablonları | Tarayıcı algılama + kullanıcı tercihi | Dinamik dil
-                        değiştirme</p>
+                    <p style="margin: 0; font-size: 14px;">
+                        Flask-Babel ile Türkçe ve İngilizce desteği |
+                        Arayüz çevirileri, hata mesajları, e-posta/SMS şablonları |
+                        Tarayıcı dil algılama + kullanıcı tercihi |
+                        Dinamik dil değiştirme
+                    </p>
                 </div>
             </div>
         </div>
+
         <!-- Slayt 11: Sonraki Adımlar (eski 10) -->
         <div class="slide title-slide">
             <h2 style="color: white; border: none; font-size: 42px;">Sonraki Adımlar</h2>
 
             <div style="
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    margin: 30px auto;
-    max-width: 850px;
-  ">
-                <h3 style="
-      color: var(--accent-green);
-      margin-top: 0;
-      font-size: 26px;
-      font-weight: 700;
-      border: none;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        margin: 30px auto;
+        max-width: 850px;
     ">
+                <h3 style="
+            color: var(--accent-green);
+            margin-top: 0;
+            font-size: 26px;
+            font-weight: 700;
+            border: none;
+        ">
                     Test Etmeye Hazır mısınız?
                 </h3>
 
@@ -1069,29 +1092,28 @@
 
                     <h4 style="color: var(--primary-text); margin-bottom: 6px;">1. Ortam Kurulumu</h4>
                     <p style="color: var(--secondary-gray); font-size: 15px;">
-                        RSAT özellikli Windows Server veya WinRM destekli Linux sunucusu yapılandırın.
+                        RSAT özellikli bir Windows Server veya WinRM destekli bir Linux sunucusu hazırlayın.
                     </p>
 
                     <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">2. AD Servis Hesabı
                     </h4>
                     <p style="color: var(--secondary-gray); font-size: 15px;">
-                        Yetkilendirilmiş şifre sıfırlama izinleriyle <strong>svc-sspr</strong> servis hesabını
+                        Yetkilendirilmiş parola sıfırlama izinlerine sahip <strong>svc-sspr</strong> servis hesabını
                         oluşturun.
                     </p>
 
                     <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">3. Veritabanı Kurulumu
                     </h4>
                     <p style="color: var(--secondary-gray); font-size: 15px;">
-                        PostgreSQL'i kurun ve ilk şema migrasyonunu çalıştırın.
+                        PostgreSQL kurulumunu tamamlayın ve ilk şema migrasyonunu çalıştırın.
                     </p>
 
                     <h4 style="color: var(--primary-text); margin-top: 22px; margin-bottom: 6px;">4. Bildirim Altyapısı
                         Entegrasyonu</h4>
                     <p style="color: var(--secondary-gray); font-size: 15px;">
-                        SMS Gateway (NAC API veya alternatif sağlayıcı) ve SMTP e-posta sunucusu üzerinden bildirim
+                        SMS Gateway (NAC API veya alternatif sağlayıcılar) ve SMTP e-posta sunucusu üzerinden bildirim
                         mekanizmalarını yapılandırın.
                     </p>
-
 
                 </div>
             </div>
@@ -1100,28 +1122,29 @@
                 <p style="font-size: 22px; font-weight: 600;">Sorularınız mı var?</p>
                 <p style="font-size: 18px; margin-top: 10px;">
                     <a href="mailto:destek@rigosis.com" style="
-          color: white;
-          text-decoration: none;
-          background: rgba(255,255,255,0.2);
-          padding: 10px 22px;
-          border-radius: 6px;
-        ">
+                color: white;
+                text-decoration: none;
+                background: rgba(255,255,255,0.2);
+                padding: 10px 22px;
+                border-radius: 6px;
+            ">
                         destek@rigosis.com
                     </a>
                 </p>
             </div>
 
             <div style="
-    margin-top: 35px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.25);
-  ">
+        margin-top: 35px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255,255,255,0.25);
+    ">
                 <p style="font-size: 16px; opacity: 0.9;">
-                    ResetHub – Şifre Sıfırlama Platformu
-                    | <strong>Rigosis Bilgi Sistemleri</strong> tarafından geliştirilmiştir
+                    ResetHub – Şifre Sıfırlama Platformu |
+                    <strong>Rigosis Bilgi Sistemleri</strong> tarafından geliştirilmiştir
                 </p>
             </div>
         </div>
+
     </div>
     <div class="slide-number"></div>
     <div class="brand-footer">
