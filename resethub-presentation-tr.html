@@ -960,6 +960,7 @@
 
                     <div>
 
+                        <!-- Kimlik Doğrulama -->
                         <div class="card" style="margin-bottom: 15px;">
                             <h4>Kimlik Doğrulama</h4>
                             <ul style="font-size: 13px;">
@@ -970,21 +971,23 @@
                             </ul>
                         </div>
 
+                        <!-- Veri Koruma -->
                         <div class="card" style="margin-bottom: 15px;">
                             <h4>Veri Koruma</h4>
                             <ul style="font-size: 13px;">
                                 <li><strong>Fernet:</strong> AES tabanlı güçlü veri şifreleme</li>
-                                <li><strong>bcrypt:</strong> Endüstri standardı parola karma algoritması</li>
+                                <li><strong>bcrypt:</strong> Güvenli parola karma algoritması</li>
                                 <li><strong>HTTPS:</strong> Uçtan uca TLS güvenliği</li>
-                                <li><strong>Hız Sınırlama:</strong> Redis tabanlı kötü niyetli istek koruması</li>
+                                <li><strong>Hız Sınırlama:</strong> Redis tabanlı brute-force koruması</li>
                             </ul>
                         </div>
 
+                        <!-- Denetim -->
                         <div class="card">
                             <h4>Denetim ve Uyumluluk</h4>
                             <ul style="font-size: 13px;">
                                 <li>Tüm işlemler ayrıntılı olarak kaydedilir</li>
-                                <li>Kullanıcı bazlı ilişkilendirme ve izlenebilirlik</li>
+                                <li>Kullanıcı bazlı ilişkilendirme</li>
                                 <li>Dışa aktarma ve raporlama desteği</li>
                                 <li><strong>OWASP Top 10:</strong> Web güvenlik risklerine karşı koruma</li>
                             </ul>
@@ -994,6 +997,7 @@
 
                     <div>
 
+                        <!-- Görseller -->
                         <div class="two-column">
                             <div>
                                 <div class="screenshot-placeholder">
@@ -1014,6 +1018,7 @@
                             </div>
                         </div>
 
+                        <!-- Bildirim Yapıları -->
                         <div class="two-column" style="margin-top: 15px;">
 
                             <div class="card">
@@ -1021,7 +1026,7 @@
                                 <ul style="font-size: 12px;">
                                     <li>HTML tabanlı modern e-posta şablonları</li>
                                     <li>Çoklu dil desteği</li>
-                                    <li>SMTP / SendGrid entegrasyonu</li>
+                                    <li>SMTP sunucusu ile gönderim</li>
                                 </ul>
                             </div>
 
@@ -1029,8 +1034,7 @@
                                 <h4>SMS</h4>
                                 <ul style="font-size: 12px;">
                                     <li>NAC SMS Gateway entegrasyonu</li>
-                                    <li>Yedekli sağlayıcı yapısı</li>
-                                    <li>Teslimat durumu analizi</li>
+                                    <li>Alternatif sağlayıcı eklenebilir yapı</li>
                                 </ul>
                             </div>
 
@@ -1041,7 +1045,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Slayt 10: Dağıtım Seçenekleri (eski 9) -->
         <div class="slide">
