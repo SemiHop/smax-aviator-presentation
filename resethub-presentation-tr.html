@@ -984,12 +984,28 @@
 
                         <!-- Denetim -->
                         <div class="card">
-                            <h4>Denetim ve Uyumluluk</h4>
+                            <h4>Denetim & Uyumluluk</h4>
                             <ul style="font-size: 13px;">
-                                <li>Tüm işlemler ayrıntılı olarak kaydedilir</li>
-                                <li>Kullanıcı bazlı ilişkilendirme</li>
+                                <li>Tüm işlemler ayrıntılı olarak kaydedilir (kullanıcı, IP, zaman, işlem)</li>
+                                <li>Kullanıcı bazlı ilişkilendirme ve izlenebilirlik</li>
                                 <li>Dışa aktarma ve raporlama desteği</li>
-                                <li><strong>OWASP Top 10:</strong> Web güvenlik risklerine karşı koruma</li>
+
+                                <!-- OWASP Top 10 Expanded -->
+                                <li><strong>OWASP Top 10 Uygulaması:</strong></li>
+                                <ul style="font-size: 12px; margin-left: 15px; margin-top: 6px;">
+                                    <li><strong>A01 – Erişim Kontrolü:</strong> RBAC, role_required() dekoratörleri,
+                                        domain bazlı yetkilendirme</li>
+                                    <li><strong>A02 – Kriptografik Güvenlik:</strong> bcrypt (12 round), Fernet AES
+                                        şifreleme, SHA-256 token karması</li>
+                                    <li><strong>A03 – Enjeksiyon Koruması:</strong> SQLAlchemy ORM (parametreli
+                                        sorgular), kapsamlı input doğrulama</li>
+                                    <li><strong>A05 – Güvenli Yapılandırma:</strong> Security headers (X-Frame-Options,
+                                        X-XSS-Protection), environment kontrollü config</li>
+                                    <li><strong>A07 – Kimlik Doğrulama Güvenliği:</strong> JWT expiration, LDAP/Azure
+                                        AD, güvenli oturum cookie yapısı</li>
+                                    <li><strong>A09 – Denetim & İzleme:</strong> JSONB audit log, veri maskeleme, hata
+                                        loglarında hassas veri gizleme</li>
+                                </ul>
                             </ul>
                         </div>
 
@@ -1045,6 +1061,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- Slayt 10: Dağıtım Seçenekleri (eski 9) -->
         <div class="slide">
