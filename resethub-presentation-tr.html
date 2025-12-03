@@ -668,17 +668,18 @@
 ┌─────────────────────────────────────────┐
 │               İÇ AĞ (LAN)               │
 │                                         │
-│  ┌─────────────┐    ┌─────────────┐     │
-│  │  Kullanıcı  │    │    Agent    │     │
-│  │ (Browser)   │    │ (Browser)   │     │
-│  └──────┬──────┘    └──────┬──────┘     │
-│         └────────┬─────────┘            │
-│                  ▼                      │
+│  ┌──────────┐ ┌───────┐ ┌───────────┐   │
+│  │ Kullanıcı│ │ Agent │ │ Harici    │   │
+│  │(Browser) │ │(Brwsr)│ │ Sistem    │   │
+│  └────┬─────┘ └───┬───┘ │(SMAX/ITSM)│   │
+│       │           │     └─────┬─────┘   │
+│       └─────┬─────┴───────────┘         │
+│             ▼                           │
 │  ┌─────────────────────────────┐        │
 │  │   ResetHub Platform         │        │
 │  │   (Flask API + JWT)         │        │
-│  │   • Waitress/Gunicorn       │        │
-│  │   • IIS/nginx (Opsiyonel)   │        │
+│  │   • Web UI (Self/Agent)     │        │
+│  │   • External API (Bearer)   │        │
 │  └─────────────┬───────────────┘        │
 │                │                        │
 │       ┌────────┼────────┐               │
@@ -737,7 +738,262 @@
             </div>
         </div>
 
-        <!-- Slayt 4: Self-Service Portalı -->
+        <!-- Slayt 4: API Token Yönetimi -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>API Token Yönetimi</h2>
+            </div>
+
+            <div class="content">
+                <div class="two-column">
+
+                    <!-- SOL SÜTUN: Ekran Görüntüleri -->
+                    <div>
+                        <div class="screenshot-placeholder">
+                            <img alt="API Erişim Yönetimi" src="screenshots/resethub/admin_api_tokens.png" />
+                        </div>
+                        <p style="text-align: center; font-size: 12px; color: var(--secondary-gray);">
+                            API Erişim Yönetimi Paneli
+                        </p>
+
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <h4>Token Oluşturma Adımları</h4>
+                            <ol style="font-size: 13px; margin: 0; padding-left: 18px;">
+                                <li>Yönetici Portalı → API Erişimi menüsüne gidin</li>
+                                <li>“Yeni Token Oluştur” butonuna tıklayın</li>
+                                <li>Token adı ve açıklama girin (örn. “SMAX Entegrasyonu”)</li>
+                                <li>Bitiş tarihi ve hız limiti ayarlayın</li>
+                                <li>Bildirim e-posta alıcılarını belirleyin</li>
+                                <li>Oluşturulan token’ı güvenli bir yere kaydedin</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- SAĞ SÜTUN: Token Oluşturma Ekranları -->
+                    <div>
+                        <div class="two-column" style="gap: 10px;">
+                            <div>
+                                <div class="screenshot-placeholder">
+                                    <img alt="Token Oluşturma Formu"
+                                        src="screenshots/resethub/admin_api_tokens_create_new_token.png" />
+                                </div>
+                                <p style="text-align: center; font-size: 11px; color: var(--secondary-gray);">
+                                    Token Ayarları
+                                </p>
+                            </div>
+
+                            <div>
+                                <div class="screenshot-placeholder">
+                                    <img alt="Token Oluşturuldu"
+                                        src="screenshots/resethub/admin_api_tokens_create_new_token_2.png" />
+                                </div>
+                                <p style="text-align: center; font-size: 11px; color: var(--secondary-gray);">
+                                    Token Görüntüleme
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-top: 15px;">
+                            <h4>Token Özellikleri</h4>
+                            <ul style="font-size: 13px;">
+                                <li><strong>Benzersiz Token:</strong> sspr_ önekli güvenli API anahtarı</li>
+                                <li><strong>Süre Yönetimi:</strong> 1 gün–sınırsız arası geçerlilik</li>
+                                <li><strong>Hız Sınırlama:</strong> Token başına dakikada istek limiti</li>
+                                <li><strong>Kullanım İzleme:</strong> Son kullanım ve toplam çağrı sayısı</li>
+                            </ul>
+                        </div>
+
+                        <div class="card" style="margin-top: 15px;">
+                            <h4>Otomatik Bildirimler</h4>
+                            <ul style="font-size: 13px;">
+                                <li><strong>E-posta Uyarıları:</strong> Birden fazla alıcıya bildirim</li>
+                                <li><strong>Son Kullanım Uyarısı:</strong> 30 / 14 / 7 / 1 gün kala e-posta</li>
+                                <li><strong>Zamanlanmış Kontrol:</strong> Günlük otomatik tarama (UTC)</li>
+                                <li><strong>Manuel Tetikleme:</strong> “Şimdi Çalıştır” seçeneği</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ALT BİLGİ -->
+                <div class="blue-callout" style="margin-top: 15px;">
+                    <h4>Güvenlik Uyarısı</h4>
+                    <p style="font-size: 13px; margin: 0;">
+                        <strong>Token yalnızca bir kez gösterilir!</strong> Oluşturulduktan sonra mutlaka güvenli bir
+                        yere kaydedin.
+                        Token’lar veritabanında bcrypt ile şifrelenmiş olarak saklanır ve tekrar görüntülenemez.
+                        Kaybolması durumunda yeni token oluşturmanız gerekir.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Slayt 5: API Entegrasyonu ve Kullanım -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2>API Entegrasyonu ve Kullanım</h2>
+            </div>
+
+            <div class="content">
+                <div class="two-column">
+
+                    <!-- SOL SÜTUN: API Endpoint -->
+                    <div>
+                        <div class="highlight-box" style="margin-top: 0;">
+                            <h4>REST API Uç Noktası (Endpoint)</h4>
+                            <p style="font-size: 14px; margin-bottom: 10px;">
+                                Tek bir API çağrısı ile şifre sıfırlama ve kullanıcıya teslim işlemi gerçekleştirilir.
+                            </p>
+                            <div
+                                style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 6px; font-family: monospace; font-size: 13px;">
+                                POST /api/v1/external/password-reset
+                            </div>
+                        </div>
+
+                        <h4 style="margin-top: 15px; margin-bottom: 10px;">Senaryo 1: Otomatik Şifre + SMS Teslimatı
+                        </h4>
+                        <div class="card"
+                            style="background: #1a1a2e; color: #eee; font-family: Consolas, monospace; font-size: 10px; padding: 12px; border-left: 5px solid var(--highlight-blue);">
+                            <pre style="margin: 0; line-height: 1.5;">
+<span style="color: #6a9955;">// İstek:</span>
+{
+  "sam_account_name": "ahmet.yilmaz",
+  "delivery_method": "sms",
+  "reason": "SMAX Ticket #12345"
+}
+
+<span style="color: #6a9955;">// Yanıt:</span>
+{
+  "success": true,
+  "username": "ahmet.yilmaz",
+  "delivery_method": "sms",
+  "delivery_target": "*****1304",
+  "password_generated": true
+}
+</pre>
+                        </div>
+
+                        <h4 style="margin-top: 15px; margin-bottom: 10px;">Senaryo 2: Belirli Şifre Atama</h4>
+                        <div class="card"
+                            style="background: #1a1a2e; color: #eee; font-family: Consolas, monospace; font-size: 10px; padding: 12px; border-left: 5px solid var(--accent-green);">
+                            <pre style="margin: 0; line-height: 1.5;">
+<span style="color: #6a9955;">// İstek:</span>
+{
+  "sam_account_name": "ahmet.yilmaz",
+  "new_password": "YeniSifre123!",
+  "reason": "Onboarding script"
+}
+
+<span style="color: #6a9955;">// Yanıt:</span>
+{
+  "success": true,
+  "username": "ahmet.yilmaz"
+}
+</pre>
+                        </div>
+                    </div>
+
+                    <!-- SAĞ SÜTUN: Entegrasyon Detayları -->
+                    <div>
+
+                        <div class="card" style="margin-top: 0;">
+                            <h4>API Parametreleri</h4>
+                            <table style="font-size: 12px; width: 100%; border-collapse: collapse;">
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 6px 0;"><strong>sam_account_name</strong></td>
+                                    <td style="padding: 6px 0;">Zorunlu – AD kullanıcı adı</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 6px 0;"><strong>delivery_method</strong></td>
+                                    <td style="padding: 6px 0;">Opsiyonel – “sms” veya “email”</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 6px 0;"><strong>new_password</strong></td>
+                                    <td style="padding: 6px 0;">Opsiyonel – Belirli şifre atama</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px 0;"><strong>reason</strong></td>
+                                    <td style="padding: 6px 0;">Opsiyonel – Denetim açıklaması</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="card" style="margin-top: 15px;">
+                            <h4>Desteklenen Entegrasyonlar</h4>
+                            <p style="font-size: 12px; margin-bottom: 8px; color: var(--secondary-gray);">
+                                ResetHub, REST API destekleyen tüm ITSM, iş akışı ve otomasyon platformlarıyla entegre
+                                olabilir.
+                                Aşağıdaki ürünler örnek entegrasyon senaryolarıdır:
+                            </p>
+                            <ul style="font-size: 13px;">
+                                <li><strong>Micro Focus SMAX:</strong> İş akışı otomasyonu (örnek)</li>
+                                <li><strong>ServiceNow:</strong> Talep bazlı entegrasyon (örnek)</li>
+                                <li><strong>JIRA Service Management:</strong> Ticket otomasyonu (örnek)</li>
+                                <li><strong>Power Automate:</strong> Microsoft iş akışları (örnek)</li>
+                                <li><strong>Özel Scriptler:</strong> cURL, Python, PowerShell (tam uyumlu)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Postman ile API Tetikleme (EKLENEN BÖLÜM) -->
+                        <div class="card" style="margin-top: 15px;">
+                            <h4>Postman ile API Tetikleme</h4>
+
+                            <div class="screenshot-placeholder" style="margin-top: 10px;">
+                                <img alt="Postman API Tetikleme"
+                                    src="screenshots/resethub/postman_api_trigger_password-reset.png" />
+                            </div>
+
+                            <p
+                                style="text-align: center; font-size: 11px; color: var(--secondary-gray); margin-top: 6px;">
+                                API isteği ve yanıtının Postman üzerinden görüntülenmesi
+                            </p>
+                        </div>
+
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <h4>ITSM Entegrasyon Akışı</h4>
+                            <ol style="font-size: 12px; margin: 0; padding-left: 18px;">
+                                <li>Kullanıcı ITSM sistemi üzerinden şifre sıfırlama talebi oluşturur</li>
+                                <li>ITSM iş akışı ResetHub API’sine şifre sıfırlama çağrısı gönderir</li>
+                                <li>ResetHub şifreyi oluşturur ve SMS/E-posta yoluyla kullanıcıya iletir</li>
+                                <li>API yanıtı ITSM talebine veya kayıt akışına eklenir</li>
+                                <li>İş akışı süreçlerine göre talep otomatik olarak kapatılır</li>
+                            </ol>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- ALT BİLGİ: Güvenlik ve Test -->
+                <div class="two-column" style="margin-top: 15px;">
+                    <div class="card">
+                        <h4>API Güvenlik Önlemleri</h4>
+                        <ul style="font-size: 12px;">
+                            <li><strong>Bearer Token:</strong> Authorization header zorunlu</li>
+                            <li><strong>bcrypt Hash:</strong> Token’lar geri okunamaz şekilde saklanır</li>
+                            <li><strong>Hız Sınırlama:</strong> Token başına dakika bazlı limit</li>
+                            <li><strong>Denetim Kaydı:</strong> Tüm çağrılar JSONB olarak kaydedilir</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h4>Test Araçları</h4>
+                        <ul style="font-size: 12px;">
+                            <li><strong>Postman:</strong> Hazır koleksiyon ile hızlı test</li>
+                            <li><strong>cURL:</strong> Komut satırından test</li>
+                            <li><strong>Swagger:</strong> API dokümantasyonu</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Slayt 6: Self-Service Portalı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Self-Service Portalı</h2>
@@ -813,7 +1069,7 @@
             </div>
         </div>
 
-        <!-- Slayt 5: Agent Portalı -->
+        <!-- Slayt 7: Agent Portalı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Agent Portalı</h2>
@@ -870,7 +1126,7 @@
                 </div>
             </div>
         </div>
-        <!-- Slayt 6: Agent Portalı Akışı -->
+        <!-- Slayt 8: Agent Portalı Akışı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Agent Portalı – Şifre Sıfırlama Akışı</h2>
@@ -921,7 +1177,7 @@
             </div>
         </div>
 
-        <!-- Slayt 7: Yönetici Portalı -->
+        <!-- Slayt 9: Yönetici Portalı -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Yönetici Portalı</h2>
@@ -986,7 +1242,7 @@
             </div>
         </div>
 
-        <!-- Slayt 8: Denetim Kayıtları (Audit Logs) -->
+        <!-- Slayt 10: Denetim Kayıtları (Audit Logs) -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Denetim Kayıtları</h2>
@@ -1059,7 +1315,7 @@
             </div>
         </div>
 
-        <!-- Slayt 9: Güvenlik ve Şifre Teslimi -->
+        <!-- Slayt 11: Güvenlik ve Şifre Teslimi -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Güvenlik ve Şifre Teslimi</h2>
@@ -1172,7 +1428,7 @@
         </div>
 
 
-        <!-- Slayt 10: Dağıtım Seçenekleri (eski 9) -->
+        <!-- Slayt 12: Kurulum Seçenekleri -->
         <div class="slide">
             <div class="slide-header">
                 <h2>Kurulum Seçenekleri</h2>
@@ -1264,7 +1520,7 @@
             </div>
         </div>
 
-        <!-- Slayt 11: Sonraki Adımlar (eski 10) -->
+        <!-- Slayt 13: Sonraki Adımlar -->
         <div class="slide title-slide">
             <h2 style="color: white; border: none; font-size: 42px;">Sonraki Adımlar</h2>
 
